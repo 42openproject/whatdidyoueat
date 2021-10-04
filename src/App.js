@@ -1,14 +1,13 @@
-import Home from "./Home";
+import LoginPage from "./LoginPageView/LoginPage";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   
   return (
     <div className="App">
-      Hello World
-      엠키 바보gggggg
-      ggg
-      gggggg
-      <Home />
+      <BrowserRouter>
+        <Route exact path="/" component={LoginPage} />
+      </BrowserRouter>
     </div>
   );
 }
