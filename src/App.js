@@ -1,8 +1,7 @@
-import LoginPage from "./LoginPageView/LoginPage";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from 'react-router-dom';
+import LoginPage from './LoginPageView/LoginPage';
 
 function App() {
-  
   return (
     <div className="App">
       <BrowserRouter>
