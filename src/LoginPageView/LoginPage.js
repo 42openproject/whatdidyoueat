@@ -1,5 +1,5 @@
 import GoogleLogin from "react-google-login";
-import {CLIENT_ID} from "./config";
+import {CLIENT_ID} from "../config";
 
 const onSuccessGoogle = (res) => {
 	console.log(res.tokenObj, res.googleId);
