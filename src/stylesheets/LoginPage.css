@@ -39,16 +39,19 @@ body {
   min-width: 200px;
 }
 
-.container__login {
+.box--white {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80%;
   min-width: 250px;
-  height: 150px;
   background-color: white;
   border-radius: 20px;
   padding: 5px;
+}
+
+.container__login {
+  height: 150px;
 }
 
 .container__login .btn {
