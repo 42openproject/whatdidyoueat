@@ -1,6 +1,5 @@
 import '../stylesheets/SetNicknamePage.css';
 
-// 이 페이지를 링크입력으로 접근할 수 없도록 만들어야함
 function SetNicknamePage() {
   return (
     <>
