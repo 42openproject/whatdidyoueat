@@ -1,0 +1,33 @@
+.container__greeting {
+  padding: 150px 0 100px;
+  font-size: 2rem;
+  color: #707070;
+}
+
+.container__box {
+  height: 250px;
+}
+
+.container__box__title {
+  padding: 30px 0;
+  font-size: 1.2rem;
+  color: #828282;
+}
+.container__box__input {
+  width: 80%;
+  height: 2.2rem;
+  font-size: 1.7rem;
+  text-align: center;
+  line-height: 1.4rem;
+  margin: 10px;
+}
+.container__box__btn {
+  background-color: #bfbfe5;
+  border: none;
+  border-radius: 1rem;
+  width: 40%;
+  height: 2rem;
+  color: white;
+  font-size: 1.05rem;
+  margin: 30px 0;
+}

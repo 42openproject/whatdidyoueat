@@ -1,14 +1,14 @@
-import Home from "./Home";
+import { BrowserRouter, Route } from 'react-router-dom';
+import LoginPage from './LoginPageView/LoginPage';
+import SetNicknamePage from './LoginPageView/SetNicknamePage';
 
 function App() {
-  
   return (
     <div className="App">
-      Hello World
-      엠키 바보gggggg
-      ggg
-      gggggg
-      <Home />
+      <BrowserRouter>
+        <Route exact path="/" component={LoginPage} />
+        <Route path="/nickname" component={SetNicknamePage} />
+      </BrowserRouter>
     </div>
   );
 }
