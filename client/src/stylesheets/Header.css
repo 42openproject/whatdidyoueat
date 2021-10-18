@@ -1,0 +1,18 @@
+header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header-btn {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #bfbfe5;
+  margin: 10px 12px;
+}
