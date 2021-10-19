@@ -1,13 +1,16 @@
 import '../stylesheets/SetNicknamePage.css';
+import axios from 'axios';
 
 function SetNicknamePage({ history }) {
-  function onSaveNick() {
+  async function onSaveNick() {
     const nickInput = document.querySelector('.container__box__input').value;
-    console.log(nickInput);
     if (nickInput === '' || nickInput.length < 2)
       alert('2자 이상 입력해주세요');
     else {
-      localStorage.setItem('nickname', nickInput);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/users`, {
+        nickInput,
+      });
+      console.log(response.data);
       history.push('/main');
     }
   }
