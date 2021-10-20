@@ -8,7 +8,7 @@ function MainPage() {
   const [post, setPost] = useState([]);
 
   const getPost = () => {
-    console.log(post);
+    // console.log(post);
     if (localStorage.getItem('postContent')) {
       const newPost = {
         postContent: localStorage.getItem('postContent'),
