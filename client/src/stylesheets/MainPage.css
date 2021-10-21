@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar {
+  width: 90%;
+  height: 97px;
+  border-radius: 15px;
+  background-color: white;
+  margin-bottom: 5px;
+}
+
+.following {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 30px;
+  margin: 5px;
+}
+
+.following-user {
+  line-height: 25px;
+  margin: 5px;
+  border-radius: 13px;
+  background-color: white;
+}
+
+.posts {
+  width: 90%;
+  height: 700px;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 5px;
+}

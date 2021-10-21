@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
+import '../stylesheets/MainPage.css';
 
 const data = [];
 
@@ -27,13 +28,40 @@ function MainPage() {
   return (
     <>
       <Header />
-      <div>MainPage</div>
-      {data.map(p => (
-        <>
-          <h2>글내용 : {p.postContent}</h2>
-          태그 : {p.tagArr.map(t => `${t}, `)}
-        </>
-      ))}
+      <div className="container">
+        <div className="calendar"></div>
+        <div className="following">
+          <div className="following-user">dhyeon</div>
+          <div className="following-user">mki</div>
+          <div className="following-user">wopark</div>
+        </div>
+        <div className="posts">
+          <div className="post">
+            <div className="post-content">post content</div>
+            <div className="tag-wrap">
+              <div className="tag"></div>
+              <div className="tag"></div>
+              <div className="tag"></div>
+            </div>
+          </div>
+          <div className="post">
+            <div className="post-content">post content</div>
+            <div className="tag-wrap">
+              <div className="tag"></div>
+              <div className="tag"></div>
+              <div className="tag"></div>
+            </div>
+          </div>
+          <div className="post">
+            <div className="post-content">post content</div>
+            <div className="tag-wrap">
+              <div className="tag"></div>
+              <div className="tag"></div>
+              <div className="tag"></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <NaviBar />
     </>
   );
