@@ -1,17 +1,31 @@
+.header-hr {
+  width: 90%;
+  padding: 0;
+  margin: 0.5rem;
+  border-bottom: 1px solid #999999;
+  border-top: none;
+}
+.post-hr {
+  width: 80%;
+  margin: 2rem auto;
+  border-bottom: 1px solid #dddddd;
+  border-top: none;
+}
+
 .container {
   display: flex;
   flex-direction: column;
 }
 
 .calendar {
-  width: 90%;
+  width: 90vw;
   height: 97px;
   border-radius: 15px;
   background-color: white;
   margin-bottom: 5px;
 }
 
-.following {
+.following-wrap {
   display: flex;
   align-items: center;
   width: 90%;
@@ -22,14 +36,67 @@
 .following-user {
   line-height: 25px;
   margin: 5px;
-  border-radius: 13px;
+  padding: 0.1rem 0.8rem;
+  border-radius: 0.8rem;
   background-color: white;
 }
 
 .posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90%;
-  height: 700px;
+  /* height: 500px; */
   background-color: white;
   border-radius: 15px;
   margin-top: 5px;
+  margin-bottom: 100px;
+}
+
+.post-wrap {
+  width: 100%;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 0.8rem;
+}
+
+.post-title {
+  font-size: 1.3rem;
+}
+
+.post-content {
+  width: 84%;
+  margin: 0 8%;
+}
+
+.post-img {
+  height: 250px;
+  background-color: gray;
+  margin: 1rem 0;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: rgb(157, 157, 157);
+}
+
+.post-text {
+  display: block;
+  margin: 0.8rem 0;
+}
+
+.tag-wrap {
+  display: flex;
+}
+
+.tag {
+  background-color: rgb(181, 230, 232);
+  padding: 0.3rem 1rem;
+  margin: 0.2rem;
+  font-size: 0.7rem;
+  border-radius: 0.65rem;
 }

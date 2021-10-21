@@ -30,35 +30,40 @@ function MainPage() {
       <Header />
       <div className="container">
         <div className="calendar"></div>
-        <div className="following">
-          <div className="following-user">dhyeon</div>
-          <div className="following-user">mki</div>
-          <div className="following-user">wopark</div>
+        <div className="following-wrap">
+          <div className="following-user">👿dhyeon</div>
+          <div className="following-user">🥕mki</div>
+          <div className="following-user">👻wopark</div>
         </div>
         <div className="posts">
-          <div className="post">
-            <div className="post-content">post content</div>
-            <div className="tag-wrap">
-              <div className="tag"></div>
-              <div className="tag"></div>
-              <div className="tag"></div>
-            </div>
+          <div className="post-header">
+            <div className="post-title">mki의 이유식일기</div>
+            <div className="post-author">🥕mki</div>
           </div>
-          <div className="post">
-            <div className="post-content">post content</div>
-            <div className="tag-wrap">
-              <div className="tag"></div>
-              <div className="tag"></div>
-              <div className="tag"></div>
+          <hr size="1" className="header-hr" />
+          <div className="post-wrap">
+            <div className="post-content">
+              <div className="post-img">image 영역</div>
+              <p className="post-date">2021년 10월 21일 오후 2시 32분</p>
+              <p className="post-text">hi</p>
+              <ul className="tag-wrap">
+                <li className="tag">떡볶이</li>
+                <li className="tag">순대</li>
+                <li className="tag">분식</li>
+              </ul>
             </div>
-          </div>
-          <div className="post">
-            <div className="post-content">post content</div>
-            <div className="tag-wrap">
-              <div className="tag"></div>
-              <div className="tag"></div>
-              <div className="tag"></div>
+            <hr size="1" className="post-hr" />
+            <div className="post-content">
+              <div className="post-img">image 영역</div>
+              <p className="post-date">2021년 10월 21일 오후 2시 32분</p>
+              <p className="post-text">hi</p>
+              <ul className="tag-wrap">
+                <li className="tag">떡볶이</li>
+                <li className="tag">순대</li>
+                <li className="tag">분식</li>
+              </ul>
             </div>
+            <hr size="1" className="post-hr" />
           </div>
         </div>
       </div>
