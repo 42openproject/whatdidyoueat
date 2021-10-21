@@ -1,0 +1,7 @@
+components:
+  schemas:
+    Users:
+      properties:
+        nickname:
+          type: string
+          description: 닉네임
