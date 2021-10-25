@@ -2,6 +2,51 @@ components:
   schemas:
     Users:
       properties:
+        id:
+          type: int
+        email:
+          type: varchar(45)
+        JWT:
+          type: varchar(45)
+        refresh_token:
+          type: varchar(45)
+        access_token:
+          type: varchar(45)
         nickname:
-          type: string
-          description: 닉네임
+          type: varchar(45)
+        created_at:
+          type: DATE
+        introduction:
+          type: TEXT
+        photo:
+          type: varchar(100)
+        status:
+          type: SMALLINT
+    Posts:
+      properties:
+        id:
+          type: INT
+        user_id:
+          type: INT
+        photo:
+          type: varchar(100)
+        text_contents:
+          type: TEXT
+        created_at:
+          type: DATETIME
+        eat_time:
+          type: DATETIME
+        day_title:
+          type: VARCHAR(45)
+    Post_Hashtag:
+      properties:
+        post_id:
+          type: INT
+        hashtag_id:
+          type: INT
+    Hashtag:
+      properties:
+        id:
+          type: INT
+        hashtag:
+          type: VARCHAR(45)

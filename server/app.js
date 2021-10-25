@@ -2,12 +2,6 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const cors = require("cors");
-const { swaggerUi, specs } = require("./modules/swagger");
-
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var postsRouter = require("./routes/posts");
 
 var app = express();
 
@@ -16,15 +10,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+/*
+ ** routes
+ */
+
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var postsRouter = require("./routes/posts");
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/posts", postsRouter);
+
+/*
+ ** CORS
+ */
+
+const cors = require("cors");
+app.use(cors());
+
+/*
+ ** swagger
+ */
+
+const { swaggerUi, specs } = require("./modules/swagger");
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(specs, { explorer: true })
 );
-app.use(cors());
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/posts", postsRouter);
 
 module.exports = app;
