@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
 import Header from '../components/Header';
 
-function PostPage() {
+function PostPage({ history }) {
   // 현재 상태, Setter
   const [postContent, setPostContent] = useState('');
   const [postTag, setPostTag] = useState('');
@@ -70,12 +71,18 @@ function PostPage() {
     setDisabled(true);
     e.preventDefault();
     await new Promise(r => setTimeout(r, 1000));
-    console.log(postContent);
-    console.log(postTag);
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/posts`,
+      {
+        postContent,
+        tagArr,
+      },
+    );
+    console.log(response.data);
     setDisabled(false);
-    localStorage.setItem('postContent', postContent);
-    localStorage.setItem('tagArr', tagArr);
-    window.location.replace('/main');
+    // localStorage.setItem('postContent', postContent);
+    // localStorage.setItem('tagArr', tagArr);
+    history.push('/main');
   };
   return (
     <>
