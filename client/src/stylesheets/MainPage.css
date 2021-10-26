@@ -1,4 +1,4 @@
-.header-hr {
+.posts-header-hr {
   width: 90%;
   padding: 0;
   margin: 0.5rem;
@@ -12,12 +12,13 @@
   border-top: none;
 }
 
-.container {
+.main-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.calendar {
+.main-calendar {
   width: 90vw;
   height: 97px;
   border-radius: 15px;
@@ -41,7 +42,7 @@
   background-color: white;
 }
 
-.posts {
+.main-posts-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,18 +54,18 @@
   margin-bottom: 100px;
 }
 
-.post-wrap {
+.posts-body {
   width: 100%;
 }
 
-.post-header {
+.posts-header {
   display: flex;
   justify-content: space-between;
   width: 90%;
   margin-top: 0.8rem;
 }
 
-.post-title {
+.posts-header__title {
   font-size: 1.3rem;
 }
 
@@ -73,27 +74,27 @@
   margin: 0 8%;
 }
 
-.post-img {
+.post-content__img {
   height: 250px;
   background-color: gray;
   margin: 1rem 0;
 }
 
-.post-date {
+.post-content__date {
   font-size: 0.8rem;
   color: rgb(157, 157, 157);
 }
 
-.post-text {
+.post-content__text {
   display: block;
   margin: 0.8rem 0;
 }
 
-.tag-wrap {
+.post-content__tags {
   display: flex;
 }
 
-.tag {
+.tag-item {
   background-color: rgb(181, 230, 232);
   padding: 0.3rem 1rem;
   margin: 0.2rem;
