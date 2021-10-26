@@ -7,12 +7,15 @@ function SetNicknamePage({ history }) {
     if (nickInput === '' || nickInput.length < 2)
       alert('2자 이상 입력해주세요');
     else {
+      const googleId = localStorage.getItem('googleId');
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users`,
         {
+          googleId,
           nickInput,
         },
       );
+
       console.log(response.data);
       history.push('/main');
     }

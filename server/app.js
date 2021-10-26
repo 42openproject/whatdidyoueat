@@ -12,6 +12,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 /*
+ ** CORS
+ */
+
+const cors = require("cors");
+app.use(cors());
+
+/*
  ** routes
  */
 
@@ -21,13 +28,6 @@ var postsRouter = require("./routes/posts");
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
-
-/*
- ** CORS
- */
-
-const cors = require("cors");
-app.use(cors());
 
 /*
  ** swagger

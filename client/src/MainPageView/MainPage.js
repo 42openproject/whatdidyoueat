@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
@@ -7,6 +8,19 @@ const data = [];
 
 function MainPage() {
   const [post, setPost] = useState([]);
+  const [userNickname, setUserNickname] = useState('');
+
+  const googleId = localStorage.getItem('googleId');
+  useEffect(async () => {
+    const response = await axios
+      .get(`${process.env.REACT_APP_API_URL}/users/${googleId}`)
+      .then(res => {
+        console.log(res.data.nickname);
+        setUserNickname(res.data.nickname);
+      });
+  }, []);
+
+  // useEffect(getUserData(), []);
 
   const getPost = () => {
     // console.log(post);
@@ -37,8 +51,8 @@ function MainPage() {
         </div>
         <div className="posts">
           <div className="post-header">
-            <div className="post-title">mki의 이유식일기</div>
-            <div className="post-author">🥕mki</div>
+            <div className="post-title">{userNickname}의 이유식일기</div>
+            <div className="post-author">🥕{userNickname}</div>
           </div>
           <hr size="1" className="header-hr" />
           <div className="post-wrap">
