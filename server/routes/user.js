@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const userService = require("../services/users");
+const userService = require("../services/user");
 
 /**
  * @swagger
- *  /users:
+ *  /user/:id:
  *    get:
  *      tags:
  *      - users
@@ -25,7 +25,7 @@ router.get("/:id", function (req, res, next) {
 
 /**
  * @swagger
- *  /users:
+ *  /user:
  *    post:
  *      tags:
  *      - users

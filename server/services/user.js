@@ -1,12 +1,11 @@
 const models = require("../models");
 
 function getUser(req, res, next) {
-  models.user
+  models.users
     .findOne({
       where: { jwt: req.params.id },
     })
     .then((user) => {
-      console.log(user);
       res.send(user);
     });
   // .then((result) => {
@@ -18,7 +17,7 @@ function getUser(req, res, next) {
 }
 
 function createUser(req, res, next) {
-  models.user.create({
+  models.users.create({
     nickname: req.body.nickInput,
     jwt: req.body.googleId,
   });
