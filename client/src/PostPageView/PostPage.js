@@ -4,10 +4,12 @@ import Header from '../components/Header';
 
 function PostPage({ history }) {
   // 현재 상태, Setter
-  const [postContent, setPostContent] = useState('');
+  const [textContent, setPostContent] = useState('');
   const [postTag, setPostTag] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [tagArr, setTagArr] = useState([]);
+
+  const googleId = localStorage.getItem('googleId');
 
   document.addEventListener(
     'keydown',
@@ -72,15 +74,15 @@ function PostPage({ history }) {
     e.preventDefault();
     await new Promise(r => setTimeout(r, 1000));
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/posts`,
+      `${process.env.REACT_APP_API_URL}/post/${googleId}`,
       {
-        postContent,
+        textContent,
         tagArr,
       },
     );
     console.log(response.data);
     setDisabled(false);
-    // localStorage.setItem('postContent', postContent);
+    // localStorage.setItem('textContent', textContent);
     // localStorage.setItem('tagArr', tagArr);
     history.push('/main');
   };
@@ -90,8 +92,8 @@ function PostPage({ history }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="postContent"
-          value={postContent}
+          name="textContent"
+          value={textContent}
           onChange={handleContentChange}
         ></input>
         <div className="tagWrap">
