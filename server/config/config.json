@@ -3,7 +3,7 @@
     "username": "root",
     "password": "Wopark1!",
     "database": "wheat",
-    "host": "ec2-54-180-158-6.ap-northeast-2.compute.amazonaws.com",
+    "host": "api.whatdidyoueat.net",
     "dialect": "mysql"
   },
   "test": {

@@ -1,5 +1,22 @@
 const models = require("../models");
 
+function getGoogleId(req, res, next) {
+  models.users
+    .findOne({
+      where: { nickname: req.params.nickname },
+    })
+    .then((user) => {
+      console.log(user);
+      res.send(user);
+    });
+  // .then((result) => {
+  //   res.json(null);
+  // })
+  // .catch((err) => {
+  //   console.error(err);
+  // });
+}
+
 function getUser(req, res, next) {
   models.users
     .findOne({
@@ -30,6 +47,7 @@ function createUser(req, res, next) {
 }
 
 module.exports = {
+  getGoogleId,
   getUser,
   createUser,
 };

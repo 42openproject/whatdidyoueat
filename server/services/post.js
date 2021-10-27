@@ -8,7 +8,7 @@ function getPost(req, res, next) {
     .then((user) => {
       models.posts
         .findAll({
-          where: { userID: user.id },
+          where: { userId: user.dataValues.id },
         })
         .then((post) => {
           res.send(post);
