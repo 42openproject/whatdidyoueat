@@ -1,3 +1,8 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .posts-header-hr {
   width: 90%;
   padding: 0;
@@ -100,4 +105,17 @@
   margin: 0.2rem;
   font-size: 0.7rem;
   border-radius: 0.65rem;
+}
+
+.empty-post {
+  height: 300px;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.empty-post span {
+  display: block;
+  line-height: 3rem;
+  color: #aeaeae;
+  font-size: 2rem;
 }

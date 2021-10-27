@@ -1,26 +1,24 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-
-function MainPost() {
-  const [postData, setPostData] = useState({
-    createAt: '',
-    textContent: '',
-    tagArr: [],
-  });
-
-  useEffect(async () => {
-    const googleId = localStorage.getItem('googleId');
-    try {
-      const response = await axios
-        .get(`${process.env.REACT_APP_API_URL}/post/${googleId}`)
-        .then(res => {
-          console.log(res.data);
-        });
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-  return <div>test</div>;
+function MainPost({ id, date, textContent, tagArr }) {
+  return (
+    <>
+      <div className="post-content">
+        <div className="post-content__img">image 영역</div>
+        <p className="post-content__date">{date}</p>
+        <p className="post-content__text">{textContent}</p>
+        <ul className="post-content__tags">
+          {tagArr &&
+            tagArr.split(',').map((tag, idx) => {
+              return (
+                <li className="tag-item" key={idx}>
+                  {tag}
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+      <hr size="1" className="post-hr" />
+    </>
+  );
 }
 
 export default MainPost;

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
-
-const data = [];
 
 function MainPage() {
   const [post, setPost] = useState([]);
@@ -19,26 +18,19 @@ function MainPage() {
         console.log(res.data.nickname);
         setUserNickname(res.data.nickname);
       });
+
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+      );
+      console.log(data);
+      setPost(data);
+    } catch (e) {
+      console.log(e);
+    }
   }, []);
 
-  // useEffect(getUserData(), []);
-
-  const getPost = () => {
-    // console.log(post);
-    if (localStorage.getItem('postContent')) {
-      const newPost = {
-        postContent: localStorage.getItem('postContent'),
-        tagArr: localStorage.getItem('tagArr').split(','),
-      };
-      console.log(data);
-      setPost([...post, newPost]);
-      data.push(newPost);
-      localStorage.removeItem('postContent');
-      localStorage.removeItem('tagArr');
-    }
-  };
-
-  useEffect(() => getPost(), []);
+  useEffect(async () => {}, []);
 
   return (
     <>
@@ -46,9 +38,15 @@ function MainPage() {
       <div className="main-container">
         <div className="main-calendar"></div>
         <section className="following-wrap">
-          <div className="following-user">👿dhyeon</div>
-          <div className="following-user">🥕mki</div>
-          <div className="following-user">👻wopark</div>
+          <div className="following-user">
+            <Link to="/user/dhyeon">👿dhyeon</Link>
+          </div>
+          <div className="following-user">
+            <Link to="/user/mki">🥕mki</Link>
+          </div>
+          <div className="following-user">
+            <Link to="/user/wopark">👻wopark</Link>
+          </div>
         </section>
         <section className="main-posts-container">
           <div className="posts-header">
@@ -59,33 +57,26 @@ function MainPage() {
           </div>
           <hr size="1" className="posts-header-hr" />
           <div className="posts-body">
-            <MainPost />
-            <div className="post-content">
-              <div className="post-content__img">image 영역</div>
-              <p className="post-content__date">
-                2021년 10월 21일 오후 2시 32분
-              </p>
-              <p className="post-content__text">hi</p>
-              <ul className="post-content__tags">
-                <li className="tag-item">떡볶이</li>
-                <li className="tag-item">순대</li>
-                <li className="tag-item">분식</li>
-              </ul>
-            </div>
-            <hr size="1" className="post-hr" />
-            <div className="post-content">
-              <div className="post-content__img">image 영역</div>
-              <p className="post-content__date">
-                2021년 10월 21일 오후 2시 32분
-              </p>
-              <p className="post-content__text">hi</p>
-              <ul className="post-content__tags">
-                <li className="tag-item">떡볶이</li>
-                <li className="tag-item">순대</li>
-                <li className="tag-item">분식</li>
-              </ul>
-            </div>
-            <hr size="1" className="post-hr" />
+            {post.length === 0 ? (
+              <div className="empty-post">
+                <span>오늘의 식단을</span>
+                <span>기록해주세요</span>
+              </div>
+            ) : (
+              post
+                .slice(0)
+                .reverse()
+                .map(p => {
+                  return (
+                    <MainPost
+                      id={p.id}
+                      date={p.createdAt}
+                      textContent={p.textContent}
+                      tagArr={p.tagArr}
+                    />
+                  );
+                })
+            )}
           </div>
         </section>
       </div>
