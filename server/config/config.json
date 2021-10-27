@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "1234",
+    "password": "Wopark1!",
     "database": "wheat",
-    "host": "127.0.0.1",
+    "host": "ec2-54-180-158-6.ap-northeast-2.compute.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
