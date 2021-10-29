@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
 
-function UserPage({ match }) {
+function UserPage() {
   const [post, setPost] = useState([]);
-  const [userNickname, setUserNickname] = useState('');
+  const { nickname } = useParams();
 
   useEffect(async () => {
     try {
       // user googleId 가져오기
-      setUserNickname(match.params.nickname);
-      console.log(match.params.nickname);
       const data = await axios.get(
-        `${process.env.REACT_APP_API_URL}/user/nickname/${match.params.nickname}`,
+        `${process.env.REACT_APP_API_URL}/user/nickname/${nickname}`,
       );
       console.log(data);
 
       // post 가져오기
-      console.log('!!!!!');
       const res = await axios.get(
         `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
       );
@@ -29,7 +26,7 @@ function UserPage({ match }) {
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [nickname]);
 
   const goUserPage = user => {
     window.location.href = `/user/${user}`;
@@ -53,10 +50,8 @@ function UserPage({ match }) {
         </section>
         <section className="main-posts-container">
           <div className="posts-header">
-            <div className="posts-header__title">
-              {userNickname}의 이유식일기
-            </div>
-            <div className="post-header__author">🥕{userNickname}</div>
+            <div className="posts-header__title">{nickname}의 이유식일기</div>
+            <div className="post-header__author">🥕{nickname}</div>
           </div>
           <hr size="1" className="posts-header-hr" />
           <div className="posts-body">
