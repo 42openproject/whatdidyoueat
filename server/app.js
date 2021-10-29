@@ -23,11 +23,11 @@ app.use(cors());
  */
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var postsRouter = require("./routes/posts");
+var usersRouter = require("./routes/user");
+var postsRouter = require("./routes/post");
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/posts", postsRouter);
+app.use("/user", usersRouter);
+app.use("/post", postsRouter);
 
 /*
  ** swagger
@@ -39,5 +39,21 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(specs, { explorer: true })
 );
+
+/*
+ ** sequelize
+ */
+
+const models = require("./models/index.js");
+
+models.sequelize
+  .sync()
+  .then(() => {
+    console.log(" DB 연결 성공");
+  })
+  .catch((err) => {
+    console.log("연결 실패");
+    console.log(err);
+  });
 
 module.exports = app;

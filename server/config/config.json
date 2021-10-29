@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "1234",
+    "password": "Wopark1!",
     "database": "wheat",
-    "host": "127.0.0.1",
+    "host": "api.whatdidyoueat.net",
     "dialect": "mysql"
   },
   "test": {

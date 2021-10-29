@@ -1,36 +1,36 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
 
-function MainPage() {
+function UserPage() {
   const [post, setPost] = useState([]);
-  const [userNickname, setUserNickname] = useState('');
+  const { nickname } = useParams();
 
-  const googleId = localStorage.getItem('googleId');
   useEffect(async () => {
-    const response = await axios
-      .get(`${process.env.REACT_APP_API_URL}/user/${googleId}`)
-      .then(res => {
-        console.log(res.data.nickname);
-        setUserNickname(res.data.nickname);
-      });
-
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+      // user googleId 가져오기
+      const data = await axios.get(
+        `${process.env.REACT_APP_API_URL}/user/nickname/${nickname}`,
       );
       console.log(data);
-      setPost(data);
+
+      // post 가져오기
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
+      );
+      setPost(res.data);
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [nickname]);
 
-  useEffect(async () => {}, []);
+  const goUserPage = user => {
+    window.location.href = `/user/${user}`;
+  };
 
   return (
     <>
@@ -50,10 +50,8 @@ function MainPage() {
         </section>
         <section className="main-posts-container">
           <div className="posts-header">
-            <div className="posts-header__title">
-              {userNickname}의 이유식일기
-            </div>
-            <div className="post-header__author">🥕{userNickname}</div>
+            <div className="posts-header__title">{nickname}의 이유식일기</div>
+            <div className="post-header__author">🥕{nickname}</div>
           </div>
           <hr size="1" className="posts-header-hr" />
           <div className="posts-body">
@@ -85,4 +83,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default UserPage;

@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const userService = require("../services/users");
+const userService = require("../services/user");
 
 /**
  * @swagger
- *  /users:
+ *  /user/:id:
  *    get:
  *      tags:
  *      - users
@@ -25,7 +25,28 @@ router.get("/:id", function (req, res, next) {
 
 /**
  * @swagger
- *  /users:
+ *  /user/nickname/:nickname:
+ *    get:
+ *      tags:
+ *      - users
+ *      description: 닉네임으로 구글 아이디 얻기
+ *
+ *      responses:
+ *       200:
+ *        description: 구글 아이디 게또
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Users'
+ *
+ */
+router.get("/nickname/:nickname", function (req, res, next) {
+  user = userService.getGoogleId(req, res, next);
+});
+
+/**
+ * @swagger
+ *  /user:
  *    post:
  *      tags:
  *      - users
