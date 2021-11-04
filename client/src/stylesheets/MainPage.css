@@ -3,6 +3,10 @@ a {
   color: black;
 }
 
+input {
+  border: none;
+}
+
 .posts-header-hr {
   width: 90%;
   padding: 0;
@@ -72,6 +76,17 @@ a {
 
 .posts-header__title {
   font-size: 1.3rem;
+  display: flex;
+}
+
+.title-content-input {
+  font-size: 1.3rem;
+}
+
+.title-edit-btn {
+  display: block;
+  font-size: 1.2rem;
+  margin-left: 0.7rem;
 }
 
 .post-content {
