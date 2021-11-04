@@ -53,7 +53,6 @@ function MainPage() {
           <div className="posts-header">
             <div className="posts-header__title">
               <PostTitle nick={userNickname} />
-              {/* {userNickname}의 이유식일기 */}
             </div>
             <div className="post-header__author">🥕{userNickname}</div>
           </div>
