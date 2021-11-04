@@ -8,6 +8,10 @@ function PostTitle({ nick }) {
 
   const editTitle = () => {
     if (editFlag === true) {
+      if (title.length < 3 || title.length > 16) {
+        alert('3자 이상 15자 이하로 입력해주세요');
+        return;
+      }
       setDefaultTitle(title);
       // 여기서 DB로 보내야 함
     }
@@ -28,6 +32,7 @@ function PostTitle({ nick }) {
       ) : (
         <>
           <input
+            autoFocus
             className="title-content-input"
             type="text"
             value={title}
