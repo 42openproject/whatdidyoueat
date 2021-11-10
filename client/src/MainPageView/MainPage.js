@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
+import PostTitle from './PostTitle';
 
 function MainPage() {
   const [post, setPost] = useState([]);
@@ -51,7 +52,7 @@ function MainPage() {
         <section className="main-posts-container">
           <div className="posts-header">
             <div className="posts-header__title">
-              {userNickname}의 이유식일기
+              <PostTitle nick={userNickname} />
             </div>
             <div className="post-header__author">🥕{userNickname}</div>
           </div>
