@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FiEdit2, FiCornerDownLeft } from 'react-icons/fi';
 
 function PostTitle({ nick }) {
-  const [defaultTitle, setDefaultTitle] = useState(`${nick}의 이유식일기`);
+  const [defaultTitle, setDefaultTitle] = useState('');
   const [title, setTitle] = useState(defaultTitle);
   const [editFlag, setEditFlag] = useState(false);
+
+  useEffect(() => {
+    setDefaultTitle(`${nick}의 이유식일기`);
+  }, [nick]);
 
   const editTitle = () => {
     if (editFlag === true) {
@@ -24,6 +28,7 @@ function PostTitle({ nick }) {
 
   return (
     <>
+      {console.log(nick)}
       {editFlag === false ? (
         <>
           <span className="title-content">{defaultTitle}</span>
