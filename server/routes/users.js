@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const userService = require("../services/user");
+const userService = require("../services/users");
 
 /**
  * @swagger
- *  /user/:id:
+ *  /users/:id:
  *    get:
  *      tags:
  *      - users
@@ -20,12 +20,12 @@ const userService = require("../services/user");
  *
  */
 router.get("/:id", function (req, res, next) {
-  user = userService.getUser(req, res, next);
+  users = userService.getUser(req, res, next);
 });
 
 /**
  * @swagger
- *  /user/nickname/:nickname:
+ *  /users/nickname/:nickname:
  *    get:
  *      tags:
  *      - users
@@ -41,12 +41,12 @@ router.get("/:id", function (req, res, next) {
  *
  */
 router.get("/nickname/:nickname", function (req, res, next) {
-  user = userService.getGoogleId(req, res, next);
+  users = userService.getGoogleId(req, res, next);
 });
 
 /**
  * @swagger
- *  /user:
+ *  /users:
  *    post:
  *      tags:
  *      - users

@@ -23,11 +23,11 @@ app.use(cors());
  */
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/user");
-var postsRouter = require("./routes/post");
+var usersRouter = require("./routes/users");
+var postsRouter = require("./routes/posts");
 app.use("/", indexRouter);
-app.use("/user", usersRouter);
-app.use("/post", postsRouter);
+app.use("/users", usersRouter);
+app.use("/posts", postsRouter);
 
 /*
  ** swagger

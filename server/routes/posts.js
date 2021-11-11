@@ -1,14 +1,14 @@
 var express = require("express");
-const { post } = require(".");
+const { posts } = require(".");
 var router = express.Router();
-const postService = require("../services/post");
+const postService = require("../services/posts");
 
 /**
  * @swagger
- *  /post/:id:
- *    post:
+ *  /posts/:id:
+ *    posts:
  *      tags:
- *      - post
+ *      - posts
  *      description: 내가 쓴 글을 다 가져옵니다.
  *
  *      responses:
@@ -26,10 +26,10 @@ router.get("/:id", function (req, res, next) {
 
 /**
  * @swagger
- *  /post/:id:
- *    post:
+ *  /posts/:id:
+ *    posts:
  *      tags:
- *      - post
+ *      - posts
  *      description: 글을 게시합시다!
  *
  *      responses:
