@@ -29,9 +29,10 @@ input {
 
 .main-calendar {
   width: 90vw;
-  height: 97px;
+  min-height: 50px;
   border-radius: 15px;
   background-color: white;
+  padding: 20px 20px;
   margin-bottom: 5px;
 }
 

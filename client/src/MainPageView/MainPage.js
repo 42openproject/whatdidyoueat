@@ -6,6 +6,7 @@ import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
 import PostTitle from './PostTitle';
+import Calendar from './MainCalendar';
 
 function MainPage() {
   const [post, setPost] = useState([]);
@@ -37,7 +38,9 @@ function MainPage() {
     <>
       <Header />
       <div className="main-container">
-        <div className="main-calendar"></div>
+        <div className="main-calendar">
+          <Calendar />
+        </div>
         <section className="following-wrap">
           <div className="following-user">
             <Link to="/user/dhyeon">👿dhyeon</Link>
