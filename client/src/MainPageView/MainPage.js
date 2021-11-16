@@ -11,6 +11,7 @@ import Calendar from './MainCalendar';
 function MainPage() {
   const [post, setPost] = useState([]);
   const [userNickname, setUserNickname] = useState('');
+  const [clickedDay, setClickedDay] = useState('');
 
   const googleId = localStorage.getItem('googleId');
   useEffect(async () => {
@@ -38,9 +39,9 @@ function MainPage() {
     <>
       <Header />
       <div className="main-container">
-        <div className="main-calendar">
-          <Calendar />
-        </div>
+        <section className="main-calendar-wrap">
+          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+        </section>
         <section className="following-wrap">
           <div className="following-user">
             <Link to="/user/dhyeon">👿dhyeon</Link>
@@ -61,6 +62,7 @@ function MainPage() {
           </div>
           <hr size="1" className="posts-header-hr" />
           <div className="posts-body">
+            {clickedDay}
             {post.length === 0 ? (
               <div className="empty-post">
                 <span>오늘의 식단을</span>

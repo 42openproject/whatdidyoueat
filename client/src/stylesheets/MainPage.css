@@ -27,13 +27,18 @@ input {
   align-items: center;
 }
 
-.main-calendar {
+.main-calendar-wrap {
   width: 90vw;
   min-height: 50px;
   border-radius: 15px;
   background-color: white;
   padding: 20px 20px;
   margin-bottom: 5px;
+  position: relative;
+}
+
+.main-calendar {
+  width: 80vw;
 }
 
 .following-wrap {
