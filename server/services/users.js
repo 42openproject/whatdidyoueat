@@ -17,7 +17,7 @@ function getGoogleId(req, res, next) {
   // });
 }
 
-function getUser(req, res, next) {
+function getNickname(req, res, next) {
   models.users
     .findOne({
       where: { jwt: req.params.id },
@@ -33,11 +33,19 @@ function getUser(req, res, next) {
   // });
 }
 
-function createUser(req, res, next) {
-  models.users.create({
-    nickname: req.body.nickInput,
-    jwt: req.body.googleId,
-  });
+function setNickname(req, res, next) {
+  models.users
+    .create({
+      nickname: req.body.nickname,
+      jwt: req.body.googleId,
+    })
+    .then(() => {
+      var temp = {
+        success: "True",
+        message: "Good Bo",
+      };
+      res.send(temp);
+    });
   // .then((result) => {
   //   res.json(null);
   // })
@@ -47,7 +55,7 @@ function createUser(req, res, next) {
 }
 
 module.exports = {
+  setNickname,
+  getNickname,
   getGoogleId,
-  getUser,
-  createUser,
 };

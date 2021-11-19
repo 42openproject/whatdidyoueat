@@ -40,8 +40,8 @@ router.get("/:id", function (req, res, next) {
  *              $ref: '#/components/schemas/Users'
  *
  */
-router.get("/nickname/:nickname", function (req, res, next) {
-  users = userService.getGoogleId(req, res, next);
+router.get("/nickname", function (req, res, next) {
+  users = userService.getNicknamee(req, res, next);
 });
 
 /**
@@ -61,9 +61,8 @@ router.get("/nickname/:nickname", function (req, res, next) {
  *              $ref: '#/components/schemas/Users'
  *
  */
-router.post("/", function (req, res, next) {
-  userService.createUser(req, res, next);
-  res.send(req.body);
+router.post("/nickname", function (req, res, next) {
+  userService.setNickname(req, res, next);
 });
 
 module.exports = router;
