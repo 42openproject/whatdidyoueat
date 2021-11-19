@@ -25,6 +25,8 @@ app.use(cors());
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
+var loginRouter = require("./routes/login");
+var calendarRouter = require("./routes/calendar");
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
