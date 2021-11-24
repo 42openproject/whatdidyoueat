@@ -24,21 +24,35 @@ button {
   text-decoration: none;
 }
 
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr);
+  /* grid-template-rows: repeat(5, 1fr); */
+  grid-gap: 5px;
+  place-items: center;
+}
+
 .react-calendar__tile {
-  /* background-color: red; */
   border: 1px solid #707070;
+  justify-content: center;
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  font-size: 1.1rem;
+  width: 10vw;
+  height: 10vw;
+  font-size: 1.2rem;
   text-align: center;
-  margin: 4px;
-  flex-basis: auto !important;
-  line-height: 1.7rem;
+  /* line-height: 1.7rem; */
+  max-width: 70px !important;
+  max-height: 70px;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: rgb(167, 167, 167);
+  border: none;
 }
 
 .react-calendar__tile abbr {
   text-align: center;
+  display: block;
 }
 
 .react-calendar__tile--active {
