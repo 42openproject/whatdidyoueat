@@ -75,7 +75,7 @@ function MainPage() {
                 .map(p => {
                   return (
                     <MainPost
-                      id={p.id}
+                      key={p.id}
                       date={p.createdAt}
                       textContent={p.textContent}
                       tagArr={p.tagArr}
