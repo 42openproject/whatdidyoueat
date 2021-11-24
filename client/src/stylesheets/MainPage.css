@@ -29,7 +29,7 @@ input {
 
 .main-calendar-wrap {
   width: 90vw;
-  min-width: 350px;
+  min-width: 280px;
   /* max-width: 600px; */
   min-height: 50px;
   border-radius: 15px;
