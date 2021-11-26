@@ -8,6 +8,7 @@ const MainCalendar = ({ clickedDay, setClickedDay }) => {
   const [monthVal, setMonthVal] = useState(new Date());
   const [postedDate, setPostedDate] = useState([]);
 
+  // 달력에서 날짜 선택
   const onClickDay = e => {
     console.log(`${e.getMonth() + 1}월 ${e.getDate()}일 입니다`);
     setClickedDay(`${e.getMonth() + 1}월 ${e.getDate()}일 입니다`);
@@ -26,14 +27,17 @@ const MainCalendar = ({ clickedDay, setClickedDay }) => {
     return '';
   };
 
-  // test api
+  // test api 포스팅된 날짜 달력에 표시하기
   useEffect(async () => {
-    const response = await axios.get(`http://localhost:8000/calendar/dhyeon`);
+    const response = await axios.get(
+      `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
+    );
 
     console.log(response.data.data);
     setPostedDate(response.data.data);
-  }, []);
+  }, [monthVal]); // 월 화살표 눌러서 바꿀때마다 요청받도록
 
+  // 달력 년.월 표시 포맷
   const testFormat = () => {
     return new Intl.DateTimeFormat('ko-KR', {
       year: 'numeric',
@@ -41,6 +45,7 @@ const MainCalendar = ({ clickedDay, setClickedDay }) => {
     }).format(monthVal);
   };
 
+  // 달력에 화살표 누를때 현재 월 표시
   const onActiveStartDateChange = data => {
     console.log(data);
     const oldDate = dateVal;
