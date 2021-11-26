@@ -22,17 +22,17 @@ function UserPage() {
       console.log(data);
 
       // test api
-      const postData = await axios.get(
-        `http://localhost:8000/post?userId=${nickname}&createdAt=2021-11-${clickedDay.getDate()}`,
-      );
-      console.log(postData.data);
-      setPost(postData.data);
+      // const postData = await axios.get(
+      //   `http://localhost:8000/post?userId=${nickname}&createdAt=2021-11-${clickedDay.getDate()}`,
+      // );
+      // console.log(postData.data);
+      // setPost(postData.data);
 
       // post 가져오기
-      //   const res = await axios.get(
-      //     `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
-      //   );
-      //   setPost(res.data);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
+      );
+      setPost(res.data);
     } catch (e) {
       console.log(e);
     }

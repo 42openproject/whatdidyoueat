@@ -25,26 +25,26 @@ function MainPage() {
 
   useEffect(async () => {
     // test api
-    try {
-      const data = await axios.get(
-        `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
-      );
-      console.log(data.data);
-      setPost(data.data);
-    } catch (e) {
-      console.log(e);
-    }
-
-    // 본 요청 api
     // try {
-    //   const { data } = await axios.get(
-    //     `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+    //   const data = await axios.get(
+    //     `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
     //   );
-    //   console.log(data);
-    //   setPost(data);
+    //   console.log(data.data);
+    //   setPost(data.data);
     // } catch (e) {
     //   console.log(e);
     // }
+
+    // 본 요청 api
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+      );
+      console.log(data);
+      setPost(data);
+    } catch (e) {
+      console.log(e);
+    }
   }, [clickedDay]);
 
   return (
