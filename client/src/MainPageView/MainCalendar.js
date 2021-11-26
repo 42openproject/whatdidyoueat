@@ -10,8 +10,7 @@ const MainCalendar = ({ clickedDay, setClickedDay }) => {
 
   // 달력에서 날짜 선택
   const onClickDay = e => {
-    console.log(`${e.getMonth() + 1}월 ${e.getDate()}일 입니다`);
-    setClickedDay(`${e.getMonth() + 1}월 ${e.getDate()}일 입니다`);
+    setClickedDay(e);
   };
 
   const setPostedDay = allday => {

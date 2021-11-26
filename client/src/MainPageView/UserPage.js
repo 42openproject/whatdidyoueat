@@ -5,10 +5,12 @@ import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
+import PostTitle from './PostTitle';
 
 function UserPage() {
   const [post, setPost] = useState([]);
   const { nickname } = useParams();
+  const [clickedDay, setClickedDay] = useState('');
 
   useEffect(async () => {
     try {
@@ -50,7 +52,9 @@ function UserPage() {
         </section>
         <section className="main-posts-container">
           <div className="posts-header">
-            <div className="posts-header__title">{nickname}의 이유식일기</div>
+            <div className="posts-header__title">
+              <PostTitle nick={nickname} clickedDay={clickedDay} />
+            </div>
             <div className="post-header__author">🥕{nickname}</div>
           </div>
           <hr size="1" className="posts-header-hr" />

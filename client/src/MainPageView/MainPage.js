@@ -12,8 +12,8 @@ function MainPage() {
   const [post, setPost] = useState([]);
   const [userNickname, setUserNickname] = useState('');
   const [clickedDay, setClickedDay] = useState('');
-
   const googleId = localStorage.getItem('googleId');
+
   useEffect(async () => {
     const response = await axios
       .get(`${process.env.REACT_APP_API_URL}/user/${googleId}`)
@@ -56,13 +56,13 @@ function MainPage() {
         <section className="main-posts-container">
           <div className="posts-header">
             <div className="posts-header__title">
-              <PostTitle nick={userNickname} />
+              <PostTitle nick={userNickname} clickedDay={clickedDay} />
             </div>
             <div className="post-header__author">🥕{userNickname}</div>
           </div>
           <hr size="1" className="posts-header-hr" />
           <div className="posts-body">
-            {clickedDay}
+            {/* {clickedDay} */}
             {post.length === 0 ? (
               <div className="empty-post">
                 <span>오늘의 식단을</span>
