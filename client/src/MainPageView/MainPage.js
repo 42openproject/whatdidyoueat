@@ -11,7 +11,7 @@ import Calendar from './MainCalendar';
 function MainPage() {
   const [post, setPost] = useState([]);
   const [userNickname, setUserNickname] = useState('');
-  const [clickedDay, setClickedDay] = useState('');
+  const [clickedDay, setClickedDay] = useState(new Date());
   const googleId = localStorage.getItem('googleId');
 
   useEffect(async () => {

@@ -6,11 +6,12 @@ import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
 import PostTitle from './PostTitle';
+import Calendar from './MainCalendar';
 
 function UserPage() {
   const [post, setPost] = useState([]);
   const { nickname } = useParams();
-  const [clickedDay, setClickedDay] = useState('');
+  const [clickedDay, setClickedDay] = useState(new Date());
 
   useEffect(async () => {
     try {
@@ -38,7 +39,9 @@ function UserPage() {
     <>
       <Header />
       <div className="main-container">
-        <div className="main-calendar"></div>
+        <div className="main-calendar-wrap">
+          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+        </div>
         <section className="following-wrap">
           <div className="following-user">
             <Link to="/user/dhyeon">👿dhyeon</Link>

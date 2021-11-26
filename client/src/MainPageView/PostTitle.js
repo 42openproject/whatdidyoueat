@@ -6,12 +6,11 @@ function PostTitle({ nick, clickedDay }) {
   const [defaultTitle, setDefaultTitle] = useState('');
   const [title, setTitle] = useState(defaultTitle);
   const [editFlag, setEditFlag] = useState(false);
-  const today = new Date();
 
   useEffect(async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8000/title?id=${nick}&date=${today.getDate()}`,
+        `http://localhost:8000/title?id=${nick}&date=${clickedDay.getDate()}`,
       );
       setDefaultTitle(data[0].title);
       console.log(data[0]);
