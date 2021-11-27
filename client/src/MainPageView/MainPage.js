@@ -13,6 +13,11 @@ function MainPage() {
   const [userNickname, setUserNickname] = useState('');
   const [clickedDay, setClickedDay] = useState(new Date());
   const googleId = localStorage.getItem('googleId');
+  const [testFlag, setTestFlag] = useState(
+    localStorage.getItem('testFlag') === null
+      ? false
+      : localStorage.getItem('testFlag'),
+  );
 
   useEffect(async () => {
     const response = await axios
@@ -25,27 +30,29 @@ function MainPage() {
 
   useEffect(async () => {
     // test api
-    // try {
-    //   const data = await axios.get(
-    //     `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
-    //   );
-    //   console.log(data.data);
-    //   setPost(data.data);
-    // } catch (e) {
-    //   console.log(e);
-    // }
-
-    // 본 요청 api
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/post/${googleId}`,
-      );
-      console.log(data);
-      setPost(data);
-    } catch (e) {
-      console.log(e);
+    if (testFlag === true) {
+      try {
+        const data = await axios.get(
+          `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
+        );
+        console.log(data.data);
+        setPost(data.data);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      // 본 요청 api
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+        );
+        console.log(data);
+        setPost(data);
+      } catch (e) {
+        console.log(e);
+      }
     }
-  }, [clickedDay]);
+  }, [clickedDay, testFlag]);
 
   return (
     <>
@@ -99,6 +106,26 @@ function MainPage() {
         </section>
       </div>
       <NaviBar />
+
+      {/* flag 설정! */}
+      <button
+        style={{
+          position: 'absolute',
+          width: '150px',
+          height: '50px',
+          top: '10px',
+          left: '100px',
+          backgroundColor: 'yellow',
+          border: '1px solid black',
+          borderRadius: '10px',
+        }}
+        onClick={() => {
+          localStorage.setItem('testFlag', !testFlag);
+          setTestFlag(!testFlag);
+        }}
+      >
+        {testFlag === false ? 'test api 사용하기' : '본 api 사용하기'}
+      </button>
     </>
   );
 }
