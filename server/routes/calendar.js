@@ -1,5 +1,4 @@
 var express = require("express");
-const { calendar } = require(".");
 var router = express.Router();
 const calendarService = require("../services/calendar");
 
@@ -23,3 +22,5 @@ const calendarService = require("../services/calendar");
 router.get("/:id", function (req, res, next) {
   calendarService.getCalendar(req, res, next);
 });
+
+module.exports = router;
