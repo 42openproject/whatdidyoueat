@@ -5,10 +5,13 @@ import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
+import PostTitle from './PostTitle';
+import Calendar from './MainCalendar';
 
 function UserPage() {
   const [post, setPost] = useState([]);
   const { nickname } = useParams();
+  const [clickedDay, setClickedDay] = useState(new Date());
 
   useEffect(async () => {
     try {
@@ -18,6 +21,13 @@ function UserPage() {
       );
       console.log(data);
 
+      // test api
+      // const postData = await axios.get(
+      //   `http://localhost:8000/post?userId=${nickname}&createdAt=2021-11-${clickedDay.getDate()}`,
+      // );
+      // console.log(postData.data);
+      // setPost(postData.data);
+
       // post 가져오기
       const res = await axios.get(
         `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
@@ -26,7 +36,7 @@ function UserPage() {
     } catch (e) {
       console.log(e);
     }
-  }, [nickname]);
+  }, [nickname, clickedDay]);
 
   const goUserPage = user => {
     window.location.href = `/user/${user}`;
@@ -36,7 +46,9 @@ function UserPage() {
     <>
       <Header />
       <div className="main-container">
-        <div className="main-calendar"></div>
+        <div className="main-calendar-wrap">
+          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+        </div>
         <section className="following-wrap">
           <div className="following-user">
             <Link to="/user/dhyeon">👿dhyeon</Link>
@@ -50,7 +62,9 @@ function UserPage() {
         </section>
         <section className="main-posts-container">
           <div className="posts-header">
-            <div className="posts-header__title">{nickname}의 이유식일기</div>
+            <div className="posts-header__title">
+              <PostTitle nick={nickname} clickedDay={clickedDay} />
+            </div>
             <div className="post-header__author">🥕{nickname}</div>
           </div>
           <hr size="1" className="posts-header-hr" />
@@ -67,7 +81,7 @@ function UserPage() {
                 .map(p => {
                   return (
                     <MainPost
-                      id={p.id}
+                      key={p.id}
                       date={p.createdAt}
                       textContent={p.textContent}
                       tagArr={p.tagArr}

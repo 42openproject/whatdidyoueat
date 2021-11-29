@@ -1,10 +1,28 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { FiEdit2, FiCornerDownLeft } from 'react-icons/fi';
 
-function PostTitle({ nick }) {
-  const [defaultTitle, setDefaultTitle] = useState(`${nick}의 이유식일기`);
+function PostTitle({ nick, clickedDay }) {
+  const [defaultTitle, setDefaultTitle] = useState('');
   const [title, setTitle] = useState(defaultTitle);
   const [editFlag, setEditFlag] = useState(false);
+  const [editBtn, setEditBtn] = useState(false); // 나중에 본인페이지, 오늘날짜에만 버튼 나오도록 설정
+
+  useEffect(async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8000/title?id=${nick}&date=${clickedDay.getDate()}`,
+      );
+      setDefaultTitle(data[0].title);
+      setTitle(defaultTitle);
+      console.log(data[0]);
+    } catch (e) {
+      console.log(e.message);
+      setDefaultTitle(`${nick}의 이유식일기`);
+      setTitle(defaultTitle);
+    }
+    // 맨 처음엔 data를 못받아오고, 다시 리로드되어서 받아오는데 본 요청때는 체크해봐야할듯 함
+  }, [nick, clickedDay, editFlag]);
 
   const editTitle = () => {
     if (editFlag === true) {
@@ -13,6 +31,7 @@ function PostTitle({ nick }) {
         return;
       }
       setDefaultTitle(title);
+      axios.patch(`http://localhost:8000/title/dhyeon`, { title });
       // 여기서 DB로 보내야 함
     }
     setEditFlag(!editFlag);

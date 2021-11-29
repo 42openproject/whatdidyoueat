@@ -9,6 +9,7 @@ import KakaoLogo from '../asset/kakao_logo.png';
 function Home({ history }) {
   const onSuccessGoogle = res => {
     console.log(res.googleId);
+    console.log(res);
     localStorage.setItem('googleId', res.googleId);
     // console.dir(res.tokenObj);
     console.log('success');
