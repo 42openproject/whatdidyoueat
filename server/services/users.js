@@ -7,51 +7,55 @@ function getGoogleId(req, res, next) {
     })
     .then((user) => {
       console.log(user);
-      res.send(user);
+      res.send("user");
+    })
+    .catch((err) => {
+      console.error(err);
     });
-  // .then((result) => {
-  //   res.json(null);
-  // })
-  // .catch((err) => {
-  //   console.error(err);
-  // });
 }
 
 function getNickname(req, res, next) {
   models.users
     .findOne({
-      where: { jwt: req.params.id },
+      where: { jwt: req.query.googleId },
     })
     .then((user) => {
-      res.send(user);
+      var msg = {
+        success: true,
+        data: {
+          nickname: user.nickname,
+        },
+        message: "success",
+      };
+      res.send(msg);
+    })
+    .catch((err) => {
+      var msg = {
+        success: false,
+        message: err,
+      };
+      res.send(msg);
     });
-  // .then((result) => {
-  //   res.json(null);
-  // })
-  // .catch((err) => {
-  //   console.error(err);
-  // });
 }
 
 function setNickname(req, res, next) {
   models.users
-    .create({
-      nickname: req.body.nickname,
-      jwt: req.body.googleId,
-    })
+    .update(
+      {
+        nickname: req.body.nickname,
+      },
+      { where: { jwt: req.body.googleId } }
+    )
     .then(() => {
       var temp = {
-        success: "True",
-        message: "Good Bo",
+        success: true,
+        message: "Success",
       };
       res.send(temp);
+    })
+    .catch((err) => {
+      console.error(err);
     });
-  // .then((result) => {
-  //   res.json(null);
-  // })
-  // .catch((err) => {
-  //   console.error(err);
-  // });
 }
 
 module.exports = {

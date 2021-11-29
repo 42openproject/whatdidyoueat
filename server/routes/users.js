@@ -2,26 +2,26 @@ var express = require("express");
 var router = express.Router();
 const userService = require("../services/users");
 
-/**
- * @swagger
- *  /users/:id:
- *    get:
- *      tags:
- *      - users
- *      description: user목록
- *
- *      responses:
- *       200:
- *        description: user성공
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Users'
- *
- */
-router.get("/:id", function (req, res, next) {
-  users = userService.getUser(req, res, next);
-});
+// /**
+//  * @swagger
+//  *  /users/:id:
+//  *    get:
+//  *      tags:
+//  *      - users
+//  *      description: user목록
+//  *
+//  *      responses:
+//  *       200:
+//  *        description: user성공
+//  *        content:
+//  *          application/json:
+//  *            schema:
+//  *              $ref: '#/components/schemas/Users'
+//  *
+//  */
+// router.get("/:id", function (req, res, next) {
+//   users = userService.getGoogleId(req, res, next);
+// });
 
 /**
  * @swagger
@@ -41,7 +41,7 @@ router.get("/:id", function (req, res, next) {
  *
  */
 router.get("/nickname", function (req, res, next) {
-  users = userService.getNicknamee(req, res, next);
+  userService.getNickname(req, res, next);
 });
 
 /**
