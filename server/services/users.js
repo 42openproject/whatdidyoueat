@@ -1,19 +1,5 @@
 const models = require("../models");
 
-function getGoogleId(req, res, next) {
-  models.users
-    .findOne({
-      where: { nickname: req.params.nickname },
-    })
-    .then((user) => {
-      console.log(user);
-      res.send("user");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
 function getNickname(req, res, next) {
   models.users
     .findOne({
