@@ -27,9 +27,11 @@ var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
 var loginRouter = require("./routes/login");
 var calendarRouter = require("./routes/calendar");
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
+app.use("/login", loginRouter);
 
 /*
  ** swagger
