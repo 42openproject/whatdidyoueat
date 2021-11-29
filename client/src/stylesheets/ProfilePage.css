@@ -1,0 +1,128 @@
+.profile-container {
+  width: 90vw;
+  border-radius: 15px;
+  background-color: white;
+  padding: 30px 20px;
+  margin: auto;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.profile-hr {
+  width: 100%;
+  margin: 0 auto 10px;
+  border-bottom: 1px solid #dddddd;
+  border-top: none;
+}
+
+/* user-profile */
+.user-profile {
+  display: flex;
+}
+
+.user-profile__img {
+  background-color: gray;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.user-profile__nickname {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  padding-left: 20px;
+  padding-top: 50px;
+  height: 1.3rem;
+}
+.user-profile__nickname--text {
+}
+.user-profile__nickname--edit-btn {
+  margin-left: 10px;
+  font-size: 1.1rem;
+}
+
+/* user-follow */
+.user-follow {
+  display: flex;
+  padding: 20px 10px;
+  position: relative;
+}
+
+.user-follow__wrap {
+  width: 50%;
+  align-items: center;
+}
+.user-follow__title {
+  margin-right: 10px;
+}
+.user-follow__number {
+  font-size: 0.9rem;
+}
+
+/* user-info-item */
+.user-info-item {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.user-info-item__upper-menu {
+  display: flex;
+  justify-content: space-between;
+}
+.user-info-item__upper-menu__left {
+  display: flex;
+}
+.user-info-item__title {
+  font-size: 1.2rem;
+  width: 5rem;
+  display: block;
+}
+.user-info-item__subtitle {
+  font-size: 0.5rem;
+  line-height: 1.5rem;
+  color: #8e8e8e;
+}
+.user-info-item__edit-btn {
+}
+
+.user-info-item__contents {
+  display: flex;
+}
+
+.user-info-item__tag-item {
+  background-color: rgb(158, 203, 205);
+  padding: 1px 6px;
+  font-size: 0.6rem;
+  height: 1.3rem;
+  border-radius: 0.6rem;
+  margin: 4px;
+  display: flex;
+  align-items: center;
+}
+.user-info-item__tag-item__title {
+  padding-left: 0.3rem;
+}
+.user-info-item__tag-item__xbtn {
+  padding-left: 0.3rem;
+}
+
+.user-info-item__acheivement-item {
+  margin: 6px;
+}
+.user-info-item__acheivement-item__img {
+  width: 16vw;
+  max-width: 600px;
+  height: 16vw;
+  max-height: 600px;
+  border-radius: 50%;
+  background-color: darkturquoise;
+}
+.user-info-item__acheivement-item__title {
+  font-size: 0.5rem;
+  text-align: center;
+  display: block;
+  margin: 7px auto;
+  color: #8e8e8e;
+}
