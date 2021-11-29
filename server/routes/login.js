@@ -1,5 +1,4 @@
 var express = require("express");
-const { posts } = require(".");
 var router = express.Router();
 const googleService = require("../services/login");
 
@@ -20,6 +19,8 @@ const googleService = require("../services/login");
  *              $ref: '#/components/schemas/Posts'
  *
  */
-router.get("/google", function (req, res, next) {
+router.post("/google", function (req, res, next) {
   googleService.loginGoogle(req, res, next);
 });
+
+module.exports = router;
