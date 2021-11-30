@@ -1,31 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const userService = require("../services/user");
+const userService = require("../services/users");
 
 /**
  * @swagger
- *  /user/:id:
- *    get:
- *      tags:
- *      - users
- *      description: user목록
- *
- *      responses:
- *       200:
- *        description: user성공
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Users'
- *
- */
-router.get("/:id", function (req, res, next) {
-  user = userService.getUser(req, res, next);
-});
-
-/**
- * @swagger
- *  /user/nickname/:nickname:
+ *  /users/nickname/:nickname:
  *    get:
  *      tags:
  *      - users
@@ -40,13 +19,13 @@ router.get("/:id", function (req, res, next) {
  *              $ref: '#/components/schemas/Users'
  *
  */
-router.get("/nickname/:nickname", function (req, res, next) {
-  user = userService.getGoogleId(req, res, next);
+router.get("/nickname", function (req, res, next) {
+  userService.getNickname(req, res, next);
 });
 
 /**
  * @swagger
- *  /user:
+ *  /users:
  *    post:
  *      tags:
  *      - users
@@ -61,9 +40,8 @@ router.get("/nickname/:nickname", function (req, res, next) {
  *              $ref: '#/components/schemas/Users'
  *
  */
-router.post("/", function (req, res, next) {
-  userService.createUser(req, res, next);
-  res.send(req.body);
+router.post("/nickname", function (req, res, next) {
+  userService.setNickname(req, res, next);
 });
 
 module.exports = router;
