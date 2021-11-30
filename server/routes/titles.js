@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const titleServices = require("../services/title");
+const titleServices = require("../services/titles");
+const userServices = require("../services/users");
 
 /**
  * @swagger
