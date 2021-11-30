@@ -47,5 +47,4 @@ function setNickname(req, res, next) {
 module.exports = {
   setNickname,
   getNickname,
-  getGoogleId,
 };
