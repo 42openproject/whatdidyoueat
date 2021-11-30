@@ -1,22 +1,35 @@
 const models = require("../models");
+const { Op } = require("sequelize");
 
 function getTitle(req, res, next) {
-  function getUserId(req, res, next) {
-    return models.users
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   models.users
     .findOne({
       where: { nickname: req.params.id },
     })
     .then((user) => {
-      models.return(user);
+      models.titles
+        .findOne({
+          where: {
+            [Op.and]: [
+              { userId: user.id },
+              {
+                createdAt: {
+                  [Op.lte]: req.query.date,
+                },
+              },
+            ],
+          },
+        })
+        .then((title) => {
+          var msg = {
+            success: true,
+            data: {
+              title: title.title,
+            },
+            message: "Success",
+          };
+          res.send(msg);
+        });
     })
     .catch((err) => {
       console.log(err);
