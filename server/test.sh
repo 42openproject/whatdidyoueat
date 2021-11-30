@@ -17,11 +17,13 @@
 # GET /title/:id
 # curl -X GET 'http://localhost:3001/titles/123'
 
-# POST /title/mki
-# curl \
-# -H "Content-Type: application/json" \
-# -d '{"googleId":"123", "title":"mki의 이유식"}' \
-# -X POST 'http://localhost:3001/titles/mki'
+# POST /title/:id
+# body: googleId, title
+curl \
+-H "Content-Type: application/json" \
+-d '{"googleId":"123", "title":"mki의 이유식"}' \
+-X POST 'http://localhost:3001/titles/mki'
 
-# GET /title/mki
+# GET /title/:id
+# query parameter: date=YYYY-MM-DD
 curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-01'
