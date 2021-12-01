@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MdFormatListNumberedRtl, MdModeEdit } from 'react-icons/md';
+import { MdModeEdit } from 'react-icons/md';
 import axios from 'axios';
 import EditNickModal from './EditNickModal';
 
@@ -24,6 +24,11 @@ function UserProfile() {
 
   useEffect(async () => {
     // user image 요청 추가
+
+    // test api
+    const { data } = await axios.get(`http://localhost:8000/profileImg/dhyeon`);
+    console.log(data);
+    setUserImage(data.imgUrl);
   }, [userImage]);
 
   const editUserNickname = () => {

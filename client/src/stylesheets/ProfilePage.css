@@ -30,8 +30,10 @@
   overflow: hidden;
 }
 .user-profile__img__img {
-  width: 100px;
+  width: 100%;
+  height: 100%;
   background-color: gray;
+  object-fit: cover;
 }
 
 .user-profile__nickname {
