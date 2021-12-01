@@ -163,7 +163,6 @@
   max-width: 400px;
   height: 150px;
   padding: 20px;
-  z-index: 3;
 }
 .edit-nick-modal__title {
   display: block;
