@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const googleService = require("../services/login");
+const loginService = require("../services/login");
 
 /**
  * @swagger
@@ -20,7 +20,17 @@ const googleService = require("../services/login");
  *
  */
 router.post("/google", function (req, res, next) {
-  googleService.loginGoogle(req, res, next);
+  if (req.body.googleId == undefined || req.body.email == undefined) {
+    res.status(400).send({
+      success: false,
+      data: {
+        isSigned: false,
+      },
+      message: "missing googleId or email in POST body",
+    });
+  } else {
+    loginService.isSigned(req, res, next);
+  }
 });
 
 module.exports = router;
