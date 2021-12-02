@@ -1,5 +1,6 @@
 .profile-container {
   width: 90vw;
+  max-width: 600px;
   border-radius: 15px;
   background-color: white;
   padding: 30px 20px;
@@ -26,6 +27,13 @@
   height: 100px;
   border-radius: 50px;
   text-align: center;
+  overflow: hidden;
+}
+.user-profile__img__img {
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  object-fit: cover;
 }
 
 .user-profile__nickname {
@@ -113,9 +121,9 @@
 }
 .user-info-item__acheivement-item__img {
   width: 16vw;
-  max-width: 600px;
+  max-width: 100px;
   height: 16vw;
-  max-height: 600px;
+  max-height: 100px;
   border-radius: 50%;
   background-color: darkturquoise;
 }
@@ -125,4 +133,64 @@
   display: block;
   margin: 7px auto;
   color: #8e8e8e;
+}
+
+/* modal */
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.edit-nick-modal-close-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.edit-nick-modal {
+  position: relative;
+  background-color: white;
+  border: 3px solid #bfbfe5;
+  border-radius: 15px;
+  box-shadow: 3px 3px 6px #999;
+  margin: 30vh auto 0;
+  width: 80vw;
+  max-width: 400px;
+  height: 150px;
+  padding: 20px;
+}
+.edit-nick-modal__title {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.edit-nick-modal__input-box {
+  margin-bottom: 15px;
+  margin-left: 2rem;
+}
+.edit-nick-modal__input {
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+.edit-nick-modal__input-check-btn {
+  margin-left: 0.8rem;
+}
+.edit-nick-modal__check-msg {
+  display: block;
+  font-size: 0.9rem;
+  color: forestgreen;
+  height: 1.2rem;
+}
+.edit-nick-modal__input-submit-btn {
+  background-color: #bfbfe5;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: white;
 }
