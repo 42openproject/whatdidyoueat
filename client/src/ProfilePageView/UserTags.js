@@ -1,12 +1,11 @@
-import { IoClose } from 'react-icons/io5';
-import { IconContext } from 'react-icons';
 import { FiPlus } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AddTagModal from './AddTagModal';
+import TagList from './TagList';
 
 function UserTags() {
-  const [tagList, setTagList] = useState([]);
+  const [tagArr, setTagArr] = useState([]);
   const [tagModal, setTagModal] = useState(false);
 
   useEffect(async () => {
@@ -14,7 +13,10 @@ function UserTags() {
 
     // test api
     const { data } = await axios.get(`http://localhost:8000/tags/dhyeon`);
-    setTagList(data.tagArr);
+    console.log(data);
+    if (data.tagArr.length !== 0) {
+      setTagArr(data.tagArr);
+    }
   }, []);
 
   const addTag = () => {
@@ -38,22 +40,18 @@ function UserTags() {
         </div>
         <hr size="1" className="profile-hr" />
         <div className="user-info-item__contents">
-          <div className="user-info-item__tag-item">
+          {tagArr.length !== 0 &&
+            tagArr.map((tag, idx) => {
+              return <TagList tagName={tag} key={idx} />;
+            })}
+          {/* <div className="user-info-item__tag-item">
             <span className="user-info-item__tag-item__title">다이어트</span>
             <div className="user-info-item__tag-item__xbtn">
               <IconContext.Provider value={{ color: 'red' }}>
                 <IoClose />
               </IconContext.Provider>
             </div>
-          </div>
-          <div className="user-info-item__tag-item">
-            <span className="user-info-item__tag-item__title">운동</span>
-            <div className="user-info-item__tag-item__xbtn">
-              <IconContext.Provider value={{ color: 'red' }}>
-                <IoClose />
-              </IconContext.Provider>
-            </div>
-          </div>
+          </div> */}
         </div>
       </section>
       {tagModal && <AddTagModal addTag={addTag} />}
