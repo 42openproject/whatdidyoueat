@@ -1,8 +1,27 @@
 import { IoClose } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 import { FiPlus } from 'react-icons/fi';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import AddTagModal from './AddTagModal';
 
 function UserTags() {
+  const [tagList, setTagList] = useState([]);
+  const [tagModal, setTagModal] = useState(false);
+
+  useEffect(async () => {
+    // 본 api 추가
+
+    // test api
+    const { data } = await axios.get(`http://localhost:8000/tags/dhyeon`);
+    setTagList(data.tagArr);
+  }, []);
+
+  const addTag = () => {
+    console.log('add tag click!!');
+    setTagModal(!tagModal);
+  };
+
   return (
     <>
       <section className="user-info-item">
@@ -14,7 +33,7 @@ function UserTags() {
             </span>
           </div>
           <div className="user-info-item__edit-btn">
-            <FiPlus />
+            <FiPlus onClick={addTag} />
           </div>
         </div>
         <hr size="1" className="profile-hr" />
@@ -37,6 +56,7 @@ function UserTags() {
           </div>
         </div>
       </section>
+      {tagModal && <AddTagModal addTag={addTag} />}
     </>
   );
 }

@@ -228,5 +228,11 @@
       "following": 42,
       "follower": 4242
     }
+  ],
+  "tags": [
+    {
+      "id": "dhyeon",
+      "tagArr": ["테스트1", "테스트2", "테스트3"]
+    }
   ]
 }
