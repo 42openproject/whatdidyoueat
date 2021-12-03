@@ -3,7 +3,7 @@ const models = require("../models");
 function getPost(req, res, next) {
   models.users
     .findOne({
-      where: { jwt: req.params.id },
+      where: { nickname: req.params.id },
     })
     .then((user) => {
       models.posts
@@ -19,14 +19,24 @@ function getPost(req, res, next) {
 function createPost(req, res, next) {
   models.users
     .findOne({
-      where: { jwt: req.params.id },
+      where: { nickname: req.params.id },
     })
     .then((user) => {
-      models.posts.create({
-        textContent: req.body.textContent,
-        tagArr: req.body.tagArr.join(),
-        userId: user.id,
-      });
+      models.posts
+        .create({
+          textContent: req.body.textContent,
+          tagArr: req.body.tagArr.join(),
+          userId: user.id,
+        })
+        .then(() => {
+          res.status(200).send({
+            success: true,
+            message: "Post uploaded",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
 }
 

@@ -42,7 +42,6 @@ router.get("/:id", function (req, res, next) {
  */
 router.post("/:id", function (req, res, next) {
   postService.createPost(req, res, next);
-  res.send(req.body);
 });
 
 module.exports = router;
