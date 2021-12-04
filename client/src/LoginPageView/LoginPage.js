@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
 import { GOOGLE_CLIENT_ID, KAKAO } from '../config';
@@ -6,15 +8,41 @@ import '../stylesheets/reset.css';
 import LogoImg from '../asset/logo.svg';
 import KakaoLogo from '../asset/kakao_logo.png';
 
+const onOauthSuccess = ({ history, googleId, email }) => {
+  console.log(googleId);
+  axios
+    .post(`${process.env.REACT_APP_API_URL}/login/google`, {
+      googleId,
+      email,
+    })
+    .then(res => {
+      console.log(res);
+    });
+  history.push('/nickname');
+};
+
 function Home({ history }) {
   const onSuccessGoogle = res => {
-    console.log(res.googleId);
-    console.log(res);
+    // console.log(res.googleId);
+    // console.log(res);
     localStorage.setItem('googleId', res.googleId);
+    localStorage.setItem('email', res.profileObj.email);
+    const googleId = localStorage.getItem('googleId');
+    const email = localStorage.getItem('email');
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/login/google`, {
+        googleId,
+        email,
+      })
+      .then(r => {
+        console.log(r);
+      });
     // console.dir(res.tokenObj);
-    console.log('success');
+    // console.log('success');
     history.push('/nickname');
   };
+
   const onFailureGoogle = () => {
     console.log('failure');
   };
@@ -55,7 +83,7 @@ function Home({ history }) {
                 </div>
               )}
               onSuccess={e => onSuccessKakao(e)}
-              onFail={console.log('fail')}
+              // onFail={console.log('fail')}
             />
           </button>
         </div>
