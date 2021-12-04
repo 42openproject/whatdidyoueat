@@ -63,7 +63,7 @@ function PostPage({ history }) {
       setPostContent(value);
     }
   };
-  const handleTagChange = ({ target: { value } }) => {
+  const onChangeTag = ({ target: { value } }) => {
     if (value.length > 10) {
       alert('글자수 초과!!');
     } else {
@@ -82,7 +82,7 @@ function PostPage({ history }) {
         // 태그 클릭 이벤트
         $TagWrapInner.addEventListener('click', () => {
           $TagWrapOuter?.removeChild($TagWrapInner);
-          setHashArr(hashArr.filter(tag => tag));
+          setTagArr(tagArr.filter(tag => tag));
         });
 
         // enter 입력 시
