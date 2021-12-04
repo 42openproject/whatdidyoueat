@@ -1,4 +1,6 @@
 const models = require("../models");
+const { Op } = require("sequelize");
+const moment = require("moment");
 
 function getPost(req, res, next) {
   models.users
@@ -6,11 +8,23 @@ function getPost(req, res, next) {
       where: { nickname: req.params.id },
     })
     .then((user) => {
+      var from = req.query.date + " 00:00:00";
+      var to = req.query.date + " 23:59:59";
       models.posts
         .findAll({
-          where: { userId: user.dataValues.id },
+          where: {
+            [Op.and]: [
+              { userId: user.dataValues.id },
+              {
+                createdAt: {
+                  [Op.between]: [from, to],
+                },
+              },
+            ],
+          },
         })
         .then((post) => {
+          console.log(post);
           res.send(post);
         });
     });

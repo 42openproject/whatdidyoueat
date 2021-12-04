@@ -50,7 +50,15 @@
 # -H "Content-Type: application/json" \
 # -d '{"googleId":"123", "textContent": "오늘의 아침입니다.", "tagArr": ["밥", "계란"]}' \
 # -X POST 'http://localhost:3001/posts/mki'
+# curl \
+# -H "Content-Type: application/json" \
+# -d '{"googleId":"123", "textContent": "오늘의 점심입니다.", "tagArr": ["밥", "치킨"]}' \
+# -X POST 'http://localhost:3001/posts/mki'
+# curl \
+# -H "Content-Type: application/json" \
+# -d '{"googleId":"123", "textContent": "오늘의 저녁입니다.", "tagArr": ["밥", "국수"]}' \
+# -X POST 'http://localhost:3001/posts/mki'
 
 # GET /posts/:id
 # query parameter: date=YYYY-MM-DD
-curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-03'
+curl -X GET 'http://localhost:3001/posts/mki?date=2021-12-04'
