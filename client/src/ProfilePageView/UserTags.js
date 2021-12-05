@@ -24,8 +24,9 @@ function UserTags() {
     setTagModal(!tagModal);
   };
 
-  const onRemoveTag = () => {
+  const onRemoveTag = tagName => {
     console.log('remove');
+    setTagArr(tagArr.filter(tag => tagName !== tag));
   };
 
   return (

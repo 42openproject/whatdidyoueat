@@ -8,7 +8,7 @@ function TagList({ tagName, onRemoveTag }) {
         <span className="user-info-item__tag-item__title">{tagName}</span>
         <div className="user-info-item__tag-item__xbtn btn">
           <IconContext.Provider value={{ color: 'red' }}>
-            <IoClose onClick={onRemoveTag} />
+            <IoClose onClick={() => onRemoveTag(tagName)} />
           </IconContext.Provider>
         </div>
       </div>
