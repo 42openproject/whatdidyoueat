@@ -1,7 +1,52 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
+import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
 import ImageUploader from './ImageUploader';
+
+const PostUploadTitle = () => {
+  const [defaultTitle, setDefaultTitle] = useState('');
+  const [title, setTitle] = useState(defaultTitle);
+  const [editFlag, setEditFlag] = useState(false);
+
+  const editTitle = () => {
+    if (editFlag === true) {
+      if (title.length < 3 || title.length > 16) {
+        alert('3자 이상 15자 이하로 입력해주세요');
+        return;
+      }
+      setDefaultTitle(title);
+      // axios.patch()
+    }
+    setEditFlag(!editFlag);
+  };
+
+  const onChangeTitle = e => {
+    setTitle(e.target.value);
+  };
+
+  return (
+    <>
+      {editFlag === false ? (
+        <>
+          <span className="title">{title}</span>
+          <FiEdit2 className="title-edit-btn" onClick={editTitle} />
+        </>
+      ) : (
+        <>
+          <input
+            autoFocus
+            className="title-input"
+            type="text"
+            value={title}
+            onChange={onChangeTitle}
+          />
+          <FiCornerDownLeft className="title-edit-btn" onClick={editTitle} />
+        </>
+      )}
+    </>
+  );
+};
 
 function PostPage({ history }) {
   // 현재 상태, Setter
@@ -12,16 +57,6 @@ function PostPage({ history }) {
 
   const googleId = localStorage.getItem('googleId');
 
-  document.addEventListener(
-    'keydown',
-    event => {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-      }
-    },
-    true,
-  );
-
   const handleContentChange = ({ target: { value } }) => {
     if (value.length > 50) {
       alert('글자수 초과!!');
@@ -29,7 +64,7 @@ function PostPage({ history }) {
       setPostContent(value);
     }
   };
-  const handleTagChange = ({ target: { value } }) => {
+  const onChangeTag = ({ target: { value } }) => {
     if (value.length > 10) {
       alert('글자수 초과!!');
     } else {
@@ -40,28 +75,22 @@ function PostPage({ history }) {
   const onKeyUp = useCallback(
     e => {
       if (process.browser) {
+        // 요소 불러오기, 만들기
         const $TagWrapOuter = document.querySelector('.tagWrapOuter');
         const $TagWrapInner = document.createElement('div');
         $TagWrapInner.className = 'tagWrapInner';
 
-        // console.log($TagWrapOuter);
-        // console.log(tagArr);
-        // $TagWrapInner.addEventListener('click', () => {
-        //   $TagWrapOuter?.removeChild($TagWrapInner);
-        //   console.log($TagWrapInner.innerHTML);
-        //   setTagArr(
-        //     tagArr.filter(tag => {
-        //       console.log('tag : ', tag);
-        //       return tag;
-        //     }),
-        //   );
-        // });
+        // 태그 클릭 이벤트
+        $TagWrapInner.addEventListener('click', () => {
+          $TagWrapOuter?.removeChild($TagWrapInner);
+          setTagArr(tagArr.filter(tag => tag));
+        });
 
+        // enter 입력 시
         if (e.keyCode === 13 && e.target.value.trim() !== '') {
           console.log('Enter key!!!', e.target.value);
           $TagWrapInner.innerHTML = `#${e.target.value}`;
           $TagWrapOuter?.appendChild($TagWrapInner);
-
           setTagArr([...tagArr, postTag]);
           setPostTag('');
         }
@@ -90,6 +119,7 @@ function PostPage({ history }) {
   return (
     <>
       <Header />
+      <PostUploadTitle />
       <ImageUploader />
       <form onSubmit={handleSubmit}>
         <input
@@ -101,10 +131,12 @@ function PostPage({ history }) {
         <div className="tagWrap">
           <div className="tagWrapOuter"></div>
           <input
+            className="tagInput"
             type="text"
             name="postTag"
             value={postTag}
-            onChange={handleTagChange}
+            // onChange={handleTagChange}
+            onChange={onChangeTag}
             onKeyUp={onKeyUp}
           />
         </div>
