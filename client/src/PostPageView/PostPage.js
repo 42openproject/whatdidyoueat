@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
+import ImageUploader from './ImageUploader';
 
 function PostPage({ history }) {
   // 현재 상태, Setter
@@ -89,6 +90,7 @@ function PostPage({ history }) {
   return (
     <>
       <Header />
+      <ImageUploader />
       <form onSubmit={handleSubmit}>
         <input
           type="text"
