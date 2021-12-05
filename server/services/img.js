@@ -1,9 +1,8 @@
 const models = require("../models");
 
-
-
 function uploadImg(req, res, next) {
-  res.state(200).send("HELLO");
+  console.log(req.file);
+  res.json({ url: `/img/${req.file.filename}` });
 }
 
 module.exports = {
