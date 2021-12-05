@@ -1,3 +1,7 @@
+.btn {
+  cursor: pointer;
+}
+
 .profile-container {
   width: 90vw;
   max-width: 600px;

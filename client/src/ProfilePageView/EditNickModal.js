@@ -19,7 +19,7 @@ function EditNickModal({ editUserNickname }) {
       <div className="modal-container" ref={modalRef}>
         <div className="edit-nick-modal">
           <IoClose
-            className="edit-nick-modal-close-btn"
+            className="edit-nick-modal-close-btn btn"
             onClick={editUserNickname}
           />
           <span className="edit-nick-modal__title">새 닉네임을 입력하세요</span>
@@ -30,10 +30,10 @@ function EditNickModal({ editUserNickname }) {
               onChange={onChangeNewNick}
               autoFocus
             />
-            <FiCheck className="edit-nick-modal__input-check-btn" />
+            <FiCheck className="edit-nick-modal__input-check-btn btn" />
           </div>
           <span className="edit-nick-modal__check-msg"></span>
-          <button className="edit-nick-modal__input-submit-btn">
+          <button className="edit-nick-modal__input-submit-btn btn">
             저장하기
           </button>
         </div>

@@ -24,6 +24,10 @@ function UserTags() {
     setTagModal(!tagModal);
   };
 
+  const onRemoveTag = () => {
+    console.log('remove');
+  };
+
   return (
     <>
       <section className="user-info-item">
@@ -34,7 +38,7 @@ function UserTags() {
               최대 5개까지 설정 가능합니다
             </span>
           </div>
-          <div className="user-info-item__edit-btn">
+          <div className="user-info-item__edit-btn btn">
             <FiPlus onClick={addTag} />
           </div>
         </div>
@@ -42,16 +46,10 @@ function UserTags() {
         <div className="user-info-item__contents">
           {tagArr.length !== 0 &&
             tagArr.map((tag, idx) => {
-              return <TagList tagName={tag} key={idx} />;
+              return (
+                <TagList tagName={tag} key={idx} onRemoveTag={onRemoveTag} />
+              );
             })}
-          {/* <div className="user-info-item__tag-item">
-            <span className="user-info-item__tag-item__title">다이어트</span>
-            <div className="user-info-item__tag-item__xbtn">
-              <IconContext.Provider value={{ color: 'red' }}>
-                <IoClose />
-              </IconContext.Provider>
-            </div>
-          </div> */}
         </div>
       </section>
       {tagModal && <AddTagModal addTag={addTag} />}

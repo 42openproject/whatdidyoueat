@@ -40,7 +40,7 @@ function UserProfile() {
   return (
     <>
       <section className="user-profile">
-        <div className="user-profile__img">
+        <div className="user-profile__img btn">
           <img
             src={userImage === '' ? defaultUserImage : userImage}
             className="user-profile__img__img"
@@ -48,7 +48,7 @@ function UserProfile() {
         </div>
         <div className="user-profile__nickname">
           <span className="user-profile__nickname--text">{userNickname}</span>
-          <div className="user-profile__nickname--edit-btn">
+          <div className="user-profile__nickname--edit-btn btn">
             <MdModeEdit onClick={editUserNickname} />
           </div>
         </div>
