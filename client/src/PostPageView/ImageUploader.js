@@ -9,20 +9,21 @@ const ImagePreview = styled.div`
     border-radius: 1rem;
   }
 `;
-const ImageUploader = () => {
-  const [image, setImage] = useState('');
+const ImageUploader = ({ image, setImage }) => {
+  // const [image, setImage] = useState('');
   const [isUploaded, setIsUploaded] = useState(false);
 
   const imageChangeHandler = e => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
 
-      reader.onload = function (res) {
+      reader.onload = res => {
         setImage(res.target.result);
         setIsUploaded(true);
       };
 
       reader.readAsDataURL(e.target.files[0]);
+      // handleImageChange(image);
     }
   };
 

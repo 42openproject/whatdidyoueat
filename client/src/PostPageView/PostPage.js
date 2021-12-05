@@ -50,6 +50,7 @@ const PostUploadTitle = () => {
 
 function PostPage({ history }) {
   // 현재 상태, Setter
+  const [image, setImage] = useState('');
   const [textContent, setPostContent] = useState('');
   const [postTag, setPostTag] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -100,27 +101,34 @@ function PostPage({ history }) {
   );
 
   const handleSubmit = async e => {
-    setDisabled(true);
-    e.preventDefault();
-    await new Promise(r => setTimeout(r, 1000));
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/post/${googleId}`,
-      {
-        textContent,
-        tagArr,
-      },
+    const formData = new FormData();
+    formData.append('file', image);
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_URL}/api/upload`,
+      formData,
     );
-    console.log(response.data);
-    setDisabled(false);
-    // localStorage.setItem('textContent', textContent);
-    // localStorage.setItem('tagArr', tagArr);
-    history.push('/main');
+    console.log(res);
+    setDisabled(true);
+    // e.preventDefault();
+    // await new Promise(r => setTimeout(r, 1000));
+    // const response = await axios.post(
+    //   `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+    //   {
+    //     textContent,
+    //     tagArr,
+    //   },
+    // );
+    // console.log(response.data);
+    // setDisabled(false);
+    // // localStorage.setItem('textContent', textContent);
+    // // localStorage.setItem('tagArr', tagArr);
+    // history.push('/main');
   };
   return (
     <>
       <Header />
       <PostUploadTitle />
-      <ImageUploader />
+      <ImageUploader image={image} setImage={setImage} />
       <form onSubmit={handleSubmit}>
         <input
           type="text"
