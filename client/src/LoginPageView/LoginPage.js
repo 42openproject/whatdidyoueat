@@ -8,23 +8,21 @@ import '../stylesheets/reset.css';
 import LogoImg from '../asset/logo.svg';
 import KakaoLogo from '../asset/kakao_logo.png';
 
-const onOauthSuccess = ({ history, googleId, email }) => {
-  console.log(googleId);
-  axios
-    .post(`${process.env.REACT_APP_API_URL}/login/google`, {
-      googleId,
-      email,
-    })
-    .then(res => {
-      console.log(res);
-    });
-  history.push('/nickname');
-};
+// const onOauthSuccess = ({ history, googleId, email }) => {
+//   console.log(googleId);
+//   axios
+//     .post(`${process.env.REACT_APP_API_URL}/login/google`, {
+//       googleId,
+//       email,
+//     })
+//     .then(res => {
+//       console.log(res);
+//     });
+//   history.push('/nickname');
+// };
 
 function Home({ history }) {
   const onSuccessGoogle = res => {
-    // console.log(res.googleId);
-    // console.log(res);
     localStorage.setItem('googleId', res.googleId);
     localStorage.setItem('email', res.profileObj.email);
     const googleId = localStorage.getItem('googleId');
@@ -38,8 +36,6 @@ function Home({ history }) {
       .then(r => {
         console.log(r);
       });
-    // console.dir(res.tokenObj);
-    // console.log('success');
     history.push('/nickname');
   };
 
@@ -60,16 +56,14 @@ function Home({ history }) {
           <img src={LogoImg} alt="뭐먹었니" width="100%" height="auto" />
         </div>
         <div className="container__login box--white">
-          <button className="btn">
-            <GoogleLogin
-              className="btn__google"
-              clientId={GOOGLE_CLIENT_ID}
-              onSuccess={onSuccessGoogle}
-              onFailure={onFailureGoogle}
-              buttonText="Google로 로그인하기"
-            />
-          </button>
-          <button className="btn">
+          <GoogleLogin
+            className="btn__google"
+            clientId={GOOGLE_CLIENT_ID}
+            onSuccess={onSuccessGoogle}
+            onFailure={onFailureGoogle}
+            buttonText="Google로 로그인하기"
+          />
+          {/* <button className="btn">
             <KakaoLogin
               token={KAKAO.CLIENT_ID}
               render={renderProps => (
@@ -85,7 +79,7 @@ function Home({ history }) {
               onSuccess={e => onSuccessKakao(e)}
               // onFail={console.log('fail')}
             />
-          </button>
+          </button> */}
         </div>
       </div>
     </>

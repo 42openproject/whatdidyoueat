@@ -13,6 +13,7 @@ body {
   background-color: transparent;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .container {
@@ -63,7 +64,7 @@ body {
 
 .btn__google,
 .btn__kakao {
-  width: 70% !important;
+  width: 80% !important;
   vertical-align: middle;
   display: inline-flex;
   justify-content: center;
