@@ -11,6 +11,7 @@ function EditNickModal({ editUserNickname }) {
   };
 
   window.addEventListener('click', e => {
+    e.preventDefault();
     if (e.target === modalRef.current) editUserNickname();
     return false;
   });

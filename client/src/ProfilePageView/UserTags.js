@@ -1,7 +1,7 @@
 import { FiPlus } from 'react-icons/fi';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import AddTagModal from './AddTagModal';
+import OnToggleTagModal from './OnToggleTagModal';
 import TagList from './TagList';
 
 function UserTags() {
@@ -19,15 +19,40 @@ function UserTags() {
     }
   }, []);
 
-  const addTag = () => {
-    console.log('add tag click!!');
-    setTagModal(!tagModal);
+  const updateTags = newTags => {
+    // 본 api 추가 필요
+
+    // test api
+    axios.patch(`http://localhost:8000/tags/dhyeon`, { tagArr: newTags });
   };
 
-  const onRemoveTag = tagName => {
+  const onToggleTagModal = useCallback(() => {
+    console.log('add tag click!!');
+    setTagModal(!tagModal);
+  });
+
+  const onCreateNewTag = useCallback(tagName => {
+    console.log('create');
+    console.log(tagName);
+    if (tagName.length <= 0) {
+      onToggleTagModal();
+    } else if (tagName.length >= 10) {
+      alert('10자 이하로 입력해주세요');
+    } else if (tagArr.find(tag => tag === tagName)) {
+      alert('중복된 태그입니다');
+    } else {
+      console.log('ttt');
+      setTagArr([...tagArr, tagName]);
+      updateTags([...tagArr, tagName]);
+      onToggleTagModal();
+    }
+  });
+
+  const onRemoveTag = useCallback(tagName => {
     console.log('remove');
     setTagArr(tagArr.filter(tag => tagName !== tag));
-  };
+    updateTags(tagArr.filter(tag => tagName !== tag));
+  });
 
   return (
     <>
@@ -40,7 +65,7 @@ function UserTags() {
             </span>
           </div>
           <div className="user-info-item__edit-btn btn">
-            <FiPlus onClick={addTag} />
+            <FiPlus onClick={onToggleTagModal} />
           </div>
         </div>
         <hr size="1" className="profile-hr" />
@@ -53,7 +78,12 @@ function UserTags() {
             })}
         </div>
       </section>
-      {tagModal && <AddTagModal addTag={addTag} />}
+      {tagModal && (
+        <OnToggleTagModal
+          addTagModal={onToggleTagModal}
+          onCreateNewTag={onCreateNewTag}
+        />
+      )}
     </>
   );
 }

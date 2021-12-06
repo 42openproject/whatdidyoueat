@@ -1,8 +1,9 @@
+import axios from 'axios';
 import { useRef, useState } from 'react';
 import { FiCheck } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 
-function AddTagModal({ addTag }) {
+function OnToggleTagModal({ addTagModal, onCreateNewTag }) {
   const [newTag, setNewTag] = useState('');
   const modalRef = useRef();
 
@@ -11,14 +12,15 @@ function AddTagModal({ addTag }) {
   };
 
   window.addEventListener('click', e => {
-    if (e.target === modalRef.current) addTag();
+    e.preventDefault();
+    if (e.target === modalRef.current) addTagModal();
     return false;
   });
   return (
     <>
       <div className="modal-container" ref={modalRef}>
         <div className="add-tag-modal">
-          <IoClose className="add-tag-modal-close-btn" onClick={addTag} />
+          <IoClose className="add-tag-modal-close-btn" onClick={addTagModal} />
           <span className="add-tag-modal__title">추가할 태그를 입력하세요</span>
           <div className="add-tag-modal__input-box">
             <input
@@ -29,11 +31,16 @@ function AddTagModal({ addTag }) {
             />
           </div>
           <span className="add-tag-modal__check-msg"></span>
-          <button className="add-tag-modal__input-submit-btn">추가하기</button>
+          <button
+            className="add-tag-modal__input-submit-btn btn"
+            onClick={() => onCreateNewTag(newTag)}
+          >
+            추가하기
+          </button>
         </div>
       </div>
     </>
   );
 }
 
-export default AddTagModal;
+export default OnToggleTagModal;

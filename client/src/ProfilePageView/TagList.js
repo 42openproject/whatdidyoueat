@@ -1,3 +1,4 @@
+import React from 'react';
 import { IoClose } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
@@ -16,4 +17,4 @@ function TagList({ tagName, onRemoveTag }) {
   );
 }
 
-export default TagList;
+export default React.memo(TagList);
