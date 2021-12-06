@@ -61,4 +61,4 @@
 
 # GET /posts/:id
 # query parameter: date=YYYY-MM-DD
-curl -X GET 'http://localhost:3001/posts/mki?date=2021-12-04'
+curl -X GET 'http://localhost:3001/posts/mki?date=2021-12-06'

@@ -24,8 +24,23 @@ function getPost(req, res, next) {
           },
         })
         .then((post) => {
-          console.log(post);
-          res.send(post);
+          var dataObj = post.map((p) => {
+            const createdAt = new Date(p.dataValues.createdAt);
+            return {
+              createdAt: createdAt.toLocaleString("ko-KR", {
+                timeZone: "Asia/Seoul",
+              }),
+              imageUrl: "Not Yet",
+              textContent: p.dataValues.textContent,
+              tagArr: p.dataValues.tagArr,
+            };
+          });
+
+          res.status(200).send({
+            success: true,
+            data: dataObj,
+            message: "Post loaded",
+          });
         });
     });
 }
