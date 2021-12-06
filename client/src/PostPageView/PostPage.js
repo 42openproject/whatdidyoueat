@@ -103,7 +103,7 @@ function PostPage({ history }) {
     e.preventDefault();
     await new Promise(r => setTimeout(r, 1000));
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+      `${process.env.REACT_APP_API_URL}/posts/dhyeon`,
       {
         textContent,
         tagArr,

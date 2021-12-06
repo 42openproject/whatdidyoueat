@@ -42,11 +42,15 @@ function MainPage() {
     } else {
       // 본 요청 api
       try {
+        const today = new Date();
+        const date = `${today.getFullYear()}-${
+          today.getMonth() + 1
+        }-${today.getDate()}`;
         const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/post/${googleId}`,
+          `${process.env.REACT_APP_API_URL}/posts/${userNickname}?date=${date}`,
         );
         console.log(data);
-        setPost(data);
+        setPost(data.data);
       } catch (e) {
         console.log(e);
       }
