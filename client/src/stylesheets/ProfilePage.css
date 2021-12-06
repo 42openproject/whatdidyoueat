@@ -1,3 +1,7 @@
+.btn {
+  cursor: pointer;
+}
+
 .profile-container {
   width: 90vw;
   max-width: 600px;
@@ -148,6 +152,8 @@
   z-index: 2;
 }
 
+/* edit nick modal */
+
 .edit-nick-modal-close-btn {
   position: absolute;
   right: 0.5rem;
@@ -187,8 +193,55 @@
   font-size: 0.9rem;
   color: forestgreen;
   height: 1.2rem;
+  line-height: 0.5rem;
 }
 .edit-nick-modal__input-submit-btn {
+  background-color: #bfbfe5;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: white;
+}
+
+/* add tag modal */
+
+.add-tag-modal-close-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.add-tag-modal {
+  position: relative;
+  background-color: white;
+  border: 3px solid #bfbfe5;
+  border-radius: 15px;
+  box-shadow: 3px 3px 6px #999;
+  margin: 30vh auto 0;
+  width: 80vw;
+  max-width: 400px;
+  height: 150px;
+  padding: 20px;
+}
+.add-tag-modal__title {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.add-tag-modal__input-box {
+  margin-bottom: 15px;
+}
+.add-tag-modal__input {
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+.add-tag-modal__check-msg {
+  display: block;
+  font-size: 0.9rem;
+  color: forestgreen;
+  height: 1.2rem;
+  line-height: 0.5rem;
+}
+.add-tag-modal__input-submit-btn {
   background-color: #bfbfe5;
   padding: 5px 8px;
   border-radius: 8px;
