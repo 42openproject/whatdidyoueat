@@ -34,8 +34,10 @@ function Home({ history }) {
         email,
       })
       .then(response => {
-        if (response.data.success) history.push('/nickname');
-        else alert('로그인 실패');
+        if (response.data.success) {
+          if (response.data.data.isSigned) history.push('/main');
+          else history.push('/nickname');
+        } else alert('로그인 실패');
         console.log(response);
       });
   };

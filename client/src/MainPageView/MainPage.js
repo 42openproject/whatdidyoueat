@@ -20,12 +20,11 @@ function MainPage() {
   );
 
   useEffect(async () => {
-    const response = await axios
-      .get(`${process.env.REACT_APP_API_URL}/user/${googleId}`)
-      .then(res => {
-        console.log(res.data.nickname);
-        setUserNickname(res.data.nickname);
-      });
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+    );
+    console.log(data.data.nickname);
+    setUserNickname(data.data.nickname);
   }, []);
 
   useEffect(async () => {
