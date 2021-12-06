@@ -1,5 +1,5 @@
 import { FiPlus } from 'react-icons/fi';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import OnToggleTagModal from './OnToggleTagModal';
 import TagList from './TagList';
@@ -7,6 +7,7 @@ import TagList from './TagList';
 function UserTags() {
   const [tagArr, setTagArr] = useState([]);
   const [tagModal, setTagModal] = useState(false);
+  const tagMsgRef = useRef();
 
   useEffect(async () => {
     // 본 api 추가
@@ -37,9 +38,9 @@ function UserTags() {
     if (tagName.length <= 0) {
       onToggleTagModal();
     } else if (tagName.length >= 10) {
-      alert('10자 이하로 입력해주세요');
+      tagMsgRef.current.innerText = '10자 이하로 입력해주세요';
     } else if (tagArr.find(tag => tag === tagName)) {
-      alert('중복된 태그입니다');
+      tagMsgRef.current.innerText = '중복된 태그입니다';
     } else {
       console.log('ttt');
       setTagArr([...tagArr, tagName]);
@@ -82,6 +83,7 @@ function UserTags() {
         <OnToggleTagModal
           addTagModal={onToggleTagModal}
           onCreateNewTag={onCreateNewTag}
+          tagMsgRef={tagMsgRef}
         />
       )}
     </>

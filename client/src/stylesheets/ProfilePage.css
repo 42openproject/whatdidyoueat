@@ -193,6 +193,7 @@
   font-size: 0.9rem;
   color: forestgreen;
   height: 1.2rem;
+  line-height: 0.5rem;
 }
 .edit-nick-modal__input-submit-btn {
   background-color: #bfbfe5;
@@ -238,6 +239,7 @@
   font-size: 0.9rem;
   color: forestgreen;
   height: 1.2rem;
+  line-height: 0.5rem;
 }
 .add-tag-modal__input-submit-btn {
   background-color: #bfbfe5;

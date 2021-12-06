@@ -3,12 +3,14 @@ import { useRef, useState } from 'react';
 import { FiCheck } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 
-function OnToggleTagModal({ addTagModal, onCreateNewTag }) {
+function OnToggleTagModal({ addTagModal, onCreateNewTag, tagMsgRef }) {
   const [newTag, setNewTag] = useState('');
   const modalRef = useRef();
 
   const onChangeNewTag = e => {
     setNewTag(e.target.value);
+    if (tagMsgRef.current.innerText.length !== 0)
+      tagMsgRef.current.innerText = ''; // eslint-disable-line no-param-reassign
   };
 
   window.addEventListener('click', e => {
@@ -30,7 +32,7 @@ function OnToggleTagModal({ addTagModal, onCreateNewTag }) {
               autoFocus
             />
           </div>
-          <span className="add-tag-modal__check-msg"></span>
+          <span className="add-tag-modal__check-msg" ref={tagMsgRef}></span>
           <button
             className="add-tag-modal__input-submit-btn btn"
             onClick={() => onCreateNewTag(newTag)}
