@@ -10,12 +10,17 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "fs": "0.0.1-security",
     "morgan": "~1.9.1",
+    "multer": "^1.4.3",
     "mysql2": "^2.3.2",
+    "openapi-types": "^10.0.0",
+    "path": "^0.12.7",
     "sequelize": "^6.7.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "moment": "^2.29.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
   }

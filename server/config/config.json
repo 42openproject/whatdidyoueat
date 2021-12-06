@@ -4,7 +4,8 @@
     "password": "Wopark1!",
     "database": "wheat",
     "host": "api.whatdidyoueat.net",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "+09:00"
   },
   "test": {
     "username": "root",
