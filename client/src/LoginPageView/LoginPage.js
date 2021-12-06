@@ -33,10 +33,11 @@ function Home({ history }) {
         googleId,
         email,
       })
-      .then(r => {
-        console.log(r);
+      .then(response => {
+        if (response.data.success) history.push('/nickname');
+        else alert('로그인 실패');
+        console.log(response);
       });
-    history.push('/nickname');
   };
 
   const onFailureGoogle = () => {
