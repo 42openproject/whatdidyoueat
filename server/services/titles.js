@@ -21,11 +21,11 @@ function getTitle(req, res, next) {
           },
           order: [["createdAt", "DESC"]],
         })
-        .then((title) => {
+        .then((titles) => {
           res.send({
             success: true,
             data: {
-              title: title.title,
+              title: titles.title,
             },
             message: "Success",
           });
@@ -53,14 +53,14 @@ function setTitle(req, res, next) {
       models.titles
         .findOne({
           where: {
-            createdAt: {
-              [Op.and]: [
-                { userId: user.id },
-                {
+            [Op.and]: [
+              { userId: user.id },
+              {
+                createdAt: {
                   [Op.between]: [dateString, dateString + " 23:59:59"],
                 },
-              ],
-            },
+              },
+            ],
           },
         })
         .then((title) => {
@@ -90,9 +90,14 @@ function setTitle(req, res, next) {
                 },
                 {
                   where: {
-                    createdAt: {
-                      [Op.between]: [dateString, dateString + " 23:59:59"],
-                    },
+                    [Op.and]: [
+                      { userId: user.id },
+                      {
+                        createdAt: {
+                          [Op.between]: [dateString, dateString + " 23:59:59"],
+                        },
+                      },
+                    ],
                   },
                 }
               )
