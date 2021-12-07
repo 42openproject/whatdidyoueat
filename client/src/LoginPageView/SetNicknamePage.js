@@ -24,9 +24,12 @@ function SetNicknamePage({ history }) {
           nickname,
         },
       );
-
-      console.log(response.data);
-      history.push('/main');
+      if (response.data.success) {
+        console.log(response.data);
+        history.push('/main');
+      } else {
+        console.log('api 요청 실패');
+      }
     }
   }
 
