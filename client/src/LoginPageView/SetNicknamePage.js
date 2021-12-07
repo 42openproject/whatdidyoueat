@@ -16,19 +16,23 @@ function SetNicknamePage({ history }) {
     if (nickInput === '' || nickInput.length < 2)
       alert('2자 이상 입력해주세요');
     else {
-      const googleId = localStorage.getItem('googleId');
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/nickname`,
-        {
-          googleId,
-          nickname,
-        },
-      );
-      if (response.data.success) {
-        console.log(response.data);
-        history.push('/main');
-      } else {
-        console.log('api 요청 실패');
+      try {
+        const googleId = localStorage.getItem('googleId');
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users/nickname`,
+          {
+            googleId,
+            nickname,
+          },
+        );
+        if (response.data.success) {
+          console.log(response.data);
+          history.push('/main');
+        } else {
+          console.log('api 요청 실패');
+        }
+      } catch (e) {
+        console.log(e.message);
       }
     }
   }

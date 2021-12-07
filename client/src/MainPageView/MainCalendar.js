@@ -28,12 +28,16 @@ const MainCalendar = ({ setClickedDay }) => {
 
   // test api 포스팅된 날짜 달력에 표시하기
   useEffect(async () => {
-    const response = await axios.get(
-      `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
-    );
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
+      );
 
-    // console.log(response.data.data);
-    setPostedDate(response.data.data);
+      // console.log(response.data.data);
+      setPostedDate(response.data.data);
+    } catch (e) {
+      console.log(e.message);
+    }
   }, [monthVal]); // 월 화살표 눌러서 바꿀때마다 요청받도록
 
   // 달력 년.월 표시 포맷

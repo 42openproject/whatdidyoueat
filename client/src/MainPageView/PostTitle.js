@@ -56,15 +56,19 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
         axios.patch(`http://localhost:8000/title/dhyeon`, { title });
       } else {
         setDefaultTitle(title);
-        const { data: titleData } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/titles/${nick}`,
-          {
-            googleId,
-            title,
-          },
-        );
-        console.log(titleData);
-        if (!titleData.success) console.log('post title api post요청 false');
+        try {
+          const { data: titleData } = await axios.post(
+            `${process.env.REACT_APP_API_URL}/titles/${nick}`,
+            {
+              googleId,
+              title,
+            },
+          );
+          console.log(titleData);
+          if (!titleData.success) console.log('post title api post요청 false');
+        } catch (e) {
+          console.log(e.message);
+        }
       }
     }
     setEditFlag(!editFlag);

@@ -31,11 +31,15 @@ function MainPage() {
   useEffect(async () => {
     // 닉네임 받아오기
     // console.log(date);
-    const { data: nickData } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-    );
-    if (nickData.success) setUserNickname(nickData.data.nickname);
-    else console.log('nick api 요청 false');
+    try {
+      const { data: nickData } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+      );
+      if (nickData.success) setUserNickname(nickData.data.nickname);
+      else console.log('nick api 요청 false');
+    } catch (e) {
+      console.log(e.message);
+    }
   }, [clickedDay]);
 
   return (

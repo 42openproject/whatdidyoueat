@@ -27,19 +27,22 @@ function Home({ history }) {
     localStorage.setItem('email', res.profileObj.email);
     const googleId = localStorage.getItem('googleId');
     const email = localStorage.getItem('email');
-
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/login/google`, {
-        googleId,
-        email,
-      })
-      .then(response => {
-        if (response.data.success) {
-          if (response.data.data.isSigned) history.push('/main');
-          else history.push('/nickname');
-        } else alert('로그인 실패');
-        console.log(response);
-      });
+    try {
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/login/google`, {
+          googleId,
+          email,
+        })
+        .then(response => {
+          if (response.data.success) {
+            if (response.data.data.isSigned) history.push('/main');
+            else history.push('/nickname');
+          } else alert('로그인 실패');
+          console.log(response);
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const onFailureGoogle = () => {

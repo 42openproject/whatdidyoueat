@@ -16,36 +16,40 @@ function MainPost({ clickedDay, googleId, testFlag, setUserNickname }) {
 
   useEffect(async () => {
     // 닉네임 받아오기
-    const { data: nickData } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-    );
-    if (nickData.success) setUserNickname(nickData.data.nickname);
-    else console.log('nick api 요청 false');
+    try {
+      const { data: nickData } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+      );
+      if (nickData.success) setUserNickname(nickData.data.nickname);
+      else console.log('nick api 요청 false');
 
-    // post 받아오기
-    // test api
-    if (testFlag === true) {
-      try {
-        const data = await axios.get(
-          `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
-        );
-        // console.log(data.data);
-        setPost(data.data);
-      } catch (e) {
-        console.log('post get error', e);
+      // post 받아오기
+      // test api
+      if (testFlag === true) {
+        try {
+          const data = await axios.get(
+            `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
+          );
+          // console.log(data.data);
+          setPost(data.data);
+        } catch (e) {
+          console.log('post get error', e);
+        }
+      } else {
+        // 본 요청 api
+        try {
+          const { data } = await axios.get(
+            `${process.env.REACT_APP_API_URL}/posts/${nickData.data.nickname}?date=${date}`,
+          );
+          // console.log(data);
+          if (data && data.success) setPost(data.data);
+          else console.log('post api get 요청 false');
+        } catch (e) {
+          console.log(e.message);
+        }
       }
-    } else {
-      // 본 요청 api
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/posts/${nickData.data.nickname}?date=${date}`,
-        );
-        // console.log(data);
-        if (data && data.success) setPost(data.data);
-        else console.log('post api get 요청 false');
-      } catch (e) {
-        console.log(e.message);
-      }
+    } catch (e) {
+      console.log(e.message);
     }
   }, [clickedDay, testFlag]);
 
