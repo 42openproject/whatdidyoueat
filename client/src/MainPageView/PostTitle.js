@@ -43,9 +43,9 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
       setTitle(defaultTitle);
     }
     // 맨 처음엔 data를 못받아오고, 다시 리로드되어서 받아오는데 본 요청때는 체크해봐야할듯 함
-  }, [nick, clickedDay, editFlag]);
+  }, [nick, clickedDay, editFlag, defaultTitle]);
 
-  const editTitle = () => {
+  const editTitle = async () => {
     if (title.length < 3 || title.length > 16) {
       alert('3자 이상 15자 이하로 입력해주세요');
       return;
@@ -56,15 +56,15 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
         axios.patch(`http://localhost:8000/title/dhyeon`, { title });
       } else {
         setDefaultTitle(title);
-        const data = axios.post(
+        const { data: titleData } = await axios.post(
           `${process.env.REACT_APP_API_URL}/titles/${nick}`,
           {
             googleId,
             title,
           },
         );
-        console.log(data);
-        // if (!postData.success) console.log('post title api post요청 false');
+        console.log(titleData);
+        if (!titleData.success) console.log('post title api post요청 false');
       }
     }
     setEditFlag(!editFlag);
