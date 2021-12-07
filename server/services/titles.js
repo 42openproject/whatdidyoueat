@@ -54,7 +54,12 @@ function setTitle(req, res, next) {
         .findOne({
           where: {
             createdAt: {
-              [Op.between]: [dateString, dateString + " 23:59:59"],
+              [Op.and]: [
+                { userId: user.id },
+                {
+                  [Op.between]: [dateString, dateString + " 23:59:59"],
+                },
+              ],
             },
           },
         })

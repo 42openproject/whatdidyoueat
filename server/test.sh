@@ -32,7 +32,7 @@
 
 # GET /title/:id
 # query parameter: date=YYYY-MM-DD
-curl -X GET 'http://localhost:3001/titles/dhyeon?date=2021-12-09'
+# curl -X GET 'http://localhost:3001/titles/dhyeon?date=2021-12-09'
 curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-09'
 
 # POST /title/:id
