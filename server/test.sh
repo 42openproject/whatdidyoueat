@@ -32,14 +32,15 @@
 
 # GET /title/:id
 # query parameter: date=YYYY-MM-DD
-# curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-01'
+curl -X GET 'http://localhost:3001/titles/dhyeon?date=2021-12-09'
+curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-09'
 
 # POST /title/:id
 # body: googleId, title
-curl \
--H "Content-Type: application/json" \
--d '{"googleId":"123", "title":"mki의 이유식일기234"}' \
--X POST 'http://localhost:3001/titles/mki'
+# curl \
+# -H "Content-Type: application/json" \
+# -d '{"googleId":"123", "title":"mki의 이유식일기234"}' \
+# -X POST 'http://localhost:3001/titles/mki'
 
 # -------------------------------------------------------------------
 # -----------------------/posts/:id----------------------------------

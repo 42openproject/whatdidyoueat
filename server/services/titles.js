@@ -19,6 +19,7 @@ function getTitle(req, res, next) {
               },
             ],
           },
+          order: [["createdAt", "DESC"]],
         })
         .then((title) => {
           res.send({
