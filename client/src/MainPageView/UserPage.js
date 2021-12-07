@@ -4,7 +4,7 @@ import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
-import MainPost from './MainPost';
+import PostList from './PostList';
 import PostTitle from './PostTitle';
 import Calendar from './MainCalendar';
 
@@ -12,29 +12,25 @@ function UserPage() {
   const [post, setPost] = useState([]);
   const { nickname } = useParams();
   const [clickedDay, setClickedDay] = useState(new Date());
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1 < 10
+      ? `0${clickedDay.getMonth() + 1}`
+      : clickedDay.getMonth() + 1
+  }-${
+    clickedDay.getDate() < 10
+      ? `0${clickedDay.getDate()}`
+      : clickedDay.getDate()
+  }`;
 
   useEffect(async () => {
     try {
-      // user googleId 가져오기
-      const data = await axios.get(
-        `${process.env.REACT_APP_API_URL}/user/nickname/${nickname}`,
-      );
-      console.log(data);
-
-      // test api
-      // const postData = await axios.get(
-      //   `http://localhost:8000/post?userId=${nickname}&createdAt=2021-11-${clickedDay.getDate()}`,
-      // );
-      // console.log(postData.data);
-      // setPost(postData.data);
-
       // post 가져오기
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/posts/${nickname}?date=${date}`,
       );
-      setPost(res.data);
+      setPost(data.data);
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
     }
   }, [nickname, clickedDay]);
 
@@ -80,7 +76,7 @@ function UserPage() {
                 .reverse()
                 .map(p => {
                   return (
-                    <MainPost
+                    <PostList
                       key={p.id}
                       date={p.createdAt}
                       textContent={p.textContent}
