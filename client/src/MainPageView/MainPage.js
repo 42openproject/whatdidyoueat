@@ -19,25 +19,38 @@ function MainPage() {
       : JSON.parse(localStorage.getItem('testFlag')),
   );
   const date = `${clickedDay.getFullYear()}-${
-    clickedDay.getMonth() + 1
-  }-${clickedDay.getDate()}`;
+    clickedDay.getMonth() + 1 < 10
+      ? `0${clickedDay.getMonth() + 1}`
+      : clickedDay.getMonth() + 1
+  }-${
+    clickedDay.getDate() < 10
+      ? `0${clickedDay.getDate()}`
+      : clickedDay.getDate()
+  }`;
 
   useEffect(async () => {
     // 닉네임 받아오기
+    console.log(date);
     const { data: nickData } = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
     );
-    setUserNickname(nickData.data.nickname);
+    if (nickData.success) setUserNickname(nickData.data.nickname);
+    else console.log('nick api 요청 false');
+    // post 받아오기
     // test api
     if (testFlag === true) {
       try {
         const data = await axios.get(
           `http://localhost:8000/post?userId=dhyeon&createdAt=2021-11-${clickedDay.getDate()}`,
         );
-        console.log(data.data);
-        setPost(data.data);
+        if (data.success) {
+          console.log(data.data);
+          setPost(data.data);
+        } else {
+          console.log('post api 요청 false');
+        }
       } catch (e) {
-        console.log(e);
+        console.log('post get error', e);
       }
     } else {
       // 본 요청 api
@@ -97,9 +110,9 @@ function MainPage() {
               post
                 .slice(0)
                 .reverse()
-                .map(p => (
+                .map((p, idx) => (
                   <MainPost
-                    key={p.id}
+                    key={idx}
                     date={p.createdAt}
                     textContent={p.textContent}
                     tagArr={p.tagArr}
