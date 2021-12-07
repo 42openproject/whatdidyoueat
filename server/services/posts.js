@@ -1,6 +1,5 @@
 const models = require("../models");
 const { Op } = require("sequelize");
-const moment = require("moment");
 
 function getPost(req, res, next) {
   models.users
