@@ -22,13 +22,20 @@ function getTitle(req, res, next) {
           order: [["createdAt", "DESC"]],
         })
         .then((titles) => {
-          res.send({
-            success: true,
-            data: {
-              title: titles.title,
-            },
-            message: "Success",
-          });
+          if (titles == null) {
+            res.send({
+              success: false,
+              message: "No Title",
+            });
+          } else {
+            res.send({
+              success: true,
+              data: {
+                title: titles.title,
+              },
+              message: "Success",
+            });
+          }
         });
     })
     .catch((err) => {
