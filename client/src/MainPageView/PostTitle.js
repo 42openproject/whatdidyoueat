@@ -6,7 +6,7 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
   const [defaultTitle, setDefaultTitle] = useState('');
   const [title, setTitle] = useState(defaultTitle);
   const [editFlag, setEditFlag] = useState(false);
-  const [editBtn, setEditBtn] = useState(false); // 나중에 본인페이지, 오늘날짜에만 버튼 나오도록 설정
+  // const [editBtn, setEditBtn] = useState(false); // 나중에 본인페이지, 오늘날짜에만 버튼 나오도록 설정
 
   useEffect(async () => {
     try {

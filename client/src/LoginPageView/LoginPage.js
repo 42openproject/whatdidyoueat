@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
-import KakaoLogin from 'react-kakao-login';
+// import KakaoLogin from 'react-kakao-login';
 import { GOOGLE_CLIENT_ID, KAKAO } from '../config';
 import '../stylesheets/LoginPage.css';
 import '../stylesheets/reset.css';
 import LogoImg from '../asset/logo.svg';
-import KakaoLogo from '../asset/kakao_logo.png';
+// import KakaoLogo from '../asset/kakao_logo.png';
 
 // const onOauthSuccess = ({ history, googleId, email }) => {
 //   console.log(googleId);
@@ -45,12 +45,12 @@ function Home({ history }) {
   const onFailureGoogle = () => {
     console.log('failure');
   };
-  const onSuccessKakao = e => {
-    console.log(e);
-    console.log('success');
-    // let kakaoid = e.profile.id;
-    history.push('/nickname');
-  };
+  // const onSuccessKakao = e => {
+  //   console.log(e);
+  //   console.log('success');
+  //   // let kakaoid = e.profile.id;
+  //   history.push('/nickname');
+  // };
 
   return (
     <>

@@ -34,9 +34,9 @@ function UserPage() {
     }
   }, [nickname, clickedDay]);
 
-  const goUserPage = user => {
-    window.location.href = `/user/${user}`;
-  };
+  // const goUserPage = user => {
+  //   window.location.href = `/user/${user}`;
+  // };
 
   return (
     <>

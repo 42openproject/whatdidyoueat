@@ -3,7 +3,7 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import '../stylesheets/MainCalendar.css';
 
-const MainCalendar = ({ clickedDay, setClickedDay }) => {
+const MainCalendar = ({ setClickedDay }) => {
   const [dateVal, setDateVal] = useState(new Date());
   const [monthVal, setMonthVal] = useState(new Date());
   const [postedDate, setPostedDate] = useState([]);
@@ -32,7 +32,7 @@ const MainCalendar = ({ clickedDay, setClickedDay }) => {
       `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
     );
 
-    console.log(response.data.data);
+    // console.log(response.data.data);
     setPostedDate(response.data.data);
   }, [monthVal]); // 월 화살표 눌러서 바꿀때마다 요청받도록
 
@@ -46,8 +46,8 @@ const MainCalendar = ({ clickedDay, setClickedDay }) => {
 
   // 달력에 화살표 누를때 현재 월 표시
   const onActiveStartDateChange = data => {
-    console.log(data);
-    const oldDate = dateVal;
+    // console.log(data);
+    // const oldDate = dateVal;
     if (data.action !== 'onChange') setMonthVal(data.activeStartDate);
   };
 

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
@@ -102,17 +102,17 @@ function PostPage({ history }) {
     setDisabled(true);
     e.preventDefault();
     await new Promise(r => setTimeout(r, 1000));
-    const response = await axios.post(
+    const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/posts/dhyeon`,
       {
         textContent,
         tagArr,
       },
     );
-    console.log(response.data);
+    if (data && data.success) console.log('post 쓰기 성공');
+    else console.log('post 쓰기 실패');
     setDisabled(false);
-    // localStorage.setItem('textContent', textContent);
-    // localStorage.setItem('tagArr', tagArr);
+
     history.push('/main');
   };
   return (
@@ -133,7 +133,6 @@ function PostPage({ history }) {
             type="text"
             name="postTag"
             value={postTag}
-            // onChange={handleTagChange}
             onChange={onChangeTag}
             onKeyUp={onKeyUp}
           />
