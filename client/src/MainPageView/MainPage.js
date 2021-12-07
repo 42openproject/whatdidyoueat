@@ -16,10 +16,14 @@ function MainPage() {
   const [testFlag, setTestFlag] = useState(
     localStorage.getItem('testFlag') === null
       ? false
-      : localStorage.getItem('testFlag'),
+      : JSON.parse(localStorage.getItem('testFlag')),
   );
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
 
   useEffect(async () => {
+    console.log(localStorage.getItem('testFlag'));
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
     );
@@ -42,15 +46,13 @@ function MainPage() {
     } else {
       // 본 요청 api
       try {
-        const today = new Date();
-        const date = `${today.getFullYear()}-${
-          today.getMonth() + 1
-        }-${today.getDate()}`;
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/posts/${userNickname}?date=${date}`,
-        );
-        console.log(data);
-        setPost(data.data);
+        if (userNickname) {
+          const { data } = await axios.get(
+            `${process.env.REACT_APP_API_URL}/posts/${userNickname}?date=${date}`,
+          );
+          console.log(data);
+          setPost(data.data);
+        }
       } catch (e) {
         console.log(e);
       }
@@ -78,7 +80,14 @@ function MainPage() {
         <section className="main-posts-container">
           <div className="posts-header">
             <div className="posts-header__title">
-              <PostTitle nick={userNickname} clickedDay={clickedDay} />
+              <PostTitle
+                nick={userNickname}
+                setNick={setUserNickname}
+                googleId={googleId}
+                clickedDay={clickedDay}
+                date={date}
+                testFlag={testFlag}
+              />
             </div>
             <div className="post-header__author">🥕{userNickname}</div>
           </div>
