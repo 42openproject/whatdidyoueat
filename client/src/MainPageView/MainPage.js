@@ -23,15 +23,11 @@ function MainPage() {
   }-${clickedDay.getDate()}`;
 
   useEffect(async () => {
-    console.log(localStorage.getItem('testFlag'));
-    const { data } = await axios.get(
+    // 닉네임 받아오기
+    const { data: nickData } = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
     );
-    console.log(data.data.nickname);
-    setUserNickname(data.data.nickname);
-  }, []);
-
-  useEffect(async () => {
+    setUserNickname(nickData.data.nickname);
     // test api
     if (testFlag === true) {
       try {
@@ -46,13 +42,11 @@ function MainPage() {
     } else {
       // 본 요청 api
       try {
-        if (userNickname) {
-          const { data } = await axios.get(
-            `${process.env.REACT_APP_API_URL}/posts/${userNickname}?date=${date}`,
-          );
-          console.log(data);
-          setPost(data.data);
-        }
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/posts/${nickData.data.nickname}?date=${date}`,
+        );
+        console.log(data);
+        setPost(data.data);
       } catch (e) {
         console.log(e);
       }

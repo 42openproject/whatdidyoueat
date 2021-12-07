@@ -8,15 +8,15 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
   const [editFlag, setEditFlag] = useState(false);
   const [editBtn, setEditBtn] = useState(false); // 나중에 본인페이지, 오늘날짜에만 버튼 나오도록 설정
 
-  // useEffect(async () => {
-  //   const { data } = await axios.get(
-  //     `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-  //   );
-  //   setNick(data.data.nickname);
-  // }, []);
-
   useEffect(async () => {
     try {
+      // 닉네임 받아오기
+      const { data: nickData } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+      );
+      setNick(nickData.data.nickname);
+
+      // title 받아오기
       if (testFlag === true) {
         // test api
         const { data } = await axios.get(
@@ -25,10 +25,10 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
         setDefaultTitle(data[0].title);
         setTitle(defaultTitle);
         console.log(data[0]);
-      } else if (nick) {
+      } else {
         // 본 api
         const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/titles/${nick}?date=${date}`,
+          `${process.env.REACT_APP_API_URL}/titles/${nickData.data.nickname}?date=${date}`,
         );
         console.log(data);
         setDefaultTitle(data.data.title);
