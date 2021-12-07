@@ -29,7 +29,7 @@ function UserProfile({ googleId }) {
 
     // test api
     const { data } = await axios.get(`http://localhost:8000/profileImg/dhyeon`);
-    console.log(data);
+    // console.log(data);
     setUserImage(data.imgUrl);
   }, [userImage]);
 
