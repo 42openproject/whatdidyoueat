@@ -14,7 +14,7 @@ function getTitle(req, res, next) {
               { userId: user.id },
               {
                 createdAt: {
-                  [Op.lte]: req.query.date,
+                  [Op.lte]: req.query.date + " 23:59:59",
                 },
               },
             ],
