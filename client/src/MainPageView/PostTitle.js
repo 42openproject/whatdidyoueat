@@ -8,12 +8,12 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
   const [editFlag, setEditFlag] = useState(false);
   const [editBtn, setEditBtn] = useState(false); // 나중에 본인페이지, 오늘날짜에만 버튼 나오도록 설정
 
-  useEffect(async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-    );
-    setNick(data.data.nickname);
-  }, []);
+  // useEffect(async () => {
+  //   const { data } = await axios.get(
+  //     `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+  //   );
+  //   setNick(data.data.nickname);
+  // }, []);
 
   useEffect(async () => {
     try {
