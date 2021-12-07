@@ -16,7 +16,8 @@ function UserProfile({ googleId }) {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
     );
-    setUserNickname(data.data.nickname);
+    if (data && data.success) setUserNickname(data.data.nickname);
+    else console.log('nickname api get 요청 false');
   }, []);
 
   useEffect(async () => {

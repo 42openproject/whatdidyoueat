@@ -14,7 +14,8 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
       const { data: nickData } = await axios.get(
         `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
       );
-      setNick(nickData.data.nickname);
+      if (nickData.success) setNick(nickData.data.nickname);
+      else console.log('nick api 요청 false');
 
       // title 받아오기
       if (testFlag === true) {
@@ -30,9 +31,11 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
         const { data } = await axios.get(
           `${process.env.REACT_APP_API_URL}/titles/${nickData.data.nickname}?date=${date}`,
         );
-        console.log(data);
-        setDefaultTitle(data.data.title);
-        setTitle(data.data.title);
+        // console.log(data);
+        if (data.success) {
+          setDefaultTitle(data.data.title);
+          setTitle(data.data.title);
+        } else console.log('title api 요청 false');
       }
     } catch (e) {
       console.log(e.message);
@@ -61,6 +64,7 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
           },
         );
         console.log(data);
+        // if (!postData.success) console.log('post title api post요청 false');
       }
     }
     setEditFlag(!editFlag);
