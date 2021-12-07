@@ -3,23 +3,20 @@ import { MdModeEdit } from 'react-icons/md';
 import axios from 'axios';
 import EditNickModal from './EditNickModal';
 
-function UserProfile() {
+function UserProfile({ googleId }) {
   const [userImage, setUserImage] = useState('');
   const [userNickname, setUserNickname] = useState('');
   const [editNickModal, setEditNickModal] = useState(false);
 
   const defaultUserImage =
     'https://karateinthewoodlands.com/wp-content/uploads/2017/09/default-user-image-300x300.png';
-  const googleId = localStorage.getItem('googleId');
 
   useEffect(async () => {
     // user nickname 요청
-    await axios
-      .get(`${process.env.REACT_APP_API_URL}/user/${googleId}`)
-      .then(res => {
-        console.log(res.data.nickname);
-        setUserNickname(res.data.nickname);
-      });
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+    );
+    setUserNickname(data.data.nickname);
   }, []);
 
   useEffect(async () => {

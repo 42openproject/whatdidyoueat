@@ -7,11 +7,12 @@ import UserAcheivement from './UserAcheivement';
 import '../stylesheets/ProfilePage.css';
 
 function ProfilePage() {
+  const googleId = localStorage.getItem('googleId');
   return (
     <>
       <Header />
       <div className="profile-container">
-        <UserProfile />
+        <UserProfile googleId={googleId} />
         <UserFollow />
         <UserTags />
         <UserAcheivement />
