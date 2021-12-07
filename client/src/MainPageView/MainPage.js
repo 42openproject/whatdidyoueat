@@ -7,6 +7,7 @@ import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
 import PostTitle from './PostTitle';
 import Calendar from './MainCalendar';
+import MainFollow from './MainFollow';
 
 function MainPage() {
   const [post, setPost] = useState([]);
@@ -58,8 +59,9 @@ function MainPage() {
         const { data } = await axios.get(
           `${process.env.REACT_APP_API_URL}/posts/${nickData.data.nickname}?date=${date}`,
         );
-        console.log(data);
-        setPost(data.data);
+        // console.log(data);
+        if (data && data.success) setPost(data.data);
+        else console.log('post api get 요청 false');
       } catch (e) {
         console.log(e);
       }
@@ -73,17 +75,7 @@ function MainPage() {
         <section className="main-calendar-wrap">
           <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
         </section>
-        <section className="following-wrap">
-          <div className="following-user">
-            <Link to="/user/dhyeon">👿dhyeon</Link>
-          </div>
-          <div className="following-user">
-            <Link to="/user/mki">🥕mki</Link>
-          </div>
-          <div className="following-user">
-            <Link to="/user/wopark">👻wopark</Link>
-          </div>
-        </section>
+        <MainFollow />
         <section className="main-posts-container">
           <div className="posts-header">
             <div className="posts-header__title">
