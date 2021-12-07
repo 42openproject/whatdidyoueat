@@ -1,4 +1,4 @@
-function MainPost({ id, date, textContent, tagArr }) {
+function MainPost({ date, textContent, tagArr }) {
   return (
     <>
       <div className="post-content">

@@ -97,16 +97,14 @@ function MainPage() {
               post
                 .slice(0)
                 .reverse()
-                .map(p => {
-                  return (
-                    <MainPost
-                      key={p.id}
-                      date={p.createdAt}
-                      textContent={p.textContent}
-                      tagArr={p.tagArr}
-                    />
-                  );
-                })
+                .map(p => (
+                  <MainPost
+                    key={p.id}
+                    date={p.createdAt}
+                    textContent={p.textContent}
+                    tagArr={p.tagArr}
+                  />
+                ))
             )}
           </div>
         </section>
