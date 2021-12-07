@@ -14,7 +14,7 @@ function UserTags() {
 
     // test api
     const { data } = await axios.get(`http://localhost:8000/tags/dhyeon`);
-    console.log(data);
+    // console.log(data);
     if (data.tagArr.length !== 0) {
       setTagArr(data.tagArr);
     }
@@ -28,13 +28,13 @@ function UserTags() {
   };
 
   const onToggleTagModal = useCallback(() => {
-    console.log('add tag click!!');
+    // console.log('add tag click!!');
     setTagModal(!tagModal);
   });
 
   const onCreateNewTag = useCallback(tagName => {
-    console.log('create');
-    console.log(tagName);
+    // console.log('create');
+    // console.log(tagName);
     if (tagName.length <= 0) {
       onToggleTagModal();
     } else if (tagName.length >= 10) {
@@ -50,7 +50,7 @@ function UserTags() {
   });
 
   const onRemoveTag = useCallback(tagName => {
-    console.log('remove');
+    // console.log('remove');
     setTagArr(tagArr.filter(tag => tagName !== tag));
     updateTags(tagArr.filter(tag => tagName !== tag));
   });

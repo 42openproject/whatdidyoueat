@@ -1,6 +1,4 @@
-import axios from 'axios';
 import { useRef, useState } from 'react';
-import { FiCheck } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 
 function OnToggleTagModal({ addTagModal, onCreateNewTag, tagMsgRef }) {
