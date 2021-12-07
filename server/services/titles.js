@@ -21,14 +21,13 @@ function getTitle(req, res, next) {
           },
         })
         .then((title) => {
-          var msg = {
+          res.send({
             success: true,
             data: {
               title: title.title,
             },
             message: "Success",
-          };
-          res.send(msg);
+          });
         });
     })
     .catch((err) => {
@@ -42,26 +41,81 @@ function setTitle(req, res, next) {
       where: { jwt: req.body.googleId },
     })
     .then((user) => {
-      console.log(req.body.title);
+      var today = new Date();
+
+      var year = today.getFullYear();
+      var month = ("0" + (today.getMonth() + 1)).slice(-2);
+      var day = ("0" + today.getDate()).slice(-2);
+
+      var dateString = year + "-" + month + "-" + day;
+
       models.titles
-        .create({
-          title: req.body.title,
-          userId: user.id,
+        .findOne({
+          where: {
+            createdAt: {
+              [Op.between]: [dateString, dateString + " 23:59:59"],
+            },
+          },
         })
-        .then(() => {
-          var msg = {
-            success: true,
-            message: "Success",
-          };
-          res.send(msg);
+        .then((title) => {
+          if (title == null) {
+            models.titles
+              .create({
+                title: req.body.title,
+                userId: user.id,
+              })
+              .then(() => {
+                res.send({
+                  success: true,
+                  message: "Success",
+                });
+              })
+              .catch(() => {
+                res.send({
+                  success: false,
+                  message: "Fail",
+                });
+              });
+          } else {
+            models.titles
+              .update(
+                {
+                  title: req.body.title,
+                },
+                {
+                  where: {
+                    createdAt: {
+                      [Op.between]: [dateString, dateString + " 23:59:59"],
+                    },
+                  },
+                }
+              )
+              .then(() => {
+                res.send({
+                  success: true,
+                  message: "Success",
+                });
+              })
+              .catch(() => {
+                res.send({
+                  success: false,
+                  message: "Fail",
+                });
+              });
+          }
+        })
+        .catch(() => {
+          res.send({
+            success: false,
+            message: "Fail",
+          });
         });
     })
     .catch(() => {
-      var msg = {
+      res.send({
         success: false,
         message: "Fail",
-      };
-      res.send(msg);
+      });
     });
 }
 
