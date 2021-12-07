@@ -20,7 +20,6 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "moment": "^2.29.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
   }
