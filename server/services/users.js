@@ -56,7 +56,13 @@ function getProfileImg(req, res) {
           where: { id: user.imageId },
         })
         .then((image) => {
-          res.status(200).send(image.location);
+          res.status(200).send({
+            success: true,
+            data: {
+              imgUrl: image.location,
+            },
+            message: "I gave you image URL",
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -113,7 +119,13 @@ function setProfileImg(req, res) {
               console.log(err);
             });
         });
-      res.status(200).send(req.file.location);
+      res.status(200).send({
+        success: true,
+        data: {
+          imgUrl: req.file.location,
+        },
+        message: "Image Uploaded",
+      });
     })
     .catch((err) => {
       console.log(err);
