@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.users.hasMany(models.posts, { foreignKey: "userId" });
       models.users.hasMany(models.titles, { foreignKey: "userId" });
+      models.users.belongsTo(models.images, { foreignkey: "imageId" });
     }
   }
   users.init(
@@ -17,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       nickname: DataTypes.STRING,
       email: DataTypes.STRING,
       jwt: DataTypes.STRING,
-      profileImageURL: DataTypes.STRING,
     },
     {
       sequelize,
