@@ -45,7 +45,27 @@ function setNickname(req, res) {
     });
 }
 
-function getProfileImg(req, res) {}
+function getProfileImg(req, res) {
+  models.users
+    .findOne({
+      where: { nickname: req.params.id },
+    })
+    .then((user) => {
+      models.images
+        .findOne({
+          where: { id: user.imageId },
+        })
+        .then((image) => {
+          res.status(200).send(image.location);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 function setProfileImg(req, res) {
   models.users

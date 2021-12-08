@@ -12,11 +12,13 @@ function UserProfileImage() {
     if (e.target.files[0]) {
       const img = new FormData();
       img.append('file', e.target.files[0]);
-      axios.post(`http://localhost:3001/upload/image`, img).then(res => {
-        console.log(res);
+      axios
+        .post(`http://localhost:3001/users/mki/profileImg`, img)
+        .then(res => {
+          console.log(res);
 
-        setUserImage(res.data);
-      });
+          setUserImage(res.data);
+        });
     }
   };
 

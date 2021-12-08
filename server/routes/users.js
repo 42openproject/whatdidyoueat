@@ -48,9 +48,30 @@ router.post("/nickname", function (req, res) {
 /**
  * @swagger
  *  /api/img:
- *    posts:
+ *    get:
  *      tags:
- *      - posts
+ *      - get
+ *      description: 이미지 관련 API
+ *
+ *      responses:
+ *       200:
+ *        description: 이미지 불러오기 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Posts'
+ *
+ */
+router.get("/:id/profileImg", function (req, res) {
+  usersService.getProfileImg(req, res);
+});
+
+/**
+ * @swagger
+ *  /api/img:
+ *    post:
+ *      tags:
+ *      - post
  *      description: 이미지 관련 API
  *
  *      responses:
