@@ -35,7 +35,7 @@ app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 app.use("/login", loginRouter);
 app.use("/titles", titlesRouter);
-app.use("/api", imgRouter);
+app.use("/upload", imgRouter);
 
 /*
  ** swagger
