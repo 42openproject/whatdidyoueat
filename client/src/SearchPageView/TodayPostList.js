@@ -32,7 +32,14 @@ function TodayPostList({
           <p className="post-box__content__date">{createdAt}</p>
           <p className="post-box__content__text">{textContent}</p>
           <ul className="post-box__content__tags">
-            <li className="post-box__tag-item">{tagArr[0]}</li>
+            {tagArr &&
+              tagArr.map((tag, idx) => {
+                return (
+                  <li className="post-box__tag-item" key={idx}>
+                    {tag}
+                  </li>
+                );
+              })}
           </ul>
         </div>
         <hr size="1" className="post-box-hr" />
