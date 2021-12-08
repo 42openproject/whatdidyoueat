@@ -62,13 +62,11 @@ router.post("/nickname", function (req, res) {
  *              $ref: '#/components/schemas/Posts'
  *
  */
-
 router.post(
   "/:id/profileImg",
   multer.upload.single("file"),
   function (req, res) {
     usersService.setProfileImg(req, res);
-    res.status(200).send(req.file.location);
   }
 );
 

@@ -46,7 +46,9 @@ function setNickname(req, res) {
 
 function getProfileImg(req, res) {}
 
-function setProfileImg(req, res) {}
+function setProfileImg(req, res) {
+  res.status(200).send(req.file.location);
+}
 
 module.exports = {
   setNickname,
