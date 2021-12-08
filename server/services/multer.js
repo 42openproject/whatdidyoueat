@@ -17,17 +17,20 @@ const upload = multer({
   }),
 });
 
-s3.deleteObject(
-  {
-    Bucket: "버킷명",
-    Key: "파일명",
-  },
-  function (err, data) {}
-);
+function deleteImg(key) {
+  s3.deleteObject(
+    {
+      Bucket: "images.whatdidyoueat",
+      Key: key,
+    },
+    function (err, data) {}
+  );
+}
 
 function uploadImg(req, res, next) {}
 
 module.exports = {
   uploadImg,
   upload,
+  deleteImg,
 };
