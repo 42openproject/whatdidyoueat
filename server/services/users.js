@@ -1,6 +1,6 @@
 const models = require("../models");
 
-function getNickname(req, res, next) {
+function getNickname(req, res) {
   models.users
     .findOne({
       where: { jwt: req.query.googleId },
@@ -24,7 +24,7 @@ function getNickname(req, res, next) {
     });
 }
 
-function setNickname(req, res, next) {
+function setNickname(req, res) {
   models.users
     .update(
       {
@@ -44,7 +44,13 @@ function setNickname(req, res, next) {
     });
 }
 
+function getProfileImg(req, res) {}
+
+function setProfileImg(req, res) {}
+
 module.exports = {
   setNickname,
   getNickname,
+  getProfileImg,
+  setProfileImg,
 };

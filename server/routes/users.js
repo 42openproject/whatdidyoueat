@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const userService = require("../services/users");
+const usersService = require("../services/users");
+const multer = require("../services/multer");
 
 /**
  * @swagger
@@ -19,8 +20,8 @@ const userService = require("../services/users");
  *              $ref: '#/components/schemas/Users'
  *
  */
-router.get("/nickname", function (req, res, next) {
-  userService.getNickname(req, res, next);
+router.get("/nickname", function (req, res) {
+  usersService.getNickname(req, res);
 });
 
 /**
@@ -40,8 +41,35 @@ router.get("/nickname", function (req, res, next) {
  *              $ref: '#/components/schemas/Users'
  *
  */
-router.post("/nickname", function (req, res, next) {
-  userService.setNickname(req, res, next);
+router.post("/nickname", function (req, res) {
+  usersService.setNickname(req, res);
 });
+
+/**
+ * @swagger
+ *  /api/img:
+ *    posts:
+ *      tags:
+ *      - posts
+ *      description: 이미지 관련 API
+ *
+ *      responses:
+ *       200:
+ *        description: 이미지 업로드 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Posts'
+ *
+ */
+
+router.post(
+  "/:id/profileImg",
+  multer.upload.single("file"),
+  function (req, res) {
+    usersService.setProfileImg(req, res);
+    res.status(200).send(req.file.location);
+  }
+);
 
 module.exports = router;
