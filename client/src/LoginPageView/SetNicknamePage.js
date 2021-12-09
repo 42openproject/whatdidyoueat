@@ -27,6 +27,13 @@ function SetNicknamePage({ history }) {
         );
         if (response.data.success) {
           console.log(response.data);
+          const res = await axios.post(
+            `${process.env.REACT_APP_API_URL}/titles/${nickname}`,
+            {
+              googleId,
+              title: `${nickname}의 최초 이유식일기`,
+            },
+          );
           history.push('/main');
         } else {
           console.log('api 요청 실패');
