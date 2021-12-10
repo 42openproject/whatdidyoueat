@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FiEdit2, FiCornerDownLeft } from 'react-icons/fi';
 
-function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
+function PostTitle({ nick, clickedDay, date, testFlag, googleId }) {
   const [defaultTitle, setDefaultTitle] = useState('');
   const [title, setTitle] = useState(defaultTitle);
   const [editFlag, setEditFlag] = useState(false);
