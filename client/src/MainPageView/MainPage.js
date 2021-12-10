@@ -59,7 +59,6 @@ function MainPage() {
             <div className="posts-header__title">
               <PostTitle
                 nick={userNickname}
-                setNick={setUserNickname}
                 googleId={googleId}
                 clickedDay={clickedDay}
                 date={date}
@@ -72,7 +71,6 @@ function MainPage() {
           <MainPost
             clickedDay={clickedDay}
             testFlag={testFlag}
-            setUserNickname={setUserNickname}
             userNickname={userNickname}
           />
         </section>
