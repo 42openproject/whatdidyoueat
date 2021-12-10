@@ -139,24 +139,37 @@ function setProfileImg(req, res) {
 function getTag(req, res) {
   models.users
     .findOne({
-      where: { jwt: req.query.googleId },
+      where: { nickname: req.params.id },
     })
     .then((user) => {
-      var msg = {
-        success: true,
-        data: {
-          nickname: user.nickname,
-        },
-        message: "success",
-      };
-      res.send(msg);
+      models.users_tag
+        .findAll({
+          where: { userId: user.id },
+          include: [
+            {
+              model: models.tags,
+            },
+          ],
+        })
+        .then((tags) => {
+          var tagArr = [];
+          tags.forEach((element) => {
+            tagArr.push(element.dataValues.tag.string);
+          });
+          res.status(200).send({
+            success: true,
+            data: {
+              tagArr: tagArr,
+            },
+            message: "I gave you user tags",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
-      var msg = {
-        success: false,
-        message: err,
-      };
-      res.send(msg);
+      console.log(err);
     });
 }
 
@@ -230,22 +243,17 @@ function setTag(req, res) {
                   });
                 }
               })
-              .catch((err) => {});
+              .catch((err) => {
+                console.log(err);
+              });
           }
         })
         .catch((err) => {
           console.log(err);
-          res.send({
-            success: false,
-            message: err,
-          });
         });
     })
     .catch((err) => {
-      res.send({
-        success: false,
-        message: err,
-      });
+      console.log(err);
     });
 }
 

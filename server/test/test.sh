@@ -86,7 +86,7 @@
 # -------------------------------------------------------------------
 # GET /users/:id/tag
 # query parameter: googleId=2021, month=12
-# curl -X GET 'http://localhost:3001/calendar/mki?year=2021&month=12'
+curl -X GET 'http://localhost:3001/users/mki/tag'
 
 # POST /users/:id/tag
 # body: googleId, tag
