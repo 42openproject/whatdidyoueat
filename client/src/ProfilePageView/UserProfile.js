@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MdModeEdit } from 'react-icons/md';
-import axios from 'axios';
 import EditNickModal from './EditNickModal';
 import UserProfileImage from './UserProfileImage';
 
