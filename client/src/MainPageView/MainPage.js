@@ -73,7 +73,7 @@ function MainPage() {
             clickedDay={clickedDay}
             testFlag={testFlag}
             setUserNickname={setUserNickname}
-            googleId={googleId}
+            userNickname={userNickname}
           />
         </section>
       </div>
