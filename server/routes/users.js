@@ -150,8 +150,8 @@ router.post("/:id/tag", function (req, res) {
  *              $ref: '#/components/schemas/Posts'
  *
  */
-router.delete("/:id/tag", function (req, res) {
-  usersService.setTag(req, res);
+router.delete("/:id/tag/:tagId", function (req, res) {
+  usersService.deleteTag(req, res);
 });
 
 module.exports = router;

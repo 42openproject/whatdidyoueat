@@ -86,18 +86,15 @@
 # -------------------------------------------------------------------
 # GET /users/:id/tag
 # query parameter: googleId=2021, month=12
-curl -X GET 'http://localhost:3001/users/mki/tag'
+# curl -X GET 'http://localhost:3001/users/mki/tag'
 
 # POST /users/:id/tag
 # body: googleId, tag
 # curl \
 # -H "Content-Type: application/json" \
-# -d '{"googleId":"104760257817400625505", "tag":"다이어트2"}' \
+# -d '{"googleId":"104760257817400625505", "tag":"다이어트3"}' \
 # -X POST 'http://localhost:3001/users/mki/tag'
 
-# DELETE /users/:id/tag?tag=""
-# body: googleId, tag
-# curl \
-# -H "Content-Type: application/json" \
-# -d '{"googleId":"104760257817400625505", "tag":"다이어트2"}' \
-# -X POST 'http://localhost:3001/users/mki/tag'
+# DELETE /users/:id/tag/:tagid
+# body: googleId, tagId
+curl -X DELETE 'http://localhost:3001/users/mki/tag/10'

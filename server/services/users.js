@@ -184,7 +184,7 @@ function setTag(req, res) {
     .then((tag) => {
       models.users
         .findOne({
-          where: { nickname: req.params.id },
+          where: { jwt: req.body.googleId },
         })
         .then((user) => {
           if (tag == null) {
@@ -260,6 +260,40 @@ function setTag(req, res) {
     });
 }
 
+function deleteTag(req, res) {
+  models.users
+    .findOne({
+      where: { nickname: req.params.id },
+    })
+    .then((user) => {
+      models.users_tag
+        .destroy({
+          where: {
+            [Op.and]: [{ userId: user.id }, { tagId: req.params.tagId }],
+          },
+        })
+        .then((tag) => {
+          if (tag == 0) {
+            res.status(200).send({
+              success: true,
+              message: "There is no tag",
+            });
+          } else if (tag == 1) {
+            res.status(200).send({
+              success: true,
+              message: "Deleted",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 module.exports = {
   setNickname,
   getNickname,
@@ -267,4 +301,5 @@ module.exports = {
   setProfileImg,
   getTag,
   setTag,
+  deleteTag,
 };
