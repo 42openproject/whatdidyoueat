@@ -154,7 +154,10 @@ function getTag(req, res) {
         .then((tags) => {
           var tagArr = [];
           tags.forEach((element) => {
-            tagArr.push(element.dataValues.tag.string);
+            tagArr.push({
+              tagName: element.dataValues.tag.string,
+              tagId: element.dataValues.tag.id,
+            });
           });
           res.status(200).send({
             success: true,
