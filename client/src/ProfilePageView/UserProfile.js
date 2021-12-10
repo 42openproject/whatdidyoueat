@@ -4,22 +4,8 @@ import axios from 'axios';
 import EditNickModal from './EditNickModal';
 import UserProfileImage from './UserProfileImage';
 
-function UserProfile({ googleId }) {
-  const [userNickname, setUserNickname] = useState('');
+function UserProfile({ userNickname }) {
   const [editNickModal, setEditNickModal] = useState(false);
-
-  useEffect(async () => {
-    // user nickname 요청
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-      );
-      if (data && data.success) setUserNickname(data.data.nickname);
-      else console.log('nickname api get 요청 false');
-    } catch (e) {
-      console.log(e.message);
-    }
-  }, []);
 
   const editUserNickname = () => {
     console.log(`edit btn click!!!`);
