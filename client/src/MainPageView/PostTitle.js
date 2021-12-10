@@ -10,13 +10,6 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
 
   useEffect(async () => {
     try {
-      // 닉네임 받아오기
-      const { data: nickData } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-      );
-      if (nickData.success) setNick(nickData.data.nickname);
-      else console.log('nick api 요청 false');
-
       // title 받아오기
       if (testFlag === true) {
         // test api
@@ -26,10 +19,10 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
         setDefaultTitle(data[0].title);
         setTitle(defaultTitle);
         console.log(data[0]);
-      } else {
+      } else if (nick) {
         // 본 api
         const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/titles/${nickData.data.nickname}?date=${date}`,
+          `${process.env.REACT_APP_API_URL}/titles/${nick}?date=${date}`,
         );
         // console.log(data);
         if (data.success) {

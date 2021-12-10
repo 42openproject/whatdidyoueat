@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PostList from './PostList';
 
-function MainPost({ clickedDay, googleId, testFlag, setUserNickname }) {
+function MainPost({ clickedDay, userNickname, testFlag }) {
   const [post, setPost] = useState([]);
   const date = `${clickedDay.getFullYear()}-${
     clickedDay.getMonth() + 1 < 10
@@ -15,14 +15,7 @@ function MainPost({ clickedDay, googleId, testFlag, setUserNickname }) {
   }`;
 
   useEffect(async () => {
-    // 닉네임 받아오기
     try {
-      const { data: nickData } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
-      );
-      if (nickData.success) setUserNickname(nickData.data.nickname);
-      else console.log('nick api 요청 false');
-
       // post 받아오기
       // test api
       if (testFlag === true) {
@@ -35,11 +28,11 @@ function MainPost({ clickedDay, googleId, testFlag, setUserNickname }) {
         } catch (e) {
           console.log('post get error', e);
         }
-      } else {
+      } else if (userNickname) {
         // 본 요청 api
         try {
           const { data } = await axios.get(
-            `${process.env.REACT_APP_API_URL}/posts/${nickData.data.nickname}?date=${date}`,
+            `${process.env.REACT_APP_API_URL}/posts/${userNickname}?date=${date}`,
           );
           // console.log(data);
           if (data && data.success) setPost(data.data);
@@ -51,7 +44,7 @@ function MainPost({ clickedDay, googleId, testFlag, setUserNickname }) {
     } catch (e) {
       console.log(e.message);
     }
-  }, [clickedDay, testFlag]);
+  }, [clickedDay, testFlag, userNickname]);
 
   return (
     <>
