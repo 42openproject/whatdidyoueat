@@ -3,7 +3,6 @@ import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
-import PostList from './PostList';
 import PostTitle from './PostTitle';
 import Calendar from './MainCalendar';
 import MainFollow from './MainFollow';
@@ -47,7 +46,12 @@ function MainPage() {
       <Header />
       <div className="main-container">
         <section className="main-calendar-wrap">
-          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+          <Calendar
+            clickedDay={clickedDay}
+            setClickedDay={setClickedDay}
+            testFlag={testFlag}
+            userNickname={userNickname}
+          />
         </section>
         <MainFollow />
         <section className="main-posts-container">
