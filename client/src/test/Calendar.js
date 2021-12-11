@@ -137,49 +137,51 @@ function Calendar() {
 
   return (
     <>
-      <section className="calendar-header">
-        <div className="header-year">{year}</div>
-        <div className="month-wrap">
-          <button className="prev-month-btn" onClick={onClickPrevMonth}>
-            이전달
+      <div className="calander-all-container">
+        <section className="calendar-header">
+          <div className="header-year">{year}</div>
+          <div className="month-wrap">
+            <button className="prev-month-btn" onClick={onClickPrevMonth}>
+              이전달
+            </button>
+            <div className="header-month">{month}</div>
+            <button className="prev-month-btn" onClick={onClickNextMonth}>
+              다음달
+            </button>
+          </div>
+          <button
+            className="calendar-view-change-btn"
+            onClick={onClickViewChange}
+          >
+            뷰
           </button>
-          <div className="header-month">{month}</div>
-          <button className="prev-month-btn" onClick={onClickNextMonth}>
-            다음달
-          </button>
-        </div>
-        <button
-          className="calendar-view-change-btn"
-          onClick={onClickViewChange}
-        >
-          뷰
-        </button>
-      </section>
-      <section className="calendar-week">
-        {weekName.map((w, i) => {
-          return (
-            <div className="week-item" key={i}>
-              {w}
-            </div>
-          );
-        })}
-      </section>
-      <section className="calendar-days">
-        {dateArr.length &&
-          dateArr.map((d, i) => {
+        </section>
+        <section className="calendar-week">
+          {weekName.map((w, i) => {
             return (
-              <CalendarDateItem
-                date={d}
-                key={i}
-                month={month}
-                postedDate={[1, 3, 5, 7, 9]}
-                today={today}
-                clickedDate={clickedDate}
-                setClickedDate={setClickedDate}
-              />
+              <div className="week-item" key={i}>
+                {w}
+              </div>
             );
           })}
-      </section>
+        </section>
+        <section className="calendar-days">
+          {dateArr.length &&
+            dateArr.map((d, i) => {
+              return (
+                <CalendarDateItem
+                  date={d}
+                  key={i}
+                  month={month}
+                  postedDate={[1, 3, 5, 7, 9]}
+                  today={today}
+                  clickedDate={clickedDate}
+                  setClickedDate={setClickedDate}
+                />
+              );
+            })}
+        </section>
+      </div>
     </>
   );
 }

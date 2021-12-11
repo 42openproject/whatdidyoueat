@@ -20,12 +20,16 @@ function CalendarDateItem({
     const M = dd.getMonth() + 1;
     const D = dd.getDate();
 
-    if (todayD === D && todayM === M + 1 && todayY === Y) {
+    if (todayD === D && todayM === M && todayY === Y) {
       tmp += ' calendar-days__day-item--today';
     } else if (M !== month) {
       tmp += ' calendar-days__day-item--not-this-month';
     }
-    if (postedDate.length && postedDate.some(e => e === dd.getDate()))
+    if (
+      postedDate.length &&
+      M === month &&
+      postedDate.some(e => e === dd.getDate())
+    )
       tmp += ' calendar-days__day-item--posted';
     if (clickedDate === `${Y}-${M}-${D}`)
       tmp += ' calendar-days__day-item--selected';
@@ -42,7 +46,11 @@ function CalendarDateItem({
   return (
     <>
       <div className={itemClass}>
-        <abbr aria-label={date} onClick={onClickDate}>
+        <abbr
+          aria-label={date}
+          onClick={onClickDate}
+          className="calendar-days__day-item__abbr"
+        >
           {d}
         </abbr>
       </div>
