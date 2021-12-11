@@ -36,6 +36,15 @@
 .calendar-days__day-item--today {
   color: red;
 }
+.calendar-days__day-item--posted {
+  border: 1px solid rgb(174, 105, 238);
+}
 .calendar-days__day-item--selected {
   border: 1px solid blue;
+}
+.calendar-days__day-item--not-this-month {
+  color: rgb(176, 176, 176);
+}
+
+.calendar-view-change-btn {
 }
