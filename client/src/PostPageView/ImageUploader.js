@@ -10,7 +10,7 @@ const ImagePreview = styled.div`
   }
 `;
 const ImageUploader = ({ image, setImage }) => {
-  // const [image, setImage] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
   const [isUploaded, setIsUploaded] = useState(false);
 
   const imageChangeHandler = e => {
@@ -18,12 +18,12 @@ const ImageUploader = ({ image, setImage }) => {
       const reader = new FileReader();
 
       reader.onload = res => {
-        setImage(res.target.result);
+        setImage(e.target.files[0]);
+        setPreviewImage(res.target.result);
         setIsUploaded(true);
       };
 
       reader.readAsDataURL(e.target.files[0]);
-      // handleImageChange(image);
     }
   };
 
@@ -44,7 +44,7 @@ const ImageUploader = ({ image, setImage }) => {
           <ImagePreview>
             <img
               id="uploaded-image"
-              src={image}
+              src={previewImage}
               draggable={false}
               alt="uploaded-img"
             />

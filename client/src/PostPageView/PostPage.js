@@ -58,6 +58,16 @@ function PostPage({ history }) {
 
   const googleId = localStorage.getItem('googleId');
 
+  document.addEventListener(
+    'keydown',
+    event => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+    },
+    true,
+  );
+
   const handleContentChange = ({ target: { value } }) => {
     if (value.length > 50) {
       alert('글자수 초과!!');
@@ -101,35 +111,28 @@ function PostPage({ history }) {
   );
 
   const handleSubmit = async e => {
+    setDisabled(true);
+    e.preventDefault();
+    await new Promise(r => setTimeout(r, 1000));
     const formData = new FormData();
     formData.append('file', image);
+    formData.append('textContent', textContent);
+    formData.append('tagArr', tagArr);
+    formData.append('googleId', googleId);
     const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/upload`,
+      `${process.env.REACT_APP_API_URL}/posts/mki`,
       formData,
     );
     console.log(res);
-    setDisabled(true);
-    // e.preventDefault();
-    // await new Promise(r => setTimeout(r, 1000));
-    // const response = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}/post/${googleId}`,
-    //   {
-    //     textContent,
-    //     tagArr,
-    //   },
-    // );
-    // console.log(response.data);
-    // setDisabled(false);
-    // // localStorage.setItem('textContent', textContent);
-    // // localStorage.setItem('tagArr', tagArr);
-    // history.push('/main');
+    setDisabled(false);
+    history.push('/main');
   };
   return (
     <>
       <Header />
       <PostUploadTitle />
-      <ImageUploader image={image} setImage={setImage} />
       <form onSubmit={handleSubmit}>
+        <ImageUploader image={image} setImage={setImage} />
         <input
           type="text"
           name="textContent"
