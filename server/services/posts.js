@@ -44,31 +44,32 @@ function getPost(req, res, next) {
     });
 }
 
-function createPost(req, res, next) {
+function setPost(req, res, next) {
   models.users
     .findOne({
       where: { nickname: req.params.id },
     })
     .then((user) => {
-      models.posts
-        .create({
-          textContent: req.body.textContent,
-          tagArr: req.body.tagArr.join(),
-          userId: user.id,
-        })
-        .then(() => {
-          res.status(200).send({
-            success: true,
-            message: "Post uploaded",
+      console.log(user),
+        models.posts
+          .create({
+            textContent: req.body.textContent,
+            tagArr: req.body.tagArr.join(),
+            userId: user.id,
+          })
+          .then(() => {
+            res.status(200).send({
+              success: true,
+              message: "Post uploaded",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
           });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     });
 }
 
 module.exports = {
   getPost,
-  createPost,
+  setPost,
 };
