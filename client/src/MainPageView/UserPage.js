@@ -1,95 +1,49 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import MainPost from './MainPost';
-import PostTitle from './PostTitle';
+import UserPostTitle from './UserPostTitle';
 import Calendar from './MainCalendar';
 
 function UserPage() {
-  const [post, setPost] = useState([]);
   const { nickname } = useParams();
   const [clickedDay, setClickedDay] = useState(new Date());
-
-  useEffect(async () => {
-    try {
-      // user googleId 가져오기
-      const data = await axios.get(
-        `${process.env.REACT_APP_API_URL}/user/nickname/${nickname}`,
-      );
-      console.log(data);
-
-      // test api
-      // const postData = await axios.get(
-      //   `http://localhost:8000/post?userId=${nickname}&createdAt=2021-11-${clickedDay.getDate()}`,
-      // );
-      // console.log(postData.data);
-      // setPost(postData.data);
-
-      // post 가져오기
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/post/${data.data.jwt}`,
-      );
-      setPost(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  }, [nickname, clickedDay]);
-
-  const goUserPage = user => {
-    window.location.href = `/user/${user}`;
-  };
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1 < 10
+      ? `0${clickedDay.getMonth() + 1}`
+      : clickedDay.getMonth() + 1
+  }-${
+    clickedDay.getDate() < 10
+      ? `0${clickedDay.getDate()}`
+      : clickedDay.getDate()
+  }`;
 
   return (
     <>
       <Header />
       <div className="main-container">
         <div className="main-calendar-wrap">
-          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+          <Calendar
+            clickedDay={clickedDay}
+            setClickedDay={setClickedDay}
+            userNickname={nickname}
+          />
         </div>
-        <section className="following-wrap">
-          <div className="following-user">
-            <Link to="/user/dhyeon">👿dhyeon</Link>
-          </div>
-          <div className="following-user">
-            <Link to="/user/mki">🥕mki</Link>
-          </div>
-          <div className="following-user">
-            <Link to="/user/wopark">👻wopark</Link>
-          </div>
-        </section>
         <section className="main-posts-container">
           <div className="posts-header">
             <div className="posts-header__title">
-              <PostTitle nick={nickname} clickedDay={clickedDay} />
+              <UserPostTitle
+                nick={nickname}
+                clickedDay={clickedDay}
+                date={date}
+              />
             </div>
             <div className="post-header__author">🥕{nickname}</div>
           </div>
           <hr size="1" className="posts-header-hr" />
-          <div className="posts-body">
-            {post.length === 0 ? (
-              <div className="empty-post">
-                <span>오늘의 식단을</span>
-                <span>기록해주세요</span>
-              </div>
-            ) : (
-              post
-                .slice(0)
-                .reverse()
-                .map(p => {
-                  return (
-                    <MainPost
-                      key={p.id}
-                      date={p.createdAt}
-                      textContent={p.textContent}
-                      tagArr={p.tagArr}
-                    />
-                  );
-                })
-            )}
-          </div>
+          <MainPost clickedDay={clickedDay} userNickname={nickname} />
         </section>
       </div>
       <NaviBar />

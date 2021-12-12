@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.users.hasMany(models.posts, { foreignKey: "userId" });
       models.users.hasMany(models.titles, { foreignKey: "userId" });
+      models.users.hasMany(models.users_tag, { foreignKey: "userId" });
+      models.users.belongsTo(models.images, { foreignkey: "imageId" });
     }
   }
   users.init(

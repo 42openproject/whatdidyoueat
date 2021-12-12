@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
@@ -146,7 +146,6 @@ function PostPage({ history }) {
             type="text"
             name="postTag"
             value={postTag}
-            // onChange={handleTagChange}
             onChange={onChangeTag}
             onKeyUp={onKeyUp}
           />
