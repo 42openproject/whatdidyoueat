@@ -50,7 +50,7 @@ function setPost(req, res, next) {
       where: { nickname: req.params.id },
     })
     .then((user) => {
-      console.log(user),
+      console.log(req),
         models.posts
           .create({
             textContent: req.body.textContent,
