@@ -234,5 +234,23 @@
       "id": "dhyeon",
       "tagArr": ["테스트1", "테스트2", "테스트3"]
     }
+  ],
+  "allposts": [
+    {
+      "nickname": "mki",
+      "userPostTitle": "mki임시제목",
+      "createdAt": "대충 2021 12월 8일",
+      "imageUrl": "https://m.yoriking.com/web/product/medium/flour/fish_shaped_bun-redbean500_s1.jpg",
+      "textContent": "붕어빵먹고싶다",
+      "tagArr": ["간식", "붕어빵"]
+    },
+    {
+      "nickname": "dhyeon",
+      "userPostTitle": "dhyeon 임시제목",
+      "createdAt": "대충 2021 12월 8일",
+      "imageUrl": "http://img.danawa.com/prod_img/500000/005/564/img/12564005_1.jpg?shrink=330:330&_v=20201029103516",
+      "textContent": "난 호떡먹고싶다",
+      "tagArr": ["간식", "호떡", "디저트"]
+    }
   ]
 }

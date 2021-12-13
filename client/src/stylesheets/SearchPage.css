@@ -92,9 +92,15 @@
 }
 
 .post-box__content__img {
-  height: 250px;
+  max-height: 500px;
   background-color: gray;
   margin: 1rem 0;
+  overflow: hidden;
+}
+.post-box__content__img__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .post-box__content__date {
