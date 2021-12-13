@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
+import ImageUploader from './ImageUploader';
 
 const PostUploadTitle = () => {
   const [defaultTitle, setDefaultTitle] = useState('');
@@ -49,12 +50,23 @@ const PostUploadTitle = () => {
 
 function PostPage({ history }) {
   // 현재 상태, Setter
+  const [image, setImage] = useState('');
   const [textContent, setPostContent] = useState('');
   const [postTag, setPostTag] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [tagArr, setTagArr] = useState([]);
 
   const googleId = localStorage.getItem('googleId');
+
+  document.addEventListener(
+    'keydown',
+    event => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+    },
+    true,
+  );
 
   const handleContentChange = ({ target: { value } }) => {
     if (value.length > 50) {
@@ -101,22 +113,18 @@ function PostPage({ history }) {
   const handleSubmit = async e => {
     setDisabled(true);
     e.preventDefault();
-    try {
-      await new Promise(r => setTimeout(r, 1000));
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/posts/dhyeon`,
-        {
-          textContent,
-          tagArr,
-        },
-      );
-      if (data && data.success) console.log('post 쓰기 성공');
-      else console.log('post 쓰기 실패');
-    } catch (err) {
-      console.log(err.message);
-    }
+    await new Promise(r => setTimeout(r, 1000));
+    const formData = new FormData();
+    formData.append('file', image);
+    formData.append('textContent', textContent);
+    formData.append('tagArr', tagArr);
+    formData.append('googleId', googleId);
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_URL}/posts/mki`,
+      formData,
+    );
+    console.log(res);
     setDisabled(false);
-
     history.push('/main');
   };
   return (
@@ -124,6 +132,7 @@ function PostPage({ history }) {
       <Header />
       <PostUploadTitle />
       <form onSubmit={handleSubmit}>
+        <ImageUploader image={image} setImage={setImage} />
         <input
           type="text"
           name="textContent"

@@ -26,12 +26,13 @@
 }
 
 .user-profile__img {
-  background-color: gray;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 106px;
+  height: 106px;
+  border-radius: 53px;
   text-align: center;
   overflow: hidden;
+  border: 6px solid white;
+  box-shadow: 3px 3px 7px #bfbfe5;
 }
 .user-profile__img__img {
   width: 100%;
@@ -39,13 +40,37 @@
   background-color: gray;
   object-fit: cover;
 }
+.user-profile__img--overlay {
+  position: absolute;
+  width: 106px;
+  height: 106px;
+  border-radius: 53px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.4s;
+}
+.user-profile__img__upload {
+  color: rgb(255, 255, 255, 0.8);
+  font-size: 2.4rem;
+  width: 106px;
+  height: 106px;
+  border-radius: 53px;
+  display: block;
+  padding-top: 30px;
+  padding-left: 5px;
+}
+.user-profile__img--overlay:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  opacity: 100;
+  transition: 0.4s;
+}
 
 .user-profile__nickname {
   display: flex;
   align-items: center;
   font-size: 1.3rem;
   padding-left: 20px;
-  padding-top: 50px;
+  padding-top: 55px;
   height: 1.3rem;
 }
 .user-profile__nickname--text {

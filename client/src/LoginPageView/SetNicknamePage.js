@@ -22,12 +22,21 @@ function SetNicknamePage({ history }) {
           `${process.env.REACT_APP_API_URL}/users/nickname`,
           {
             googleId,
-            nickname,
+            nickname: nickInput,
           },
         );
         if (response.data.success) {
           console.log(response.data);
-          history.push('/main');
+          const { data: titleData } = await axios.post(
+            `${process.env.REACT_APP_API_URL}/titles/${nickInput}`,
+            {
+              googleId,
+              title: `${nickInput}의 최초 이유식일기`,
+            },
+          );
+          console.log(titleData);
+          if (titleData.success) history.push('/main');
+          else console.log('title post false');
         } else {
           console.log('api 요청 실패');
         }

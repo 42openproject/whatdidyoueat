@@ -3,9 +3,8 @@ import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
-import PostList from './PostList';
 import PostTitle from './PostTitle';
-import Calendar from './MainCalendar';
+import MainCalendar from './MainCalendar';
 import MainFollow from './MainFollow';
 import MainPost from './MainPost';
 
@@ -47,7 +46,12 @@ function MainPage() {
       <Header />
       <div className="main-container">
         <section className="main-calendar-wrap">
-          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+          <MainCalendar
+            clickedDay={clickedDay}
+            setClickedDay={setClickedDay}
+            testFlag={testFlag}
+            userNickname={userNickname}
+          />
         </section>
         <MainFollow />
         <section className="main-posts-container">
@@ -55,7 +59,6 @@ function MainPage() {
             <div className="posts-header__title">
               <PostTitle
                 nick={userNickname}
-                setNick={setUserNickname}
                 googleId={googleId}
                 clickedDay={clickedDay}
                 date={date}
@@ -68,8 +71,7 @@ function MainPage() {
           <MainPost
             clickedDay={clickedDay}
             testFlag={testFlag}
-            setUserNickname={setUserNickname}
-            googleId={googleId}
+            userNickname={userNickname}
           />
         </section>
       </div>

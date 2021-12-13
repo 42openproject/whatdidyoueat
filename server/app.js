@@ -27,7 +27,6 @@ var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
 var loginRouter = require("./routes/login");
 var titlesRouter = require("./routes/titles");
-var imgRouter = require("./routes/img");
 var calendarRouter = require("./routes/calendar");
 
 app.use("/", indexRouter);
@@ -35,7 +34,7 @@ app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 app.use("/login", loginRouter);
 app.use("/titles", titlesRouter);
-app.use("/api", imgRouter);
+app.use("/calendar", calendarRouter);
 
 /*
  ** swagger
