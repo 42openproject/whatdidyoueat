@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import PostTitle from './PostTitle';
-import Calendar from './MainCalendar';
+import MainCalendar from './MainCalendar';
 import MainFollow from './MainFollow';
 import MainPost from './MainPost';
 
