@@ -4,7 +4,6 @@ import axios from 'axios';
 import Calendar from '../Calendar/Calendar';
 import '../stylesheets/MainCalendar.css';
 
-
 const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
   // const [dateVal, setDateVal] = useState(new Date());
   const [monthVal, setMonthVal] = useState(new Date());

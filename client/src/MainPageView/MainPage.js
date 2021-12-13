@@ -46,7 +46,7 @@ function MainPage() {
       <Header />
       <div className="main-container">
         <section className="main-calendar-wrap">
-          <Calendar
+          <MainCalendar
             clickedDay={clickedDay}
             setClickedDay={setClickedDay}
             testFlag={testFlag}
