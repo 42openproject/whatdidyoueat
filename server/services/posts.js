@@ -69,7 +69,7 @@ function setPost(req, res, next) {
               models.posts
                 .create({
                   textContent: req.body.textContent,
-                  tagArr: req.body.tagArr.join(),
+                  tagArr: req.body.tagArr,
                   userId: user.id,
                   imageId: image.id,
                 })
