@@ -92,7 +92,7 @@
 }
 
 .post-box__content__img {
-  height: 250px;
+  max-height: 500px;
   background-color: gray;
   margin: 1rem 0;
   overflow: hidden;
