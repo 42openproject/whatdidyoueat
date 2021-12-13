@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
+import Calendar from '../Calendar/Calendar';
 import '../stylesheets/MainCalendar.css';
 
 const MainCalendar = ({ setClickedDay }) => {
@@ -57,23 +58,17 @@ const MainCalendar = ({ setClickedDay }) => {
 
   return (
     <>
-      <Calendar
-        // className="main-calendar"
+      {/* <Calendar
         onChange={setDateVal}
         value={dateVal}
         maxDate={new Date()}
         locale="en-US"
         onClickDay={onClickDay}
-        // formatMonthYear={() =>
-        //   new Intl.DateTimeFormat('ko-KR', {
-        //     year: 'numeric',
-        //     month: 'numeric',
-        //   }).format(dateVal)
-        // }
         formatMonthYear={testFormat}
         tileClassName={setPostedDay}
         onActiveStartDateChange={onActiveStartDateChange}
-      />
+      /> */}
+      <Calendar endDate={new Date()} onClickDate={onClickDay} />
     </>
   );
 };

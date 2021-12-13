@@ -5,7 +5,7 @@ import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
 import PostList from './PostList';
 import PostTitle from './PostTitle';
-import Calendar from './MainCalendar';
+import MainCalendar from './MainCalendar';
 import MainFollow from './MainFollow';
 import MainPost from './MainPost';
 
@@ -47,7 +47,7 @@ function MainPage() {
       <Header />
       <div className="main-container">
         <section className="main-calendar-wrap">
-          <Calendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+          <MainCalendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
         </section>
         <MainFollow />
         <section className="main-posts-container">
