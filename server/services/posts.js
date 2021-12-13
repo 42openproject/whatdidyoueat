@@ -47,25 +47,41 @@ function getPost(req, res, next) {
 function setPost(req, res, next) {
   models.users
     .findOne({
-      where: { nickname: req.params.id },
+      where: { jwt: req.body.googleId },
     })
     .then((user) => {
-      console.log(req),
-        models.posts
-          .create({
-            textContent: req.body.textContent,
-            // tagArr: req.body.tagArr.join(),
-            userId: user.id,
-          })
-          .then(() => {
-            res.status(200).send({
-              success: true,
-              message: "Post uploaded",
+      models.images
+        .create({
+          key: req.file.key,
+          location: req.file.location,
+        })
+        .then(() => {
+          models.images
+            .findOne({
+              where: { key: req.file.key },
+            })
+            .then((image) => {
+              models.posts
+                .create({
+                  textContent: req.body.textContent,
+                  tagArr: req.body.tagArr.join(),
+                  userId: user.id,
+                  imageId: image.id,
+                })
+                .then(() => {
+                  res.status(200).send({
+                    success: true,
+                    message: "Post uploaded",
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
             });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        });
     });
 }
 

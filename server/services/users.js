@@ -84,7 +84,6 @@ function setProfileImg(req, res) {
     })
     .then((user) => {
       if (user.imageId != null) {
-        console.log("user: " + user.imageId);
         models.images
           .findOne({
             where: { id: user.imageId },
