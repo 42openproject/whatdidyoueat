@@ -1,12 +1,15 @@
 import { useState } from 'react';
 
 function CalendarDateItem({
+  resizeNumber,
   date,
   month,
   postedDate = [],
   today,
   clickedDate,
   setClickedDate,
+  startDate = '',
+  endDate = '',
 }) {
   const item = new Date(date);
   const d = date === '' ? '' : new Date(date).getDate();
@@ -17,8 +20,8 @@ function CalendarDateItem({
     const todayM = today.getMonth() + 1;
     const todayD = today.getDate();
     const Y = dd.getFullYear();
-    const M = dd.getMonth() + 1;
-    const D = dd.getDate();
+    const M = resizeNumber(dd.getMonth() + 1);
+    const D = resizeNumber(dd.getDate());
 
     if (todayD === D && todayM === M && todayY === Y) {
       tmp += ' calendar-days__day-item--today';
@@ -33,14 +36,22 @@ function CalendarDateItem({
       tmp += ' calendar-days__day-item--posted';
     if (clickedDate === `${Y}-${M}-${D}`)
       tmp += ' calendar-days__day-item--selected';
+    if (startDate && startDate > `${Y}-${M}-${D}`)
+      tmp += ' calendar-days__day-item--inactive';
+    if (endDate && endDate < `${Y}-${M}-${D}`)
+      tmp += ' calendar-days__day-item--inactive';
     return tmp;
   };
   const itemClass = getItemClass(item);
 
   const onClickDate = e => {
-    setClickedDate(e.target.ariaLabel);
-    // e.target.classList.toggle('calendar-days__day-item--selected');
-    console.log(e.target.ariaLabel);
+    if (
+      !(startDate && startDate > e.target.ariaLabel) &&
+      !(endDate && endDate < e.target.ariaLabel)
+    )
+      setClickedDate(e.target.ariaLabel);
+
+    return console.log(e.target.ariaLabel);
   };
 
   return (

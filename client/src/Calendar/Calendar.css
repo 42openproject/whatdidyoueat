@@ -8,15 +8,21 @@
   justify-content: space-between;
 }
 
-.header-year {
-  font-size: 1rem;
-}
-.header-month {
-  font-size: 2rem;
+.header-year-month {
+  font-size: 1.3rem;
+  margin: 10px 0;
+  margin-left: 10px;
 }
 
-.month-wrap {
+.month-btn-wrap {
   display: flex;
+}
+.prev-month-btn {
+  font-size: 1.2rem;
+}
+.calendar-view-change-btn {
+  font-size: 1.3rem;
+  color: #bfbfe5;
 }
 
 .calendar-week {
@@ -24,6 +30,7 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
   place-items: center;
+  margin: 5px 0;
 }
 
 .week-item {
@@ -61,18 +68,17 @@
 }
 
 .calendar-days__day-item--today {
-  color: red;
   font-weight: 900;
 }
 .calendar-days__day-item--posted {
-  border: 1px solid rgb(174, 105, 238);
+  border: 3px solid #bfbfe5;
 }
 .calendar-days__day-item--selected {
-  border: 2px solid blue;
+  background-color: #bfbfe5;
+}
+.calendar-days__day-item--inactive {
+  color: #b3b3b3;
 }
 .calendar-days__day-item--not-this-month {
   opacity: 40%;
-}
-
-.calendar-view-change-btn {
 }

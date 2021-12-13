@@ -7,7 +7,7 @@ import ProfilePage from './ProfilePageView/ProfilePage';
 import PostPage from './PostPageView/PostPage';
 import AchievePage from './AchievePageView/AchievePage';
 import UserPage from './MainPageView/UserPage';
-import Test from './test/Test';
+import Test from './Calendar/Test';
 
 function App() {
   return (

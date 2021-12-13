@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { GrFormNext, GrFormPrevious, GrFormDown } from 'react-icons/gr';
+import { BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
 import CalendarDateItem from './CalendarDateItem';
 import './Calendar.css';
 
-function Calendar() {
+function Calendar({ onClickDate = '', startDate = '', endDate = '' }) {
   const today = new Date();
   // const today = new Date(`2022-1-1`);
   const [year, setYear] = useState(today.getFullYear());
@@ -13,9 +15,14 @@ function Calendar() {
   const weekName = ['일', '월', '화', '수', '목', '금', '토'];
   const [clickedDate, setClickedDate] = useState('');
 
+  const resizeNumber = number => {
+    if (number < 10) return `0${number}`;
+    return number;
+  };
+
   const getDateArrMonth = (y, m) => {
     const startDay = new Date(`${y}-${m}-1`).getDay();
-    const endDate = new Date(y, m, 0).getDate();
+    const mEndDate = new Date(y, m, 0).getDate();
     const endDay = new Date(y, m, 0).getDay();
     const prevMonthDate = new Date(y, m - 1, 0);
     const nextMonthDate = new Date(y, m, 1);
@@ -26,26 +33,24 @@ function Calendar() {
       const pm = prevMonthDate.getMonth() + 1;
       let pd = prevMonthDate.getDate();
       for (let i = 0; i < startDay; i += 1) {
-        someArr.unshift(`${py}-${pm}-${pd}`);
+        someArr.unshift(`${py}-${resizeNumber(pm)}-${resizeNumber(pd)}`);
         pd -= 1;
       }
     }
-    for (let i = 0; i < endDate; i += 1) {
-      someArr.push(`${y}-${m}-${i + 1}`);
+    for (let i = 0; i < mEndDate; i += 1) {
+      someArr.push(`${y}-${resizeNumber(m)}-${resizeNumber(i + 1)}`);
     }
     if (endDay < 6) {
       const ny = nextMonthDate.getFullYear();
       const nm = nextMonthDate.getMonth() + 1;
       let nd = nextMonthDate.getDate();
       for (let i = 0; i < 6 - endDay; i += 1) {
-        someArr.push(`${ny}-${nm}-${nd}`);
+        someArr.push(`${ny}-${resizeNumber(nm)}-${resizeNumber(nd)}`);
         nd += 1;
       }
     }
     setDateArr(someArr);
     console.log(someArr);
-    // console.log(startDay);
-    // console.log(endDate);
   };
 
   const getDateArrWeek = () => {
@@ -54,7 +59,7 @@ function Calendar() {
     let M = today.getMonth() + 1;
     let Y = today.getFullYear();
     console.log(todayD);
-    someArr.push(`${Y}-${M}-${todayD}`);
+    someArr.push(`${Y}-${resizeNumber(M)}-${resizeNumber(todayD)}`);
     const prevDay = today.getDay();
     let prevD = todayD - 1;
     for (let i = 0; i < prevDay; i += 1) {
@@ -68,7 +73,7 @@ function Calendar() {
           M = 12;
         }
       }
-      someArr.unshift(`${Y}-${M}-${prevD}`);
+      someArr.unshift(`${Y}-${resizeNumber(M)}-${resizeNumber(prevD)}`);
       prevD -= 1;
     }
     let nextD = todayD + 1;
@@ -85,7 +90,7 @@ function Calendar() {
           Y += 1;
         }
       }
-      someArr.push(`${Y}-${M}-${nextD}`);
+      someArr.push(`${Y}-${resizeNumber(M)}-${resizeNumber(nextD)}`);
       nextD += 1;
     }
     setDateArr(someArr);
@@ -95,12 +100,6 @@ function Calendar() {
     if (view === 'month') getDateArrMonth(year, month);
     else if (view === 'week') getDateArrWeek();
   }, [year, month, date, view]);
-
-  // useEffect(() => {
-  //   if (clickedDate) {
-  //     clickedDate.className += ' calendar-days__day-item--selected';
-  //   }
-  // }, [clickedDate]);
 
   const onClickPrevMonth = () => {
     if (month === 1) {
@@ -139,37 +138,50 @@ function Calendar() {
     <>
       <div className="calander-all-container">
         <section className="calendar-header">
-          <div className="header-year">{year}</div>
-          <div className="month-wrap">
-            <button className="prev-month-btn" onClick={onClickPrevMonth}>
-              이전달
-            </button>
-            <div className="header-month">{month}</div>
-            <button className="prev-month-btn" onClick={onClickNextMonth}>
-              다음달
+          <div className="header-year-month">
+            {year}년 {month}월
+          </div>
+          <div className="month-btn-wrap">
+            {view === 'month' && (
+              <>
+                <button className="prev-month-btn" onClick={onClickPrevMonth}>
+                  <GrFormPrevious />
+                </button>
+                <button className="prev-month-btn" onClick={onClickNextMonth}>
+                  <GrFormNext />
+                </button>
+              </>
+            )}
+
+            <button
+              className="calendar-view-change-btn"
+              onClick={onClickViewChange}
+            >
+              {view === 'week' ? (
+                <BsFillCaretDownFill />
+              ) : (
+                <BsFillCaretUpFill />
+              )}
             </button>
           </div>
-          <button
-            className="calendar-view-change-btn"
-            onClick={onClickViewChange}
-          >
-            뷰
-          </button>
         </section>
-        <section className="calendar-week">
-          {weekName.map((w, i) => {
-            return (
-              <div className="week-item" key={i}>
-                {w}
-              </div>
-            );
-          })}
-        </section>
+        {view === 'month' && (
+          <section className="calendar-week">
+            {weekName.map((w, i) => {
+              return (
+                <div className="week-item" key={i}>
+                  {w}
+                </div>
+              );
+            })}
+          </section>
+        )}
         <section className="calendar-days">
           {dateArr.length &&
             dateArr.map((d, i) => {
               return (
                 <CalendarDateItem
+                  resizeNumber={resizeNumber}
                   date={d}
                   key={i}
                   month={month}
@@ -177,6 +189,9 @@ function Calendar() {
                   today={today}
                   clickedDate={clickedDate}
                   setClickedDate={setClickedDate}
+                  startDate={startDate}
+                  endDate={'2021-12-13'}
+                  // endDate={endDate}
                 />
               );
             })}
