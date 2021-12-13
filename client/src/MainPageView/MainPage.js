@@ -46,7 +46,12 @@ function MainPage() {
       <Header />
       <div className="main-container">
         <section className="main-calendar-wrap">
-          <MainCalendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
+          <Calendar
+            clickedDay={clickedDay}
+            setClickedDay={setClickedDay}
+            testFlag={testFlag}
+            userNickname={userNickname}
+          />
         </section>
         <MainFollow />
         <section className="main-posts-container">
@@ -54,7 +59,6 @@ function MainPage() {
             <div className="posts-header__title">
               <PostTitle
                 nick={userNickname}
-                setNick={setUserNickname}
                 googleId={googleId}
                 clickedDay={clickedDay}
                 date={date}
@@ -67,8 +71,7 @@ function MainPage() {
           <MainPost
             clickedDay={clickedDay}
             testFlag={testFlag}
-            setUserNickname={setUserNickname}
-            googleId={googleId}
+            userNickname={userNickname}
           />
         </section>
       </div>

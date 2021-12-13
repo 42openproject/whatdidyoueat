@@ -4,10 +4,12 @@ import axios from 'axios';
 import Calendar from '../Calendar/Calendar';
 import '../stylesheets/MainCalendar.css';
 
-const MainCalendar = ({ setClickedDay }) => {
+
+const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
   // const [dateVal, setDateVal] = useState(new Date());
   const [monthVal, setMonthVal] = useState(new Date());
   const [postedDate, setPostedDate] = useState([]);
+  const [startedDate, setStartedDate] = useState(new Date('2020-01-01'));
 
   // 달력에서 날짜 선택
   const onClickDay = e => {
@@ -17,16 +19,35 @@ const MainCalendar = ({ setClickedDay }) => {
   // test api 포스팅된 날짜 달력에 표시하기
   useEffect(async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
-      );
+      // test api
+      if (testFlag) {
+        const response = await axios.get(
+          `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
+        );
+        // console.log(response.data.data);
+        setPostedDate(response.data.data);
+      } else if (userNickname) {
+        // 본 api
 
-      // console.log(response.data.data);
-      setPostedDate(response.data.data);
+        const y = monthVal.getFullYear();
+        const m =
+          monthVal.getMonth() < 10
+            ? `0${monthVal.getMonth() + 1}`
+            : monthVal.getMonth() + 1;
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/calendar/${userNickname}?year=${y}&month=${m}`,
+        );
+        // console.log(data.data.date);
+        if (data.success) {
+          setPostedDate(data.data.date);
+          setStartedDate(data.data.startedAt);
+          console.log(data);
+        } else console.log('calendar api get false');
+      }
     } catch (e) {
       console.log(e.message);
     }
-  }, [monthVal]); // 월 화살표 눌러서 바꿀때마다 요청받도록
+  }, [monthVal, testFlag, userNickname]); // 월 화살표 눌러서 바꿀때마다 요청받도록
 
   const onChangeActiveMonth = data => {
     setMonthVal(data);
@@ -37,6 +58,7 @@ const MainCalendar = ({ setClickedDay }) => {
       {/* <Calendar
         onChange={setDateVal}
         value={dateVal}
+        minDate={new Date(startedDate)}
         maxDate={new Date()}
         locale="en-US"
         onClickDay={onClickDay}

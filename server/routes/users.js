@@ -91,4 +91,67 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ *  /api/img:
+ *    get:
+ *      tags:
+ *      - get
+ *      description: 이미지 관련 API
+ *
+ *      responses:
+ *       200:
+ *        description: 이미지 불러오기 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Posts'
+ *
+ */
+router.get("/:id/tag", function (req, res) {
+  usersService.getTag(req, res);
+});
+
+/**
+ * @swagger
+ *  /api/img:
+ *    get:
+ *      tags:
+ *      - get
+ *      description: 이미지 관련 API
+ *
+ *      responses:
+ *       200:
+ *        description: 이미지 불러오기 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Posts'
+ *
+ */
+router.post("/:id/tag", function (req, res) {
+  usersService.setTag(req, res);
+});
+
+/**
+ * @swagger
+ *  /api/img:
+ *    get:
+ *      tags:
+ *      - get
+ *      description: 이미지 관련 API
+ *
+ *      responses:
+ *       200:
+ *        description: 이미지 불러오기 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Posts'
+ *
+ */
+router.delete("/:id/tag/:tagId", function (req, res) {
+  usersService.deleteTag(req, res);
+});
+
 module.exports = router;
