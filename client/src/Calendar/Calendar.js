@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
-import { GrFormNext, GrFormPrevious, GrFormDown } from 'react-icons/gr';
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import { BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
 import CalendarDateItem from './CalendarDateItem';
 import './Calendar.css';
 
-function Calendar({ onClickDate = '', startDate = '', endDate = '' }) {
+function Calendar({
+  onClickDate = '',
+  startDate = '',
+  endDate = '',
+  postedDate = '',
+}) {
   const today = new Date();
   // const today = new Date(`2022-1-1`);
   const [year, setYear] = useState(today.getFullYear());
@@ -50,7 +55,7 @@ function Calendar({ onClickDate = '', startDate = '', endDate = '' }) {
       }
     }
     setDateArr(someArr);
-    console.log(someArr);
+    // console.log(someArr);
   };
 
   const getDateArrWeek = () => {
@@ -82,7 +87,6 @@ function Calendar({ onClickDate = '', startDate = '', endDate = '' }) {
     for (let i = 0; i < 6 - prevDay; i += 1) {
       if (lastDate.getDate() < nextD) {
         console.log('in');
-        const nextM = new Date(Y, M + 1, 1);
         M += 1;
         nextD = 1;
         if (M > 12) {
@@ -185,13 +189,14 @@ function Calendar({ onClickDate = '', startDate = '', endDate = '' }) {
                   date={d}
                   key={i}
                   month={month}
-                  postedDate={[1, 3, 5, 7, 9]}
+                  postedDate={postedDate}
                   today={today}
+                  todayDate={date}
                   clickedDate={clickedDate}
                   setClickedDate={setClickedDate}
                   startDate={startDate}
-                  endDate={'2021-12-13'}
-                  // endDate={endDate}
+                  endDate={endDate}
+                  onClickDate={onClickDate}
                 />
               );
             })}

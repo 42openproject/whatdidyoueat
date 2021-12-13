@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 function CalendarDateItem({
   resizeNumber,
   date,
@@ -10,6 +8,7 @@ function CalendarDateItem({
   setClickedDate,
   startDate = '',
   endDate = '',
+  onClickDate = '',
 }) {
   const item = new Date(date);
   const d = date === '' ? '' : new Date(date).getDate();
@@ -31,7 +30,7 @@ function CalendarDateItem({
     if (
       postedDate.length &&
       M === month &&
-      postedDate.some(e => e === dd.getDate())
+      postedDate.some(e => e === `${Y}-${M}-${D}`)
     )
       tmp += ' calendar-days__day-item--posted';
     if (clickedDate === `${Y}-${M}-${D}`)
@@ -44,13 +43,14 @@ function CalendarDateItem({
   };
   const itemClass = getItemClass(item);
 
-  const onClickDate = e => {
+  const onClickDateInCalendar = e => {
     if (
       !(startDate && startDate > e.target.ariaLabel) &&
       !(endDate && endDate < e.target.ariaLabel)
-    )
+    ) {
       setClickedDate(e.target.ariaLabel);
-
+      if (onClickDate) onClickDate(e.target.ariaLabel);
+    }
     return console.log(e.target.ariaLabel);
   };
 
@@ -59,7 +59,7 @@ function CalendarDateItem({
       <div className={itemClass}>
         <abbr
           aria-label={date}
-          onClick={onClickDate}
+          onClick={onClickDateInCalendar}
           className="calendar-days__day-item__abbr"
         >
           {d}
