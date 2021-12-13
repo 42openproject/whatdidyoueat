@@ -3,7 +3,6 @@ import axios from 'axios';
 import Header from '../components/Header';
 import NaviBar from '../components/NaviBar';
 import '../stylesheets/MainPage.css';
-import PostList from './PostList';
 import PostTitle from './PostTitle';
 import MainCalendar from './MainCalendar';
 import MainFollow from './MainFollow';

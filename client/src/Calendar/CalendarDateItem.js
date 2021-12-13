@@ -49,9 +49,9 @@ function CalendarDateItem({
       !(endDate && endDate < e.target.ariaLabel)
     ) {
       setClickedDate(e.target.ariaLabel);
-      if (onClickDate) onClickDate(e.target.ariaLabel);
+      if (onClickDate) onClickDate(new Date(e.target.ariaLabel));
     }
-    return console.log(e.target.ariaLabel);
+    // return console.log(e.target.ariaLabel);
   };
 
   return (

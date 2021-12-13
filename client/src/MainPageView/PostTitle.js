@@ -20,12 +20,10 @@ function PostTitle({ nick, setNick, clickedDay, date, testFlag, googleId }) {
       // title 받아오기
       if (testFlag === true) {
         // test api
-        const { data } = await axios.get(
-          `http://localhost:8000/title?id=${nick}&date=${clickedDay.getDate()}`,
-        );
-        setDefaultTitle(data[0].title);
-        setTitle(defaultTitle);
-        console.log(data[0]);
+        const { data } = await axios.get(`http://localhost:8000/title/dhyeon`);
+        console.log(data.title);
+        setDefaultTitle(data.title);
+        setTitle(data.title);
       } else {
         // 본 api
         const { data } = await axios.get(

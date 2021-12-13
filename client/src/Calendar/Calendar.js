@@ -9,6 +9,7 @@ function Calendar({
   startDate = '',
   endDate = '',
   postedDate = '',
+  onChangeActiveMonth = '',
 }) {
   const today = new Date();
   // const today = new Date(`2022-1-1`);
@@ -18,12 +19,19 @@ function Calendar({
   const [dateArr, setDateArr] = useState([]);
   const [view, setView] = useState('week');
   const weekName = ['일', '월', '화', '수', '목', '금', '토'];
-  const [clickedDate, setClickedDate] = useState('');
 
   const resizeNumber = number => {
     if (number < 10) return `0${number}`;
     return number;
   };
+
+  const makeStringDate = d => {
+    if (!d) return '';
+    return `${d.getFullYear()}-${resizeNumber(d.getMonth() + 1)}-${resizeNumber(
+      d.getDate(),
+    )}`;
+  };
+  const [clickedDate, setClickedDate] = useState(makeStringDate(new Date()));
 
   const getDateArrMonth = (y, m) => {
     const startDay = new Date(`${y}-${m}-1`).getDay();
@@ -63,7 +71,7 @@ function Calendar({
     const todayD = today.getDate();
     let M = today.getMonth() + 1;
     let Y = today.getFullYear();
-    console.log(todayD);
+    // console.log(todayD);
     someArr.push(`${Y}-${resizeNumber(M)}-${resizeNumber(todayD)}`);
     const prevDay = today.getDay();
     let prevD = todayD - 1;
@@ -83,7 +91,7 @@ function Calendar({
     }
     let nextD = todayD + 1;
     const lastDate = new Date(Y, M, 0);
-    console.log(lastDate);
+    // console.log(lastDate);
     for (let i = 0; i < 6 - prevDay; i += 1) {
       if (lastDate.getDate() < nextD) {
         console.log('in');
@@ -103,6 +111,8 @@ function Calendar({
   useEffect(() => {
     if (view === 'month') getDateArrMonth(year, month);
     else if (view === 'week') getDateArrWeek();
+    if (onChangeActiveMonth)
+      onChangeActiveMonth(new Date(`${year}-${month}-${date}`));
   }, [year, month, date, view]);
 
   const onClickPrevMonth = () => {
@@ -112,6 +122,8 @@ function Calendar({
     } else {
       setMonth(month - 1);
     }
+    if (onChangeActiveMonth)
+      onChangeActiveMonth(new Date(`${year}-${month}-${date}`));
   };
   const onClickNextMonth = () => {
     if (month === 12) {
@@ -120,12 +132,15 @@ function Calendar({
     } else {
       setMonth(month + 1);
     }
+    if (onChangeActiveMonth)
+      onChangeActiveMonth(new Date(`${year}-${month}-${date}`));
   };
 
   const goToday = () => {
     setYear(today.getFullYear());
     setMonth(today.getMonth() + 1);
     setDate(today.getDate());
+    if (onChangeActiveMonth) onChangeActiveMonth(today);
   };
 
   const onClickViewChange = () => {
@@ -194,8 +209,8 @@ function Calendar({
                   todayDate={date}
                   clickedDate={clickedDate}
                   setClickedDate={setClickedDate}
-                  startDate={startDate}
-                  endDate={endDate}
+                  startDate={makeStringDate(startDate)}
+                  endDate={makeStringDate(endDate)}
                   onClickDate={onClickDate}
                 />
               );
