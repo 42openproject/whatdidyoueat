@@ -21,17 +21,22 @@ function getPost(req, res, next) {
               },
             ],
           },
+          include: [
+            {
+              model: models.images,
+            },
+          ],
         })
         .then((post) => {
-          var dataObj = post.map((p) => {
-            const createdAt = new Date(p.dataValues.createdAt);
+          var dataObj = post.map((element) => {
+            const createdAt = new Date(element.dataValues.createdAt);
             return {
               createdAt: createdAt.toLocaleString("ko-KR", {
                 timeZone: "Asia/Seoul",
               }),
-              imageUrl: "Not Yet",
-              textContent: p.dataValues.textContent,
-              tagArr: p.dataValues.tagArr,
+              imageUrl: element.dataValues.image.location,
+              textContent: element.dataValues.textContent,
+              tagArr: element.dataValues.tagArr,
             };
           });
 
@@ -44,31 +49,48 @@ function getPost(req, res, next) {
     });
 }
 
-function createPost(req, res, next) {
+function setPost(req, res, next) {
   models.users
     .findOne({
-      where: { nickname: req.params.id },
+      where: { jwt: req.body.googleId },
     })
     .then((user) => {
-      models.posts
+      models.images
         .create({
-          textContent: req.body.textContent,
-          tagArr: req.body.tagArr.join(),
-          userId: user.id,
+          key: req.file.key,
+          location: req.file.location,
         })
         .then(() => {
-          res.status(200).send({
-            success: true,
-            message: "Post uploaded",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+          models.images
+            .findOne({
+              where: { key: req.file.key },
+            })
+            .then((image) => {
+              models.posts
+                .create({
+                  textContent: req.body.textContent,
+                  tagArr: req.body.tagArr,
+                  userId: user.id,
+                  imageId: image.id,
+                })
+                .then(() => {
+                  res.status(200).send({
+                    success: true,
+                    message: "Post uploaded",
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         });
     });
 }
 
 module.exports = {
   getPost,
-  createPost,
+  setPost,
 };

@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const postService = require("../services/posts");
+const multer = require("../services/multer");
 
 /**
  * @swagger
@@ -19,8 +20,8 @@ const postService = require("../services/posts");
  *              $ref: '#/components/schemas/Posts'
  *
  */
-router.get("/:id", function (req, res, next) {
-  postService.getPost(req, res, next);
+router.get("/:id", function (req, res) {
+  postService.getPost(req, res);
 });
 
 /**
@@ -33,15 +34,15 @@ router.get("/:id", function (req, res, next) {
  *
  *      responses:
  *       200:
- *        description: 글 업로드 성공!
+ *        description: 글 업로드 성공!s
  *        content:
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Posts'
  *
  */
-router.post("/:id", function (req, res, next) {
-  postService.createPost(req, res, next);
+router.post("/:id", multer.upload.single("file"), function (req, res) {
+  postService.setPost(req, res);
 });
 
 module.exports = router;
