@@ -21,17 +21,22 @@ function getPost(req, res, next) {
               },
             ],
           },
+          include: [
+            {
+              model: models.images,
+            },
+          ],
         })
         .then((post) => {
-          var dataObj = post.map((p) => {
-            const createdAt = new Date(p.dataValues.createdAt);
+          var dataObj = post.map((element) => {
+            const createdAt = new Date(element.dataValues.createdAt);
             return {
               createdAt: createdAt.toLocaleString("ko-KR", {
                 timeZone: "Asia/Seoul",
               }),
-              imageUrl: "Not Yet",
-              textContent: p.dataValues.textContent,
-              tagArr: p.dataValues.tagArr,
+              imageUrl: element.dataValues.image.location,
+              textContent: element.dataValues.textContent,
+              tagArr: element.dataValues.tagArr,
             };
           });
 
