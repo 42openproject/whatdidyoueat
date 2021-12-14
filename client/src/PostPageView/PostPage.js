@@ -3,50 +3,8 @@ import axios from 'axios';
 import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
 import ImageUploader from './ImageUploader';
-
-const PostUploadTitle = () => {
-  const [defaultTitle, setDefaultTitle] = useState('');
-  const [title, setTitle] = useState(defaultTitle);
-  const [editFlag, setEditFlag] = useState(false);
-
-  const editTitle = () => {
-    if (editFlag === true) {
-      if (title.length < 3 || title.length > 16) {
-        alert('3자 이상 15자 이하로 입력해주세요');
-        return;
-      }
-      setDefaultTitle(title);
-      // axios.patch()
-    }
-    setEditFlag(!editFlag);
-  };
-
-  const onChangeTitle = e => {
-    setTitle(e.target.value);
-  };
-
-  return (
-    <>
-      {editFlag === false ? (
-        <>
-          <span className="title">{title}</span>
-          <FiEdit2 className="title-edit-btn" onClick={editTitle} />
-        </>
-      ) : (
-        <>
-          <input
-            autoFocus
-            className="title-input"
-            type="text"
-            value={title}
-            onChange={onChangeTitle}
-          />
-          <FiCornerDownLeft className="title-edit-btn" onClick={editTitle} />
-        </>
-      )}
-    </>
-  );
-};
+import PostTitle from '../MainPageView/PostTitle';
+import '../stylesheets/PostPage.css';
 
 function PostPage({ history }) {
   // 현재 상태, Setter
@@ -153,30 +111,41 @@ function PostPage({ history }) {
   return (
     <>
       <Header />
-      <PostUploadTitle />
-      <form onSubmit={handleSubmit}>
-        <ImageUploader image={image} setImage={setImage} />
-        <input
-          type="text"
-          name="textContent"
-          value={textContent}
-          onChange={handleContentChange}
-        ></input>
-        <div className="tagWrap">
-          <div className="tagWrapOuter"></div>
-          <input
-            className="tagInput"
-            type="text"
-            name="postTag"
-            value={postTag}
-            onChange={onChangeTag}
-            onKeyUp={onKeyUp}
-          />
-        </div>
-        <button type="submit" disabled={disabled}>
-          UPLOAD
-        </button>
-      </form>
+      {/* <PostUploadTitle /> */}
+      <div className="post-page-container">
+        <section className="post-page-header">
+          <PostTitle nick={userNickname} googleId={googleId} />
+        </section>
+        <section className="post-page__form-wrap">
+          <form onSubmit={handleSubmit}>
+            <ImageUploader image={image} setImage={setImage} />
+            <span>내용</span>
+            <input
+              type="text"
+              name="textContent"
+              value={textContent}
+              onChange={handleContentChange}
+              className="post-page__text-input"
+            ></input>
+            <div className="tagWrap">
+              <span>태그</span>
+              <div className="tagWrapOuter"></div>
+              <input
+                className="tagInput"
+                type="text"
+                name="postTag"
+                value={postTag}
+                onChange={onChangeTag}
+                onKeyUp={onKeyUp}
+                className="post-page__tag-input"
+              />
+            </div>
+            <button type="submit" disabled={disabled}>
+              UPLOAD
+            </button>
+          </form>
+        </section>
+      </div>
     </>
   );
 }

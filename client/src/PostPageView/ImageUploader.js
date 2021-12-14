@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
-const ImagePreview = styled.div`
-  #uploaded-image {
-    height: 350px;
-    width: 350px;
-    object-fit: cover;
-    border-radius: 1rem;
-  }
-`;
 const ImageUploader = ({ setImage }) => {
   const [previewImage, setPreviewImage] = useState('');
   const [isUploaded, setIsUploaded] = useState(false);
@@ -32,12 +23,15 @@ const ImageUploader = ({ setImage }) => {
       <div className="image-upload">
         {!isUploaded ? (
           <>
-            <p>to upload image</p>
+            <label htmlFor="upload-input" className="post-page__image-input">
+              업로드
+            </label>
             <input
               id="upload-input"
               type="file"
               accept=".jpg, .jpeg, .gif, .png"
               onChange={imageChangeHandler}
+              style={{ display: 'none' }}
             />
           </>
         ) : (
