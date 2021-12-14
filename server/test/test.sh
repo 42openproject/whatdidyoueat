@@ -97,4 +97,7 @@
 
 # DELETE /users/:id/tag/:tagid
 # body: googleId, tagId
-curl -X DELETE 'http://localhost:3001/users/mki/tag/10'
+# curl -X DELETE 'http://localhost:3001/users/mki/tag/10'
+
+# GET /users/nickname/check/:id
+curl -X GET 'http://localhost:3001/users/nickname/check/mkif'
