@@ -1,0 +1,24 @@
+.post-page-container {
+  margin: auto;
+  width: 90vw;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px 15px;
+}
+
+.post-page-header {
+  display: flex;
+  font-size: 1.3rem;
+}
+
+.post-page__text-input {
+  border: 1px solid black;
+  width: 100%;
+  height: 100px;
+}
+.post-page__tag-input {
+  border: 1px solid black;
+  width: 100%;
+  height: 1.3rem;
+}
