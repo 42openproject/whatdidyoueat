@@ -34,7 +34,7 @@
 # query parameter: date=YYYY-MM-DD
 # curl -X GET 'http://localhost:3001/titles/dhyeon?date=2021-12-01'
 # curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-09'
-# curl -X GET 'http://api.whatdidyoueat.net:3001/titles/mki?date=2021-12-09'
+# curl -X GET 'http://localhost:3001/titles/mki?date=2021-12-09'
 
 
 # POST /title/:id
@@ -50,7 +50,7 @@
 # curl \
 # -H "Content-Type: application/json" \
 # -d '{"googleId":"104760257817400625505", "title":"mki의 이유식일기2567"}' \
-# -X POST 'http://api.whatdidyoueat.net:3001/titles/mki'
+# -X POST 'http://localhost:3001/titles/mki'
 
 # -------------------------------------------------------------------
 # -----------------------/posts/:id----------------------------------
@@ -58,26 +58,34 @@
 # POST /posts/:id
 # body: googleId, title
 # curl \
-# -H "Content-Type: application/json" \
-# -d '{"googleId":"104760257817400625505", "textContent": "오늘의 아침입니다.", "tagArr": ["밥", "계란"]}' \
+# -F 'file=@/Users/mki/Documents/whatdidyoueat/client/src/asset/kakao_logo.png' \
+# -F 'googleId=104760257817400625505' \
+# -F 'textContent=오늘의 아침입니다.' \
+# -F 'tagArr=밥,계란' \
 # -X POST 'http://localhost:3001/posts/mki'
+
 # curl \
-# -H "Content-Type: application/json" \
-# -d '{"googleId":"104760257817400625505", "textContent": "오늘의 점심입니다.", "tagArr": ["밥", "치킨"]}' \
+# -F 'file=@/Users/mki/Documents/whatdidyoueat/client/src/asset/kakao_logo.png' \
+# -F 'googleId=104760257817400625505' \
+# -F 'textContent=오늘의 점심입니다.' \
+# -F 'tagArr=밥,계란' \
 # -X POST 'http://localhost:3001/posts/mki'
+
 # curl \
-# -H "Content-Type: application/json" \
-# -d '{"googleId":"104760257817400625505", "textContent": "오늘의 저녁입니다.", "tagArr": ["밥", "국수"]}' \
+# -F 'file=@/Users/mki/Documents/whatdidyoueat/client/src/asset/kakao_logo.png' \
+# -F 'googleId=104760257817400625505' \
+# -F 'textContent=오늘의 저녁입니다.' \
+# -F 'tagArr=밥,계란' \
 # -X POST 'http://localhost:3001/posts/mki'
 
 # GET /posts/:id
 # query parameter: date=YYYY-MM-DD
-# curl -X GET 'http://api.whatdidyoueat.net:3001/posts/dhyeon?date=2021-12-06'
+# curl -X GET 'http://localhost:3001/posts/dhyeon?date=2021-12-06'
 
 # -------------------------------------------------------------------
 # -----------------------/calendar/:id/----------------------------------
 # -------------------------------------------------------------------
-# GET /posts/:id
+# GET /calendar/mki?year=2021&month=12
 # query parameter: year=2021, month=12
 # curl -X GET 'http://localhost:3001/calendar/mki?year=2021&month=12'
 
@@ -99,5 +107,8 @@
 # body: googleId, tagId
 # curl -X DELETE 'http://localhost:3001/users/mki/tag/10'
 
+# -------------------------------------------------------------------
+# -----------------------/users/nickname/check/:id------------------------------
+# -------------------------------------------------------------------
 # GET /users/nickname/check/:id
-curl -X GET 'http://localhost:3001/users/nickname/check/mkif'
+# curl -X GET 'http://localhost:3001/users/nickname/check/mkif'
