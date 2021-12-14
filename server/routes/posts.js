@@ -34,7 +34,7 @@ router.get("/:id", function (req, res) {
  *
  *      responses:
  *       200:
- *        description: 글 업로드 성공!s
+ *        description: 글 업로드 성공!
  *        content:
  *          application/json:
  *            schema:

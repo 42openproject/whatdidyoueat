@@ -47,6 +47,27 @@ router.post("/nickname", function (req, res) {
 
 /**
  * @swagger
+ *  /users/nickname/:nickname:
+ *    get:
+ *      tags:
+ *      - users
+ *      description: 닉네임으로 구글 아이디 얻기
+ *
+ *      responses:
+ *       200:
+ *        description: 구글 아이디 게또
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Users'
+ *
+ */
+router.get("/nickname/check/:id", function (req, res) {
+  usersService.checkNickname(req, res);
+});
+
+/**
+ * @swagger
  *  /api/img:
  *    get:
  *      tags:

@@ -36,14 +36,42 @@ function setNickname(req, res) {
       { where: { jwt: req.body.googleId } }
     )
     .then(() => {
-      var temp = {
+      res.send({
         success: true,
         message: "Success",
-      };
-      res.send(temp);
+      });
     })
     .catch((err) => {
       console.error(err);
+    });
+}
+
+function checkNickname(req, res) {
+  models.users
+    .findOne({
+      where: { nickname: req.params.id },
+    })
+    .then((user) => {
+      if (user == null) {
+        res.send({
+          success: true,
+          duplicate: false,
+          message: "You can change it",
+        });
+      } else {
+        res.send({
+          success: true,
+          duplicate: true,
+          message: "Already exist",
+        });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.send({
+        success: false,
+        message: "Failed",
+      });
     });
 }
 
@@ -296,6 +324,7 @@ function deleteTag(req, res) {
 module.exports = {
   setNickname,
   getNickname,
+  checkNickname,
   getProfileImg,
   setProfileImg,
   getTag,
