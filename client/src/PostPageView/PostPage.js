@@ -123,7 +123,6 @@ function PostPage({ history }) {
   return (
     <>
       <Header />
-      {/* <PostUploadTitle /> */}
       <form onSubmit={handleSubmit}>
         <div className="post-page-container">
           <section className="post-page-header">

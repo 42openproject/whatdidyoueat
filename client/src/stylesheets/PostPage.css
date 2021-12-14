@@ -12,9 +12,7 @@
   font-size: 1.3rem;
   margin-bottom: 10px;
 }
-.image-upload {
-  position: relative;
-}
+
 .post-page__text-title,
 .post-page__tag-title {
   display: block;
@@ -35,8 +33,17 @@
 }
 
 .post-page__image-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  height: calc(90vw - 30px);
+  cursor: pointer;
 }
-
+.image-upload {
+  position: relative;
+}
 .image-upload--upload {
   width: 100%;
   display: block;
@@ -62,7 +69,7 @@
   width: 100%;
   display: block;
   height: calc(90vw - 30px);
-  height: 100%;
+  /* height: 100%; */
   object-fit: cover;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
