@@ -101,3 +101,46 @@
   font-size: 1.2rem;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
+
+/* modal */
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.err-modal-close-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.err-modal {
+  position: relative;
+  background-color: white;
+  border: 3px solid #bfbfe5;
+  border-radius: 15px;
+  box-shadow: 3px 3px 6px #999;
+  margin: 30vh auto 0;
+  width: 80vw;
+  max-width: 400px;
+  height: 120px;
+  padding: 20px;
+}
+.err-modal__title {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.err-modal__agree-btn {
+  background-color: #bfbfe5;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: white;
+}

@@ -3,16 +3,18 @@ import axios from 'axios';
 import Header from '../components/Header';
 import ImageUploader from './ImageUploader';
 import PostTitle from '../MainPageView/PostTitle';
+import ErrorModal from './ErrorModal';
 import '../stylesheets/PostPage.css';
 
 function PostPage({ history }) {
   // 현재 상태, Setter
   const [image, setImage] = useState('');
-  const [textContent, setPostContent] = useState('');
+  const [textContent, setTextContent] = useState('');
   const [postTag, setPostTag] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [tagArr, setTagArr] = useState([]);
   const [userNickname, setUserNickname] = useState('');
+  const [errModalFlag, setErrModalFlag] = useState(false);
 
   const googleId = localStorage.getItem('googleId');
 
@@ -30,21 +32,21 @@ function PostPage({ history }) {
     }
   }, []);
 
-  // document.addEventListener(
-  //   'keydown',
-  //   event => {
-  //     if (event.keyCode === 13) {
-  //       event.preventDefault();
-  //     }
-  //   },
-  //   true,
-  // );
+  document.addEventListener(
+    'keydown',
+    event => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+    },
+    true,
+  );
 
   const handleContentChange = ({ target: { value } }) => {
     if (value.length > 100) {
       alert('글자수 초과!!');
     } else {
-      setPostContent(value);
+      setTextContent(value);
     }
   };
   const onChangeTag = ({ target: { value } }) => {
@@ -82,14 +84,24 @@ function PostPage({ history }) {
     [postTag, tagArr],
   );
 
+  const onToggleErrorModal = () => {
+    setErrModalFlag(!errModalFlag);
+  };
+
   const handleSubmit = async e => {
     if (userNickname) {
       try {
+        if (!image) {
+          // console.log('click');
+          onToggleErrorModal();
+          return;
+        }
         setDisabled(true);
         e.preventDefault();
         await new Promise(r => setTimeout(r, 1000));
         const formData = new FormData();
         formData.append('file', image);
+        // setTextContent();
         formData.append('textContent', textContent);
         formData.append('tagArr', tagArr);
         formData.append('googleId', googleId);
@@ -107,6 +119,7 @@ function PostPage({ history }) {
       }
     }
   };
+
   return (
     <>
       <Header />
@@ -146,10 +159,12 @@ function PostPage({ history }) {
           type="submit"
           disabled={disabled}
           className="post-page--submit-btn"
+          onClick={handleSubmit}
         >
           UPLOAD
         </button>
       </form>
+      {errModalFlag && <ErrorModal onToggleErrorModal={onToggleErrorModal} />}
     </>
   );
 }
