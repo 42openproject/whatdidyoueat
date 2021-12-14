@@ -68,6 +68,7 @@ function checkNickname(req, res) {
           },
           message: "Already exist",
         });
+      }
     })
     .catch((err) => {
       console.error(err);
