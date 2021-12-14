@@ -10,15 +10,94 @@
 .post-page-header {
   display: flex;
   font-size: 1.3rem;
+  margin-bottom: 10px;
 }
-
+.image-upload {
+  position: relative;
+}
+.post-page__text-title,
+.post-page__tag-title {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 0.8rem;
+  color: #969696;
+}
 .post-page__text-input {
-  border: 1px solid black;
+  border: 1px solid #707070;
   width: 100%;
   height: 100px;
 }
+
 .post-page__tag-input {
-  border: 1px solid black;
+  border: 1px solid #707070;
   width: 100%;
-  height: 1.3rem;
+  height: 1.5rem;
+}
+
+.post-page__image-input {
+}
+
+.image-upload--upload {
+  width: 100%;
+  display: block;
+  height: calc(90vw - 30px);
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  padding-top: 100%;
+}
+.image-upload--upload__thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 100%;
+  height: auto;
+  -webkit-transform: translate(50%, 50%);
+  -ms-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
+}
+.image-upload--upload__img {
+  width: 100%;
+  display: block;
+  height: calc(90vw - 30px);
+  height: 100%;
+  object-fit: cover;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.upload-input__icon {
+  color: white;
+  font-size: 40vw;
+  text-align: center;
+  display: block;
+  margin: 25% 30% 0 30%;
+}
+.image-upload--overlay {
+  width: 100%;
+  display: block;
+  height: calc(90vw - 30px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  opacity: 0.3;
+  transition: 0.2s;
+}
+.image-upload--overlay:hover {
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.post-page--submit-btn {
+  display: block;
+  margin: 20px auto;
+  width: 35vw;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #bfbfe5;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }

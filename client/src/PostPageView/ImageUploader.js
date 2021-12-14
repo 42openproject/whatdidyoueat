@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BiImageAdd } from 'react-icons/bi';
 
 const ImageUploader = ({ setImage }) => {
   const [previewImage, setPreviewImage] = useState('');
@@ -21,29 +22,31 @@ const ImageUploader = ({ setImage }) => {
   return (
     <>
       <div className="image-upload">
-        {!isUploaded ? (
-          <>
-            <label htmlFor="upload-input" className="post-page__image-input">
-              업로드
-            </label>
-            <input
-              id="upload-input"
-              type="file"
-              accept=".jpg, .jpeg, .gif, .png"
-              onChange={imageChangeHandler}
-              style={{ display: 'none' }}
-            />
-          </>
-        ) : (
-          <ImagePreview>
-            <img
-              id="uploaded-image"
-              src={previewImage}
-              draggable={false}
-              alt="uploaded-img"
-            />
-          </ImagePreview>
-        )}
+        <div className="image-upload--upload">
+          <div className="image-upload--upload__thumbnail">
+            {previewImage && (
+              <img
+                id="uploaded-image"
+                src={previewImage}
+                draggable={false}
+                alt="uploaded-img"
+                className="image-upload--upload__img"
+              />
+            )}
+          </div>
+        </div>
+        <div className="image-upload--overlay">
+          <label htmlFor="upload-input" className="post-page__image-input">
+            <BiImageAdd className="upload-input__icon" />
+          </label>
+          <input
+            id="upload-input"
+            type="file"
+            accept=".jpg, .jpeg, .gif, .png"
+            onChange={imageChangeHandler}
+            style={{ display: 'none' }}
+          />
+        </div>
       </div>
     </>
   );

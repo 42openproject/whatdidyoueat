@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
-import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
 import ImageUploader from './ImageUploader';
 import PostTitle from '../MainPageView/PostTitle';
@@ -31,18 +30,18 @@ function PostPage({ history }) {
     }
   }, []);
 
-  document.addEventListener(
-    'keydown',
-    event => {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-      }
-    },
-    true,
-  );
+  // document.addEventListener(
+  //   'keydown',
+  //   event => {
+  //     if (event.keyCode === 13) {
+  //       event.preventDefault();
+  //     }
+  //   },
+  //   true,
+  // );
 
   const handleContentChange = ({ target: { value } }) => {
-    if (value.length > 50) {
+    if (value.length > 100) {
       alert('글자수 초과!!');
     } else {
       setPostContent(value);
@@ -112,23 +111,24 @@ function PostPage({ history }) {
     <>
       <Header />
       {/* <PostUploadTitle /> */}
-      <div className="post-page-container">
-        <section className="post-page-header">
-          <PostTitle nick={userNickname} googleId={googleId} />
-        </section>
-        <section className="post-page__form-wrap">
-          <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className="post-page-container">
+          <section className="post-page-header">
+            <PostTitle nick={userNickname} googleId={googleId} />
+          </section>
+          <section className="post-page__form-wrap">
             <ImageUploader image={image} setImage={setImage} />
-            <span>내용</span>
-            <input
-              type="text"
+            <span className="post-page__text-title">내용</span>
+            <textarea
               name="textContent"
               value={textContent}
+              cols="40"
+              rows="5"
               onChange={handleContentChange}
               className="post-page__text-input"
-            ></input>
+            ></textarea>
             <div className="tagWrap">
-              <span>태그</span>
+              <span className="post-page__tag-title">태그</span>
               <div className="tagWrapOuter"></div>
               <input
                 className="tagInput"
@@ -140,12 +140,16 @@ function PostPage({ history }) {
                 className="post-page__tag-input"
               />
             </div>
-            <button type="submit" disabled={disabled}>
-              UPLOAD
-            </button>
-          </form>
-        </section>
-      </div>
+          </section>
+        </div>
+        <button
+          type="submit"
+          disabled={disabled}
+          className="post-page--submit-btn"
+        >
+          UPLOAD
+        </button>
+      </form>
     </>
   );
 }
