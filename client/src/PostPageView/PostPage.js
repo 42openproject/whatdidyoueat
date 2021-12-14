@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import { FiCornerDownLeft, FiEdit2 } from 'react-icons/fi';
 import Header from '../components/Header';
@@ -55,8 +55,23 @@ function PostPage({ history }) {
   const [postTag, setPostTag] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [tagArr, setTagArr] = useState([]);
+  const [userNickname, setUserNickname] = useState('');
 
   const googleId = localStorage.getItem('googleId');
+
+  useEffect(async () => {
+    // 닉네임 받아오기
+    // console.log(date);
+    try {
+      const { data: nickData } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/nickname?googleId=${googleId}`,
+      );
+      if (nickData.success) setUserNickname(nickData.data.nickname);
+      else console.log('nick api 요청 false');
+    } catch (e) {
+      console.log(e.message);
+    }
+  }, []);
 
   document.addEventListener(
     'keydown',
@@ -111,21 +126,29 @@ function PostPage({ history }) {
   );
 
   const handleSubmit = async e => {
-    setDisabled(true);
-    e.preventDefault();
-    await new Promise(r => setTimeout(r, 1000));
-    const formData = new FormData();
-    formData.append('file', image);
-    formData.append('textContent', textContent);
-    formData.append('tagArr', tagArr);
-    formData.append('googleId', googleId);
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/posts/mki`,
-      formData,
-    );
-    console.log(res);
-    setDisabled(false);
-    history.push('/main');
+    if (userNickname) {
+      try {
+        setDisabled(true);
+        e.preventDefault();
+        await new Promise(r => setTimeout(r, 1000));
+        const formData = new FormData();
+        formData.append('file', image);
+        formData.append('textContent', textContent);
+        formData.append('tagArr', tagArr);
+        formData.append('googleId', googleId);
+        const res = await axios.post(
+          `${process.env.REACT_APP_API_URL}/posts/${userNickname}`,
+          formData,
+        );
+        if (res.data.success) {
+          console.log(res);
+          setDisabled(false);
+          history.push('/main');
+        } else console.log('post submit false');
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
   };
   return (
     <>
