@@ -1,6 +1,6 @@
 const models = require("../models");
 
-function createUser(req, res, next) {
+function createUser(req, res) {
   models.users
     .create({
       jwt: req.body.googleId,
@@ -20,14 +20,14 @@ function createUser(req, res, next) {
     });
 }
 
-function isSigned(req, res, next) {
+function isSigned(req, res) {
   models.users
     .findOne({
       where: { jwt: req.body.googleId },
     })
     .then((user) => {
       if (user == null) {
-        createUser(req, res, next);
+        createUser(req, res);
       } else {
         if (user.nickname == null) {
           res.status(200).send({
@@ -63,7 +63,7 @@ function loginGoogle(req, res) {
       message: "missing googleId or email in POST body",
     });
   } else {
-    loginService.isSigned(req, res, next);
+    isSigned(req, res);
   }
 }
 
