@@ -1,6 +1,6 @@
 const models = require("../models");
 
-function loginGoogle(req, res, next) {
+function createUser(req, res, next) {
   models.users
     .create({
       jwt: req.body.googleId,
@@ -12,7 +12,7 @@ function loginGoogle(req, res, next) {
         data: {
           isSigned: false,
         },
-        message: "You can sign in",
+        message: "Welcome newcomer",
       });
     })
     .catch((err) => {
@@ -27,15 +27,25 @@ function isSigned(req, res, next) {
     })
     .then((user) => {
       if (user == null) {
-        loginGoogle(req, res, next);
+        createUser(req, res, next);
       } else {
-        res.status(200).send({
-          success: true,
-          data: {
-            isSigned: true,
-          },
-          message: "It's already signed in",
-        });
+        if (user.nickname == null) {
+          res.status(200).send({
+            success: true,
+            data: {
+              isSigned: false,
+            },
+            message: "You can set nickname",
+          });
+        } else {
+          res.status(200).send({
+            success: true,
+            data: {
+              isSigned: true,
+            },
+            message: "It's already signed in",
+          });
+        }
       }
     })
     .catch((err) => {
@@ -43,7 +53,22 @@ function isSigned(req, res, next) {
     });
 }
 
+function loginGoogle(req, res) {
+  if (req.body.googleId == undefined || req.body.email == undefined) {
+    res.status(400).send({
+      success: false,
+      data: {
+        isSigned: false,
+      },
+      message: "missing googleId or email in POST body",
+    });
+  } else {
+    loginService.isSigned(req, res, next);
+  }
+}
+
 module.exports = {
-  isSigned,
   loginGoogle,
+  isSigned,
+  createUser,
 };

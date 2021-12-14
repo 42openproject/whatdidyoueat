@@ -19,18 +19,8 @@ const loginService = require("../services/login");
  *              $ref: '#/components/schemas/Posts'
  *
  */
-router.post("/google", function (req, res, next) {
-  if (req.body.googleId == undefined || req.body.email == undefined) {
-    res.status(400).send({
-      success: false,
-      data: {
-        isSigned: false,
-      },
-      message: "missing googleId or email in POST body",
-    });
-  } else {
-    loginService.isSigned(req, res, next);
-  }
+router.post("/google", function (req, res) {
+  loginService.loginGoogle(req, res);
 });
 
 module.exports = router;
