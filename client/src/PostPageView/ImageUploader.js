@@ -9,7 +9,7 @@ const ImagePreview = styled.div`
     border-radius: 1rem;
   }
 `;
-const ImageUploader = ({ image, setImage }) => {
+const ImageUploader = ({ setImage }) => {
   const [previewImage, setPreviewImage] = useState('');
   const [isUploaded, setIsUploaded] = useState(false);
 

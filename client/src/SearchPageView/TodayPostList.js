@@ -25,8 +25,8 @@ function TodayPostList({
           <div className="post-box__content__img">
             <img
               src={imgUrl}
+              alt="food-image"
               className="post-box__content__img__img"
-              alt="image"
             />
           </div>
           <p className="post-box__content__date">{createdAt}</p>
