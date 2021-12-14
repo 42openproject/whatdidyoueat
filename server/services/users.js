@@ -55,16 +55,19 @@ function checkNickname(req, res) {
       if (user == null) {
         res.send({
           success: true,
-          duplicate: false,
+          data: {
+            duplicate: false,
+          },
           message: "You can change it",
         });
       } else {
         res.send({
           success: true,
-          duplicate: true,
+          data: {
+            duplicate: true,
+          },
           message: "Already exist",
         });
-      }
     })
     .catch((err) => {
       console.error(err);
