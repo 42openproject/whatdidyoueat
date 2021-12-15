@@ -40,7 +40,7 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
         if (data.success) {
           setPostedDate(data.data.date);
           setStartedDate(data.data.startedAt);
-          console.log(data);
+          // console.log(data);
         } else console.log('calendar api get false');
       }
     } catch (e) {
