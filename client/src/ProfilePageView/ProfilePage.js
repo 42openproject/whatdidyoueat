@@ -34,7 +34,11 @@ function ProfilePage() {
     <>
       <Header />
       <div className="profile-container">
-        <UserProfile userNickname={userNickname} />
+        <UserProfile
+          userNickname={userNickname}
+          googleId={googleId}
+          setUserNickname={setUserNickname}
+        />
         <UserFollow />
         <UserTags
           userNickname={userNickname}

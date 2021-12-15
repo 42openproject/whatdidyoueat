@@ -3,13 +3,13 @@ import { MdModeEdit } from 'react-icons/md';
 import EditNickModal from './EditNickModal';
 import UserProfileImage from './UserProfileImage';
 
-function UserProfile({ userNickname }) {
+function UserProfile({ userNickname, googleId, setUserNickname }) {
   const [editNickModal, setEditNickModal] = useState(false);
 
   const editUserNickname = () => {
-    console.log(`edit btn click!!!`);
+    // console.log(`edit btn click!!!`);
     setEditNickModal(!editNickModal);
-    console.log(editNickModal);
+    // console.log(editNickModal);
   };
 
   return (
@@ -23,7 +23,13 @@ function UserProfile({ userNickname }) {
           </div>
         </div>
       </section>
-      {editNickModal && <EditNickModal editUserNickname={editUserNickname} />}
+      {editNickModal && (
+        <EditNickModal
+          editUserNickname={editUserNickname}
+          googleId={googleId}
+          setUserNickname={setUserNickname}
+        />
+      )}
     </>
   );
 }
