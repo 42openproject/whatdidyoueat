@@ -48,6 +48,7 @@
   width: 100%;
   display: block;
   height: calc(90vw - 30px);
+  max-height: 500px;
   background-color: rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
@@ -69,6 +70,7 @@
   width: 100%;
   display: block;
   height: calc(90vw - 30px);
+  max-height: 500px;
   /* height: 100%; */
   object-fit: cover;
   -webkit-transform: translate(-50%, -50%);
@@ -77,15 +79,17 @@
 }
 .upload-input__icon {
   color: white;
-  font-size: 40vw;
+  font-size: 30vw;
   text-align: center;
   display: block;
-  margin: 25% 30% 0 30%;
+  margin: auto;
+  margin-top: 30%;
 }
 .image-upload--overlay {
   width: 100%;
   display: block;
   height: calc(90vw - 30px);
+
   position: absolute;
   top: 0;
   bottom: 0;
@@ -107,6 +111,17 @@
   color: white;
   font-size: 1.2rem;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+.post-page--submit-btn--disabled {
+  display: block;
+  margin: 20px auto;
+  width: 35vw;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #c9c9c9;
+  color: white;
+  font-size: 1.2rem;
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); */
 }
 
 /* modal */
