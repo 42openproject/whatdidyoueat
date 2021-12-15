@@ -2,11 +2,21 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FiEdit2, FiCornerDownLeft } from 'react-icons/fi';
 
-function PostTitle({ nick, clickedDay, date, testFlag, googleId }) {
+function PostTitle({ nick, clickedDay = '', testFlag = 'false', googleId }) {
   const [defaultTitle, setDefaultTitle] = useState('');
   const [title, setTitle] = useState(defaultTitle);
   const [editFlag, setEditFlag] = useState(false);
   // const [editBtn, setEditBtn] = useState(false); // 나중에 본인페이지, 오늘날짜에만 버튼 나오도록 설정
+
+  const getDate = () => {
+    let tmp;
+    if (!clickedDay) tmp = new Date();
+    else tmp = clickedDay;
+    return `${tmp.getFullYear()}-${
+      tmp.getMonth() + 1 < 10 ? `0${tmp.getMonth() + 1}` : tmp.getMonth() + 1
+    }-${tmp.getDate() < 10 ? `0${tmp.getDate()}` : tmp.getDate()}`;
+  };
+  const date = getDate();
 
   useEffect(async () => {
     try {
@@ -33,7 +43,6 @@ function PostTitle({ nick, clickedDay, date, testFlag, googleId }) {
       setDefaultTitle(`${nick}의 이유식일기`);
       setTitle(defaultTitle);
     }
-    // 맨 처음엔 data를 못받아오고, 다시 리로드되어서 받아오는데 본 요청때는 체크해봐야할듯 함
   }, [nick, clickedDay, editFlag, defaultTitle]);
 
   const editTitle = async () => {

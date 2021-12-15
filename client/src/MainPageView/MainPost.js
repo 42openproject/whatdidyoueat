@@ -65,6 +65,7 @@ function MainPost({ clickedDay, userNickname, testFlag }) {
                 date={p.createdAt}
                 textContent={p.textContent}
                 tagArr={p.tagArr}
+                imageUrl={p.imageUrl}
               />
             ))
         )}
