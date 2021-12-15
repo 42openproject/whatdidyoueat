@@ -1,9 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
 import ImageUploader from './ImageUploader';
 import PostTitle from '../MainPageView/PostTitle';
-import ErrorModal from './ErrorModal';
 import '../stylesheets/PostPage.css';
 
 function PostPage({ history }) {
@@ -14,8 +13,7 @@ function PostPage({ history }) {
   const [disabled, setDisabled] = useState(false);
   const [tagArr, setTagArr] = useState([]);
   const [userNickname, setUserNickname] = useState('');
-  const [errModalFlag, setErrModalFlag] = useState(false);
-
+  const tagInputRef = useRef();
   const googleId = localStorage.getItem('googleId');
 
   useEffect(async () => {
@@ -59,41 +57,36 @@ function PostPage({ history }) {
 
   const onKeyUp = useCallback(
     e => {
-      if (process.browser) {
-        // 요소 불러오기, 만들기
-        const $TagWrapOuter = document.querySelector('.tagWrapOuter');
-        const $TagWrapInner = document.createElement('div');
-        $TagWrapInner.className = 'tagWrapInner';
+      // if (process.browser) {
+      // 요소 불러오기, 만들기
+      const $TagWrapOuter = document.querySelector('.tagWrapOuter');
+      const $TagWrapInner = document.createElement('div');
+      $TagWrapInner.className = 'tagWrapInner';
 
-        // 태그 클릭 이벤트
-        $TagWrapInner.addEventListener('click', () => {
-          $TagWrapOuter?.removeChild($TagWrapInner);
-          setTagArr(tagArr.filter(tag => tag));
-        });
+      // 태그 클릭 이벤트
+      $TagWrapInner.addEventListener('click', () => {
+        $TagWrapOuter?.removeChild($TagWrapInner);
+        setTagArr(tagArr.filter(tag => tag));
+      });
 
-        // enter 입력 시
-        if (e.keyCode === 13 && e.target.value.trim() !== '') {
-          console.log('Enter key!!!', e.target.value);
-          $TagWrapInner.innerHTML = `#${e.target.value}`;
-          $TagWrapOuter?.appendChild($TagWrapInner);
-          setTagArr([...tagArr, postTag]);
-          setPostTag('');
-        }
+      // enter 입력 시
+      if (e.keyCode === 32 && e.target.value.trim() !== '') {
+        e.preventDefault();
+        console.log('Enter key!!!', e.target.value);
+        $TagWrapInner.innerHTML = `#${e.target.value}`;
+        $TagWrapOuter?.appendChild($TagWrapInner);
+        setTagArr([...tagArr, postTag]);
+        setPostTag('');
       }
+      // }
     },
     [postTag, tagArr],
   );
-
-  const onToggleErrorModal = () => {
-    setErrModalFlag(!errModalFlag);
-  };
 
   const handleSubmit = async e => {
     if (userNickname) {
       try {
         if (!image) {
-          // console.log('click');
-          onToggleErrorModal();
           return;
         }
         setDisabled(true);
@@ -141,29 +134,42 @@ function PostPage({ history }) {
             ></textarea>
             <div className="tagWrap">
               <span className="post-page__tag-title">태그</span>
-              <div className="tagWrapOuter"></div>
-              <input
-                className="tagInput"
-                type="text"
-                name="postTag"
-                value={postTag}
-                onChange={onChangeTag}
-                onKeyUp={onKeyUp}
-                className="post-page__tag-input"
-              />
+              <div className="post-page__tags-container">
+                <div className="tagWrapOuter"></div>
+                <input
+                  className="tagInput"
+                  type="text"
+                  name="postTag"
+                  value={postTag}
+                  onChange={onChangeTag}
+                  onKeyUp={onKeyUp}
+                  className="post-page__tag-input"
+                  ref={tagInputRef}
+                />
+              </div>
             </div>
           </section>
         </div>
-        <button
-          type="submit"
-          disabled={disabled}
-          className="post-page--submit-btn"
-          onClick={handleSubmit}
-        >
-          UPLOAD
-        </button>
+        {image ? (
+          <button
+            type="submit"
+            disabled={disabled}
+            className="post-page--submit-btn"
+            onClick={handleSubmit}
+          >
+            UPLOAD
+          </button>
+        ) : (
+          <button
+            type="submit"
+            disabled={true}
+            className="post-page--submit-btn--disabled"
+            // onClick={handleSubmit}
+          >
+            UPLOAD
+          </button>
+        )}
       </form>
-      {errModalFlag && <ErrorModal onToggleErrorModal={onToggleErrorModal} />}
     </>
   );
 }
