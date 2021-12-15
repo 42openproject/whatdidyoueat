@@ -5,8 +5,10 @@ import axios from 'axios';
 function SetNicknamePage({ history }) {
   const [nickname, setNickname] = useState('');
   const nickRef = useRef();
+  const errMsgRef = useRef();
 
   const onChangeNickname = e => {
+    if (errMsgRef.current.innerText) errMsgRef.current.innerText = '';
     setNickname(e.target.value);
   };
 
@@ -17,6 +19,21 @@ function SetNicknamePage({ history }) {
       alert('2자 이상 입력해주세요');
     else {
       try {
+        // nick check
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/nickname/check/${nickInput}`,
+        );
+        console.log(data);
+        if (data.success) {
+          if (data.data.duplicate) {
+            errMsgRef.current.innerText = '이미 있는 닉네임입니다';
+            return;
+          }
+        } else {
+          console.log('nick 중복 체크 api false');
+          return;
+        }
+        // nick post
         const googleId = localStorage.getItem('googleId');
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/users/nickname`,
@@ -26,7 +43,7 @@ function SetNicknamePage({ history }) {
           },
         );
         if (response.data.success) {
-          console.log(response.data);
+          // console.log(response.data);
           const { data: titleData } = await axios.post(
             `${process.env.REACT_APP_API_URL}/titles/${nickInput}`,
             {
@@ -34,7 +51,7 @@ function SetNicknamePage({ history }) {
               title: `${nickInput}의 최초 이유식일기`,
             },
           );
-          console.log(titleData);
+          // console.log(titleData);
           if (titleData.success) history.push('/main');
           else console.log('title post false');
         } else {
@@ -61,6 +78,7 @@ function SetNicknamePage({ history }) {
             onChange={onChangeNickname}
             ref={nickRef}
           ></input>
+          <span className="container__box__err-msg" ref={errMsgRef}></span>
           <button className="container__box__btn" onClick={onSaveNick}>
             확인
           </button>
