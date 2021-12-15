@@ -134,17 +134,19 @@ function PostPage({ history }) {
             ></textarea>
             <div className="tagWrap">
               <span className="post-page__tag-title">태그</span>
-              <div className="tagWrapOuter"></div>
-              <input
-                className="tagInput"
-                type="text"
-                name="postTag"
-                value={postTag}
-                onChange={onChangeTag}
-                onKeyUp={onKeyUp}
-                className="post-page__tag-input"
-                ref={tagInputRef}
-              />
+              <div className="post-page__tags-container">
+                <div className="tagWrapOuter"></div>
+                <input
+                  className="tagInput"
+                  type="text"
+                  name="postTag"
+                  value={postTag}
+                  onChange={onChangeTag}
+                  onKeyUp={onKeyUp}
+                  className="post-page__tag-input"
+                  ref={tagInputRef}
+                />
+              </div>
             </div>
           </section>
         </div>
