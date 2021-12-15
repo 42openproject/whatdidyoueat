@@ -96,11 +96,28 @@
   background-color: gray;
   margin: 1rem 0;
   overflow: hidden;
+  position: relative;
+  padding-top: 100%;
+}
+.post-box__content__img__thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 100%;
+  height: auto;
+  -webkit-transform: translate(50%, 50%);
+  -ms-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
 }
 .post-box__content__img__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .post-box__content__date {

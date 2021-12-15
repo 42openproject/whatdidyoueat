@@ -23,11 +23,13 @@ function TodayPostList({
         <hr size="1" className="post-box-header-hr" />
         <div className="post-box__content">
           <div className="post-box__content__img">
-            <img
-              src={imgUrl}
-              className="post-box__content__img__img"
-              alt="image"
-            />
+            <div className="post-box__content__img__thumbnail">
+              <img
+                src={imgUrl}
+                alt="food-image"
+                className="post-box__content__img__img"
+              />
+            </div>
           </div>
           <p className="post-box__content__date">{createdAt}</p>
           <p className="post-box__content__text">{textContent}</p>

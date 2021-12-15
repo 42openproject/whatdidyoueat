@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import { BiImageAdd } from 'react-icons/bi';
 
-const ImagePreview = styled.div`
-  #uploaded-image {
-    height: 350px;
-    width: 350px;
-    object-fit: cover;
-    border-radius: 1rem;
-  }
-`;
-const ImageUploader = ({ image, setImage }) => {
+const ImageUploader = ({ setImage }) => {
   const [previewImage, setPreviewImage] = useState('');
   const [isUploaded, setIsUploaded] = useState(false);
 
@@ -30,26 +22,31 @@ const ImageUploader = ({ image, setImage }) => {
   return (
     <>
       <div className="image-upload">
-        {!isUploaded ? (
-          <>
-            <p>to upload image</p>
-            <input
-              id="upload-input"
-              type="file"
-              accept=".jpg, .jpeg, .gif, .png"
-              onChange={imageChangeHandler}
-            />
-          </>
-        ) : (
-          <ImagePreview>
-            <img
-              id="uploaded-image"
-              src={previewImage}
-              draggable={false}
-              alt="uploaded-img"
-            />
-          </ImagePreview>
-        )}
+        <div className="image-upload--upload">
+          <div className="image-upload--upload__thumbnail">
+            {previewImage && (
+              <img
+                id="uploaded-image"
+                src={previewImage}
+                draggable={false}
+                alt="uploaded-img"
+                className="image-upload--upload__img"
+              />
+            )}
+          </div>
+        </div>
+        <div className="image-upload--overlay">
+          <label htmlFor="upload-input" className="post-page__image-input">
+            <BiImageAdd className="upload-input__icon" />
+          </label>
+          <input
+            id="upload-input"
+            type="file"
+            accept=".jpg, .jpeg, .gif, .png"
+            onChange={imageChangeHandler}
+            style={{ display: 'none' }}
+          />
+        </div>
       </div>
     </>
   );
