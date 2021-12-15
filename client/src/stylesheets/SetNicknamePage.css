@@ -14,13 +14,21 @@
   color: #828282;
 }
 .container__box__input {
-  width: 80%;
+  width: 70%;
   height: 2.2rem;
   font-size: 1.7rem;
   text-align: center;
   line-height: 1.4rem;
   margin: 10px;
+  border-bottom: 1px solid black;
 }
+
+.container__box__err-msg {
+  display: block;
+  height: 1.2rem;
+  color: rgb(255, 137, 137);
+}
+
 .container__box__btn {
   background-color: #bfbfe5;
   border: none;
