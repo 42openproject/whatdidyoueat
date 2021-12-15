@@ -4,37 +4,66 @@ import axios from 'axios';
 import OnToggleTagModal from './OnToggleTagModal';
 import TagList from './TagList';
 
-function UserTags() {
+function UserTags({ userNickname, googleId, testFlag }) {
   const [tagArr, setTagArr] = useState([]);
   const [tagModal, setTagModal] = useState(false);
+  const [tagFlag, setTagFlag] = useState(new Date());
   const tagMsgRef = useRef();
 
-  useEffect(async () => {
-    // 본 api 추가
-
-    // test api
-    const { data } = await axios.get(`http://localhost:8000/tags/dhyeon`);
-    // console.log(data);
-    if (data.tagArr.length !== 0) {
-      setTagArr(data.tagArr);
+  const updateTags = async newTags => {
+    try {
+      // test api
+      if (testFlag) {
+        await axios.patch(`http://localhost:8000/tags/dhyeon`, {
+          tagArr: newTags,
+        });
+      } else if (userNickname) {
+        // 본 api
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users/${userNickname}/tag`,
+          {
+            googleId,
+            tag: newTags,
+          },
+        );
+        if (data.success) setTagFlag(new Date());
+        else console.log('tag api post 요청 false');
+        // console.log(data);
+      }
+    } catch (e) {
+      console.log(e.message);
     }
-  }, []);
-
-  const updateTags = newTags => {
-    // 본 api 추가 필요
-
-    // test api
-    axios.patch(`http://localhost:8000/tags/dhyeon`, { tagArr: newTags });
   };
 
+  useEffect(async () => {
+    try {
+      if (testFlag) {
+        // test api
+        const { data } = await axios.get(`http://localhost:8000/tags/dhyeon`);
+        // console.log(data);
+        if (data.tagArr.length !== 0) {
+          setTagArr(data.tagArr);
+        }
+      } else if (userNickname) {
+        // 본 api 추가
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/${userNickname}/tag`,
+        );
+        // console.log(data);
+        if (data.success) {
+          setTagArr(data.data.tagArr);
+        } else console.log('tag api get 요청 false');
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  }, [userNickname, testFlag, tagFlag]);
+
   const onToggleTagModal = useCallback(() => {
-    // console.log('add tag click!!');
     setTagModal(!tagModal);
   });
 
   const onCreateNewTag = useCallback(tagName => {
-    // console.log('create');
-    // console.log(tagName);
     if (tagName.length <= 0) {
       onToggleTagModal();
     } else if (tagName.length >= 10) {
@@ -42,17 +71,22 @@ function UserTags() {
     } else if (tagArr.find(tag => tag === tagName)) {
       tagMsgRef.current.innerText = '중복된 태그입니다';
     } else {
-      console.log('ttt');
-      setTagArr([...tagArr, tagName]);
-      updateTags([...tagArr, tagName]);
+      updateTags(tagName);
       onToggleTagModal();
     }
   });
 
-  const onRemoveTag = useCallback(tagName => {
-    // console.log('remove');
-    setTagArr(tagArr.filter(tag => tagName !== tag));
-    updateTags(tagArr.filter(tag => tagName !== tag));
+  const onRemoveTag = useCallback(async tagId => {
+    try {
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/users/${userNickname}/tag/${tagId}`,
+      );
+      // console.log(data);
+      if (data.success) setTagFlag(new Date());
+      else console.log('tag api delete 요청 false');
+    } catch (e) {
+      console.log(e.message);
+    }
   });
 
   return (
@@ -72,9 +106,14 @@ function UserTags() {
         <hr size="1" className="profile-hr" />
         <div className="user-info-item__contents">
           {tagArr.length !== 0 &&
-            tagArr.map((tag, idx) => {
+            tagArr.map(tag => {
               return (
-                <TagList tagName={tag} key={idx} onRemoveTag={onRemoveTag} />
+                <TagList
+                  tagName={tag.tagName}
+                  key={tag.tagId}
+                  tagId={tag.tagId}
+                  onRemoveTag={onRemoveTag}
+                />
               );
             })}
         </div>
