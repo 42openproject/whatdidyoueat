@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 // import KakaoLogin from 'react-kakao-login';
-import { GOOGLE_CLIENT_ID, KAKAO } from '../config';
+import { GOOGLE_CLIENT_ID } from '../config';
 import '../stylesheets/LoginPage.css';
 import '../stylesheets/reset.css';
 import LogoImg from '../asset/logo.svg';

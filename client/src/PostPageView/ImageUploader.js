@@ -3,7 +3,7 @@ import { BiImageAdd } from 'react-icons/bi';
 
 const ImageUploader = ({ setImage }) => {
   const [previewImage, setPreviewImage] = useState('');
-  const [isUploaded, setIsUploaded] = useState(false);
+  // const [isUploaded, setIsUploaded] = useState(false);
 
   const imageChangeHandler = e => {
     if (e.target.files && e.target.files[0]) {
@@ -12,7 +12,7 @@ const ImageUploader = ({ setImage }) => {
       reader.onload = res => {
         setImage(e.target.files[0]);
         setPreviewImage(res.target.result);
-        setIsUploaded(true);
+        // setIsUploaded(true);
       };
 
       reader.readAsDataURL(e.target.files[0]);
