@@ -39,4 +39,4 @@ jobs:
       - name: Deploy
         run: aws s3 sync ./build s3://test-som-calendar
       - name: Invalidate
-        run: aws cloudfront create-invalidation --profile=dhyeon --distribution-id E1ZN0QK1N3I2P5 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths --paths "/*"
