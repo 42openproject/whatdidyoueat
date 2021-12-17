@@ -8,7 +8,7 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
   // const [dateVal, setDateVal] = useState(new Date());
   const [monthVal, setMonthVal] = useState(new Date());
   const [postedDate, setPostedDate] = useState([]);
-  const [startedDate, setStartedDate] = useState(new Date('2020-01-01'));
+  // const [startedDate, setStartedDate] = useState(new Date('2020-01-01'));
 
   // 달력에서 날짜 선택
   const onClickDay = e => {
@@ -39,7 +39,7 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
         // console.log(data.data.date);
         if (data.success) {
           setPostedDate(data.data.date);
-          setStartedDate(data.data.startedAt);
+          // setStartedDate(data.data.startedAt);
           // console.log(data);
         } else console.log('calendar api get false');
       }
@@ -70,6 +70,7 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
         onClickDate={onClickDay}
         postedDate={postedDate}
         onChangeActiveMonth={onChangeActiveMonth}
+        // startDate={startedDate}
       />
     </>
   );
