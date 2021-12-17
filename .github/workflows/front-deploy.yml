@@ -1,0 +1,42 @@
+name: front-deploy
+
+on:
+  push:
+    branches:
+      - dev
+      - master
+
+defaults:
+  run:
+    working-directory: ./client
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache modules
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+            - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: aws s3 sync ./build s3://test-som-calendar
+      - name: Invalidate
+        run: aws cloudfront create-invalidation --profile=dhyeon --distribution-id E1ZN0QK1N3I2P5 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico

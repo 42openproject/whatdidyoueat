@@ -1,0 +1,25 @@
+name: front-build-test
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [opened, assigned, synchronize, labeled]
+
+defaults:
+  run:
+    working-directory: ./client
+
+jobs:
+  build:
+    if: contains(github.event.pull_request.labels.*.id, 3498842830)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: action/checkout@2
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build:dev
