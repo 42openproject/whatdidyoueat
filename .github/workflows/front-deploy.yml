@@ -15,13 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache modules
-        uses: actions/cache@v1
-        id: yarn-cache
+      - name: Setup Python for AWS CLI
+        uses: actions/setup-python@v1
         with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
+          python-version: "3.x"
+      - name: Install AWS CLI
+        run: pip3 install awscli --upgrade --user
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -37,6 +36,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        run: aws s3 sync ./build s3://test-som-calendar
+        run: aws s3 sync ./build s3://whatdidyoueat
       - name: Invalidate
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths --paths "/*"
