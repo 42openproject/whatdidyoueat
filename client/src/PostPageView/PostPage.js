@@ -30,15 +30,15 @@ function PostPage({ history }) {
     }
   }, []);
 
-  document.addEventListener(
-    'keydown',
-    event => {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-      }
-    },
-    true,
-  );
+  // document.addEventListener(
+  //   'keydown',
+  //   event => {
+  //     if (event.keyCode === 13) {
+  //       event.preventDefault();
+  //     }
+  //   },
+  //   true,
+  // );
 
   const handleContentChange = ({ target: { value } }) => {
     if (value.length > 100) {
