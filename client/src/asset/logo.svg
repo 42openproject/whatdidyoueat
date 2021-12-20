@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="175.846" height="211" viewBox="0 0 175.846 211">
+  <g id="그룹_74" data-name="그룹 74" transform="translate(-107.077 -172)">
+    <path id="Icon_map-food" data-name="Icon map-food" d="M176.178,43.969l-14.416,113H113.071L98.714,43.4h59.443l11.749-40.58,6.66,2.008L165.294,43.885l10.884.084ZM91.83,109.347S93.651,94.693,68.4,94.693H28.192c-25.212,0-23.428,14.654-23.428,14.654H91.83ZM4.764,142.318S2.98,156.972,28.192,156.972H68.406c25.249,0,23.428-14.654,23.428-14.654Zm83.289-7.327c4.132,0,7.47-4.081,7.47-9.155,0-5.1-3.337-9.162-7.47-9.162H8.193c-4.114,0-7.473,4.059-7.473,9.162,0,5.074,3.359,9.155,7.473,9.155h79.86Z" transform="translate(106.357 169.175)" fill="#fff"/>
+    <text id="뭐먹었니" transform="translate(126 377)" fill="#8e8e8e" font-size="40" font-family="'\.AppleSDGothicNeoI-Regular', '\.Apple SD Gothic NeoI'"><tspan x="0" y="0">뭐먹었니</tspan></text>
+  </g>
+</svg>

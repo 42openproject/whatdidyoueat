@@ -1,0 +1,60 @@
+{
+  "name": "whatdidyoueat",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.23.0",
+    "dayjs": "^1.10.7",
+    "json-server": "^0.17.0",
+    "react": "^17.0.2",
+    "react-calendar": "^3.5.0",
+    "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-icons": "^4.3.1",
+    "react-kakao-login": "^2.1.0",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject", 
+    "deploy": "aws s3 sync ./build s3://whatdidyoueat --profile=dhyeon",
+    "invalidate": "aws cloudfront create-invalidation --profile=dhyeon --distribution-id E1ZN0QK1N3I2P5 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico",
+    "all": "npm-run-all -s build deploy invalidate"
+},
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "prettier": "2.4.1"
+  },
+  "proxy": "http://localhost:3001"
+}
