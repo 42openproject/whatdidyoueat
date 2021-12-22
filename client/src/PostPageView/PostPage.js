@@ -164,7 +164,7 @@ function PostPage({ history }) {
             type="submit"
             disabled={true}
             className="post-page--submit-btn--disabled"
-            // onClick={handleSubmit}
+            onClick={handleSubmit}
           >
             UPLOAD
           </button>
