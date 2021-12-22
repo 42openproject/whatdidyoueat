@@ -35,18 +35,15 @@
   /* height: 100%; */
   top: 0;
   bottom: 0;
-  opacity: 0.3;
+  opacity: 0.5;
   transition: 0.2s;
 }
 .image-upload--overlay:hover {
-  opacity: 0.7;
+  opacity: 1;
   transition: 0.2s;
 }
 
 .post-page__image-input {
-  /* position: absolute;
-  top: 0;
-  left: 0; */
   width: 100%;
   display: block;
   /* height: calc(90vw - 30px);
@@ -54,6 +51,9 @@
   height: 100%;
   cursor: pointer;
   overflow: hidden;
+  background-image: url('../asset/ddd@2x.png');
+  background-size: cover;
+  background-position: center;
 }
 .image-upload {
   position: relative;
@@ -98,7 +98,7 @@
 }
 .upload-input__icon {
   color: white;
-  font-size: 30vw;
+  font-size: 10rem;
   text-align: center;
   display: block;
   margin: auto;

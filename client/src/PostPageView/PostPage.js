@@ -72,7 +72,7 @@ function PostPage({ history }) {
       // enter 입력 시
       if (e.keyCode === 32 && e.target.value.trim() !== '') {
         e.preventDefault();
-        console.log('Enter key!!!', e.target.value);
+        // console.log('Enter key!!!', e.target.value);
         $TagWrapInner.innerHTML = `#${e.target.value}`;
         $TagWrapOuter?.appendChild($TagWrapInner);
         setTagArr([...tagArr, postTag]);
