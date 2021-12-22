@@ -18,7 +18,7 @@
 # POST /users/nickname
 # curl \
 # -H "Content-Type: application/json" \
-# -d '{"nickname":"mki", "googleId":"104760257817400625505"}' \
+# -d '{"nickname":"mak", "googleId":"104760"}' \
 # -X POST 'http://localhost:3001/users/nickname'
 
 # GET /users/nickname?googleId=
@@ -111,12 +111,12 @@
 # -----------------------/users/nickname/check/:id------------------------------
 # -------------------------------------------------------------------
 # GET /users/nickname/check/:id
-# curl -X GET 'http://localhost:3001/users/nickname/check/mkif'
+curl -X GET 'http://localhost:3001/users/nickname/check/mki'
 
 # -------------------------------------------------------------------
 # -----------------------/explore------------------------------
 # -------------------------------------------------------------------
 # GET /explore
-curl -X GET 'http://localhost:3001/explore'
+# curl -X GET 'http://localhost:3001/explore'
 
 
