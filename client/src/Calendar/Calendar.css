@@ -51,8 +51,8 @@
 .calendar-days__day-item {
   width: 10vw;
   height: 10vw;
-  max-width: 45px;
-  max-height: 45px;
+  max-width: 40px;
+  max-height: 40px;
   text-align: center;
   border: 1px solid gray;
   border-radius: 50%;
