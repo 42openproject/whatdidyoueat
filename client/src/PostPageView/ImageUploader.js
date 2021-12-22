@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BiImageAdd } from 'react-icons/bi';
 
 const ImageUploader = ({ setImage }) => {
   const [previewImage, setPreviewImage] = useState('');
@@ -36,9 +35,10 @@ const ImageUploader = ({ setImage }) => {
           </div>
         </div>
         <div className="image-upload--overlay">
-          <label htmlFor="upload-input" className="post-page__image-input">
-            <BiImageAdd className="upload-input__icon" />
-          </label>
+          <label
+            htmlFor="upload-input"
+            className="post-page__image-input"
+          ></label>
           <input
             id="upload-input"
             type="file"

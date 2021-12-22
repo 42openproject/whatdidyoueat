@@ -1,10 +1,13 @@
 header {
+  max-width: 600px;
   height: 60px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
 }
 
 .icon-btn {
+  margin: 0;
   border: none;
   background-color: transparent;
   cursor: pointer;
