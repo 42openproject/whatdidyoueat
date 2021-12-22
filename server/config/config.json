@@ -5,7 +5,7 @@
     "database": "wheat",
     "host": "3.34.94.140",
     "dialect": "mysql",
-    "timezone": "+00:00"
+    "timezone": "+09:00"
   },
   "test": {
     "username": "root",
