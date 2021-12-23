@@ -6,12 +6,16 @@ function SearchPost() {
   const [posts, setPosts] = useState([]);
 
   useEffect(async () => {
-    // 본 api
-
-    // test api
     try {
-      const { data } = await axios.get(`http://localhost:8000/allposts`);
-      setPosts(data);
+      // 본 api
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/explore`,
+      );
+      console.log(data);
+      setPosts(data.data.posts);
+      // test api
+      // const { data: testData } = await axios.get(`http://localhost:8000/allposts`);
+      // setPosts(testData);
     } catch (e) {
       console.log(e.message);
     }
