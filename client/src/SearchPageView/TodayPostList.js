@@ -35,7 +35,7 @@ function TodayPostList({
           <p className="post-box__content__text">{textContent}</p>
           <ul className="post-box__content__tags">
             {tagArr &&
-              tagArr.map((tag, idx) => {
+              tagArr.split(',').map((tag, idx) => {
                 return (
                   <li className="post-box__tag-item" key={idx}>
                     {tag}
