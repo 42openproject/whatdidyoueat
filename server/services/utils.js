@@ -13,7 +13,14 @@ function getDateRange(from = Date(), to = Date()) {
   return [fromYMD, toYMD];
 }
 
+function isNicknameValid(nickname) {
+  if (nickname.length < 3 || nickname.length > 15) return null;
+  res = nickname.match(/^[0-9a-z]+$/);
+  return res;
+}
+
 module.exports = {
   getDateRange,
   dateToYMD,
+  isNicknameValid,
 };
