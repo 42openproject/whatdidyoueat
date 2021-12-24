@@ -23,8 +23,22 @@ const getKakaoToken = async (req, res) => {
         },
       }
     );
-    const KakaoUserInfo = await getKakaoUserInfo(data.access_token);
-    console.log(KakaoUserInfo);
+
+    const KakaoUserInfo = await axios.post(
+      `https://kapi.kakao.com/v2/user/me`,
+      [],
+      {
+        headers: {
+          Authorization: `Bearer ${data.access_token}`,
+          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+      }
+    );
+
+    userData = KakaoUserInfo.data.kakao_account;
+
+    const user = await findOrCreate(userData.email, "kakao", data.access_token);
+
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
@@ -32,22 +46,22 @@ const getKakaoToken = async (req, res) => {
   }
 };
 
-const getKakaoUserInfo = async (ACCESS_TOKEN) => {
-  try {
-    const { data } = await axios.post(`https://kapi.kakao.com/v2/user/me`, [], {
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-      },
+const findOrCreate = async (email, login_type, token) => {
+  const user = await models.users.findOne({
+    where: { email },
+    attributes: ["id", "email"],
+  });
+
+  if (!user) {
+    const user = await models.users.create({
+      email: email,
+      // login_type: login_type,
+      jwt: token,
     });
-    return data;
-  } catch (e) {
-    console.log(e);
-    return;
+    console.log(user);
   }
 };
 
 module.exports = {
   getKakaoToken,
-  getKakaoUserInfo,
 };
