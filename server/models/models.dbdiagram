@@ -1,0 +1,58 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table images {
+  id int [pk, increment, ref: - users.imageId, ref: - posts.imageId] // auto-increment
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table users as U {
+  id int [pk, increment] // auto-increment
+  nickname string
+  email string
+  jwt string
+  imageId int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Ref: U.id > posts.userId
+Ref: U.id > titles.userId
+Ref: U.id > users_tags.userId
+
+Table posts {
+  id int [pk, increment] // auto-increment
+  textContent string
+  tagArr string
+  userId int
+  imageId int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table tags {
+  id int [pk, increment] // auto-
+  string string
+  created_at timestamp
+  updated_at timestamp
+}
+
+Ref: tags.id - users_tags.tagId
+
+Table users_tags {
+  id int [pk, increment] // auto-increment
+  tagId int
+  userId int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table titles {
+  id int [pk, increment] // auto-increment
+  title string
+  userId int
+  created_at timestamp
+  updated_at timestamp
+}
