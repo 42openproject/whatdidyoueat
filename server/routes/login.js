@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const loginService = require("../services/login");
+const auth = require("../services/controller.auth");
 
 /**
  * @swagger
@@ -23,8 +24,6 @@ router.post("/google", function (req, res) {
   loginService.loginGoogle(req, res);
 });
 
-router.post("/kakao", function (req, res) {
-  loginService.loginGoogle(req, res);
-});
+router.get("/kakao", auth.getKakaoToken);
 
 module.exports = router;
