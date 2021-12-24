@@ -19,12 +19,28 @@ const getKakaoToken = async (req, res) => {
       [],
       {
         headers: {
-          "Contnet-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
         },
       }
     );
-    console.log(data);
+    const KakaoUserInfo = await getKakaoUserInfo(data.access_token);
+    console.log(KakaoUserInfo);
     res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+};
+
+const getKakaoUserInfo = async (ACCESS_TOKEN) => {
+  try {
+    const { data } = await axios.post(`https://kapi.kakao.com/v2/user/me`, [], {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+    });
+    return data;
   } catch (e) {
     console.log(e);
     return;
@@ -33,4 +49,5 @@ const getKakaoToken = async (req, res) => {
 
 module.exports = {
   getKakaoToken,
+  getKakaoUserInfo,
 };
