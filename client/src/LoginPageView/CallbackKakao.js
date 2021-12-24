@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 
-function CallbackKakao() {
+function CallbackKakao({ history }) {
   const code = new URLSearchParams(window.location.search).get('code');
 
   useEffect(async () => {
@@ -10,6 +10,7 @@ function CallbackKakao() {
         `http://localhost:3001/login/kakao?code=${code}`,
       );
       console.log(res);
+      history.push('/nickname');
     } catch (e) {
       console.log(e.message);
     }
