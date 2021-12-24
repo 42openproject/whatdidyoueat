@@ -8,6 +8,7 @@ import PostPage from './PostPageView/PostPage';
 import AchievePage from './AchievePageView/AchievePage';
 import UserPage from './MainPageView/UserPage';
 import Test from './Calendar/Test';
+import CallbackKakao from './LoginPageView/CallbackKakao';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/profile" component={ProfilePage} />
         <Route path="/post" component={PostPage} />
         <Route path="/achievement" component={AchievePage} />
+        <Route path="/callback/kakao" component={CallbackKakao} />
         <Route path="/test" component={Test} />
       </BrowserRouter>
     </div>

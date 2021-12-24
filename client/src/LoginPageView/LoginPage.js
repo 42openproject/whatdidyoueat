@@ -2,26 +2,19 @@ import React from 'react';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 // import KakaoLogin from 'react-kakao-login';
-import { GOOGLE_CLIENT_ID } from '../config';
+import {
+  GOOGLE_CLIENT_ID,
+  KAKAO_CLIENT_ID,
+  KAKAO_REDIRECT_URI,
+} from '../config';
 import '../stylesheets/LoginPage.css';
 import '../stylesheets/reset.css';
 import LogoImg from '../asset/logo.svg';
 // import KakaoLogo from '../asset/kakao_logo.png';
 
-// const onOauthSuccess = ({ history, googleId, email }) => {
-//   console.log(googleId);
-//   axios
-//     .post(`${process.env.REACT_APP_API_URL}/login/google`, {
-//       googleId,
-//       email,
-//     })
-//     .then(res => {
-//       console.log(res);
-//     });
-//   history.push('/nickname');
-// };
-
 function Home({ history }) {
+  const KakaoRequestUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+
   const onSuccessGoogle = res => {
     localStorage.setItem('googleId', res.googleId);
     localStorage.setItem('email', res.profileObj.email);
@@ -69,23 +62,7 @@ function Home({ history }) {
             onFailure={onFailureGoogle}
             buttonText="Google로 로그인하기"
           />
-          {/* <button className="btn">
-            <KakaoLogin
-              token={KAKAO.CLIENT_ID}
-              render={renderProps => (
-                <div
-                  className="btn__kakao"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  <img src={KakaoLogo} width="20px" height="20px" />
-                  <span>카카오로 로그인하기</span>
-                </div>
-              )}
-              onSuccess={e => onSuccessKakao(e)}
-              // onFail={console.log('fail')}
-            />
-          </button> */}
+          <a href={KakaoRequestUrl}>카카오로그인</a>
         </div>
       </div>
     </>
