@@ -24,7 +24,7 @@
 
 ## 3. 팀원 🥯
 
-|                                     |                                       |                                        |
+|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/50388933?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/60869490?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/47653005?v=4">|
 | :---------------------------------: | :-----------------------------------: | :------------------------------------: |
 |               Backend               |               FrontEnd                |                FrontEnd                |
 |             기명진(mki)             |            현다솜(dhyeon)             |             박원일(wopark)             |
@@ -35,16 +35,12 @@
 ## 4. 프로젝트 제작 과정 🥨
 
 ### 🍰 GitHub Issue를 이용한 이슈 관리
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/60869490/156488654-c285fa62-d767-45fd-8c04-79a4f5d85c5f.png">
 
-사진
 
 ### 🍰 GitHub Wiki를 통한 문서 관리
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/60869490/156489292-059c3e44-899d-40f8-878b-ad3653dcf25e.png">
 
-사진
-
-### 🍰 Pull Request 를 통한 코드 리뷰
-
-사진
 
 <br>
 
