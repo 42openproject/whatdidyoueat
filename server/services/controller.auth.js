@@ -8,8 +8,8 @@ const getKakaoToken = async (req, res) => {
   try {
     const postData = {
       grant_type: "authorization_code",
-      client_id: "ef084fec0e20540d0ba785135e185ae5",
-      redirect_uri: "http://localhost:3000/callback/kakao",
+      client_id: process.env.KAKAO_CLIENT_ID,
+      redirect_uri: process.env.KAKAO_REDIRECT_URI,
       code: req.query.code,
     };
     const params = new URLSearchParams(postData).toString();
