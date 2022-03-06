@@ -75,7 +75,6 @@ function Calendar({
     for (let i = 0; i < prevDay; i += 1) {
       if (prevD === 0) {
         const prevM = new Date(Y, M - 1, 0);
-        console.log('prevM : ', prevM);
         prevD = prevM.getDate();
         M -= 1;
         if (M < 1) {
@@ -90,7 +89,6 @@ function Calendar({
     const lastDate = new Date(Y, M, 0);
     for (let i = 0; i < 6 - prevDay; i += 1) {
       if (lastDate.getDate() < nextD) {
-        console.log('in');
         M += 1;
         nextD = 1;
         if (M > 12) {
