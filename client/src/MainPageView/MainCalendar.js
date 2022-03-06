@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// import Calendar from 'react-calendar';
 import Calendar from '../Calendar/Calendar';
 import '../stylesheets/MainCalendar.css';
 
@@ -8,7 +7,7 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
   // const [dateVal, setDateVal] = useState(new Date());
   const [monthVal, setMonthVal] = useState(new Date());
   const [postedDate, setPostedDate] = useState([]);
-  // const [startedDate, setStartedDate] = useState(new Date('2020-01-01'));
+  const [startedDate, setStartedDate] = useState(new Date('2020-01-01'));
 
   // 달력에서 날짜 선택
   const onClickDay = e => {
@@ -36,11 +35,9 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
         const { data } = await axios.get(
           `${process.env.REACT_APP_API_URL}/calendar/${userNickname}?year=${y}&month=${m}`,
         );
-        // console.log(data.data.date);
         if (data.success) {
           setPostedDate(data.data.date);
-          // setStartedDate(data.data.startedAt);
-          // console.log(data);
+          setStartedDate(data.data.startedAt);
         } else console.log('calendar api get false');
       }
     } catch (e) {
@@ -54,23 +51,12 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
 
   return (
     <>
-      {/* <Calendar
-        onChange={setDateVal}
-        value={dateVal}
-        minDate={new Date(startedDate)}
-        maxDate={new Date()}
-        locale="en-US"
-        onClickDay={onClickDay}
-        formatMonthYear={testFormat}
-        tileClassName={setPostedDay}
-        onActiveStartDateChange={onActiveStartDateChange}
-      /> */}
       <Calendar
         endDate={new Date()}
         onClickDate={onClickDay}
         postedDate={postedDate}
         onChangeActiveMonth={onChangeActiveMonth}
-        // startDate={startedDate}
+        startDate={startedDate}
       />
     </>
   );

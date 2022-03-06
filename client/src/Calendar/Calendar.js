@@ -40,6 +40,7 @@ function Calendar({
     const prevMonthDate = new Date(y, m - 1, 0);
     const nextMonthDate = new Date(y, m, 1);
     const someArr = [];
+    console.log(endDay);
 
     if (startDay > 0) {
       const py = prevMonthDate.getFullYear();
@@ -209,7 +210,7 @@ function Calendar({
                   todayDate={date}
                   clickedDate={clickedDate}
                   setClickedDate={setClickedDate}
-                  startDate={makeStringDate(startDate)}
+                  startDate={startDate}
                   endDate={makeStringDate(endDate)}
                   onClickDate={onClickDate}
                 />
