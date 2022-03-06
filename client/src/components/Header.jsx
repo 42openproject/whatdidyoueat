@@ -1,3 +1,4 @@
+import React from 'react';
 import { FiHome, FiMenu } from 'react-icons/fi';
 import styled from '@emotion/styled';
 

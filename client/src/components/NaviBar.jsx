@@ -1,3 +1,4 @@
+import React from 'react';
 import { FiSearch, FiPlus, FiUser } from 'react-icons/fi';
 import styled from '@emotion/styled';
 
