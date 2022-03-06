@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import { BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
 import CalendarDateItem from './CalendarDateItem';
@@ -62,7 +62,6 @@ function Calendar({
       }
     }
     setDateArr(someArr);
-    // console.log(someArr);
   };
 
   const getDateArrWeek = () => {

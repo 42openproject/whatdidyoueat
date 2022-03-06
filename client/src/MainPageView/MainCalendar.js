@@ -4,7 +4,6 @@ import Calendar from '../Calendar/Calendar';
 import '../stylesheets/MainCalendar.css';
 
 const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
-  // const [dateVal, setDateVal] = useState(new Date());
   const [monthVal, setMonthVal] = useState(new Date());
   const [postedDate, setPostedDate] = useState([]);
   const [startedDate, setStartedDate] = useState(new Date('2020-01-01'));
@@ -22,11 +21,9 @@ const MainCalendar = ({ setClickedDay, testFlag, userNickname }) => {
         const response = await axios.get(
           `http://localhost:8000/calendar/${monthVal.getMonth() + 1}`,
         );
-        // console.log(response.data.data);
         setPostedDate(response.data.data);
       } else if (userNickname) {
         // 본 api
-
         const y = monthVal.getFullYear();
         const m =
           monthVal.getMonth() < 10

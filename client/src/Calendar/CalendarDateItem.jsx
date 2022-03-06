@@ -1,3 +1,5 @@
+import React from 'react';
+
 function CalendarDateItem({
   resizeNumber,
   date,
@@ -68,4 +70,4 @@ function CalendarDateItem({
   );
 }
 
-export default CalendarDateItem;
+export default React.memo(CalendarDateItem);
