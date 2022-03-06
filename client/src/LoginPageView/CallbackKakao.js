@@ -7,7 +7,7 @@ function CallbackKakao({ history }) {
   useEffect(async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/login/kakao?code=${code}`,
+        `${process.env.REACT_APP_API_URL}/login/kakao?code=${code}`,
       );
       console.log(res);
       history.push('/nickname');
