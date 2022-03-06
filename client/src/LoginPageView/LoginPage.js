@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from '@emotion/styled';
 import GoogleLogin from 'react-google-login';
 // import KakaoLogin from 'react-kakao-login';
+import Loading from './Loading';
+import MainPage from '../MainPageView/MainPage';
 import { GOOGLE_CLIENT_ID } from '../config';
 import '../stylesheets/LoginPage.css';
 import '../stylesheets/reset.css';
-import LogoImg from '../asset/logo.svg';
+import '../stylesheets/Header.css';
+import '../stylesheets/NaviBar.css';
+import '../stylesheets/MainPage.css';
+import Logo from '../asset/main-logo.png';
 // import KakaoLogo from '../asset/kakao_logo.png';
 
 // const onOauthSuccess = ({ history, googleId, email }) => {
@@ -22,6 +28,16 @@ import LogoImg from '../asset/logo.svg';
 // };
 
 function Home({ history }) {
+  const [isLogin, setIsLogin] = useState('loading');
+
+  useEffect(() => {
+    if (localStorage.getItem('googleId')) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
   const onSuccessGoogle = res => {
     localStorage.setItem('googleId', res.googleId);
     localStorage.setItem('email', res.profileObj.email);
@@ -54,14 +70,20 @@ function Home({ history }) {
   //   // let kakaoid = e.profile.id;
   //   history.push('/nickname');
   // };
-
+  if (isLogin === 'loading') {
+    return <Loading />;
+  }
+  if (isLogin === true) {
+    return <MainPage />;
+  }
   return (
     <>
       <div className="container">
         <div className="container__logo">
-          <img src={LogoImg} alt="뭐먹었니" width="100%" height="auto" />
+          <img src={Logo} alt="뭐먹었니" width="100%" height="auto" />
         </div>
-        <div className="container__login box--white">
+        {/* <div className="container__login box--white"> */}
+        <LoginBox>
           <GoogleLogin
             className="btn__google"
             clientId={GOOGLE_CLIENT_ID}
@@ -86,10 +108,24 @@ function Home({ history }) {
               // onFail={console.log('fail')}
             />
           </button> */}
-        </div>
+          {/* </div> */}
+        </LoginBox>
       </div>
     </>
   );
 }
+
+const LoginBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  min-width: 250px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px;
+  height: 150px;
+  max-width: 500px;
+`;
 
 export default Home;
