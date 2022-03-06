@@ -1,5 +1,5 @@
 import { FiHome, FiMenu } from 'react-icons/fi';
-import '../stylesheets/Header.css';
+import styled from '@emotion/styled';
 
 function Header() {
   const goHome = () => {
@@ -10,16 +10,43 @@ function Header() {
   };
   return (
     <>
-      <header>
-        <button className="header-btn icon-btn" onClick={goHome}>
+      <HeaderContainer>
+        <HomeButton onClick={goHome}>
           <FiHome />
-        </button>
-        <button className="header-btn icon-btn" onClick={toggleMenu}>
+        </HomeButton>
+        <MenuButton onClick={toggleMenu}>
           <FiMenu />
-        </button>
-      </header>
+        </MenuButton>
+      </HeaderContainer>
     </>
   );
 }
+const HeaderContainer = styled.header`
+  max-width: 600px;
+  height: 60px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+`;
+const HomeButton = styled.button`
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #bfbfe5;
+  margin: 10px 12px;
+`;
+const MenuButton = styled.button`
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #bfbfe5;
+  margin: 10px 12px;
+`;
 
 export default Header;
