@@ -7,7 +7,6 @@ import ProfilePage from './ProfilePageView/ProfilePage';
 import PostPage from './PostPageView/PostPage';
 import AchievePage from './AchievePageView/AchievePage';
 import UserPage from './MainPageView/UserPage';
-import Test from './Calendar/Test';
 
 function App() {
   return (
@@ -21,7 +20,6 @@ function App() {
         <Route path="/profile" component={ProfilePage} />
         <Route path="/post" component={PostPage} />
         <Route path="/achievement" component={AchievePage} />
-        <Route path="/test" component={Test} />
       </BrowserRouter>
     </div>
   );
