@@ -23,4 +23,8 @@ router.post("/google", function (req, res) {
   loginService.loginGoogle(req, res);
 });
 
+router.post("/kakao", function (req, res) {
+  loginService.loginGoogle(req, res);
+});
+
 module.exports = router;

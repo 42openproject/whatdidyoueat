@@ -45,7 +45,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        run: aws s3 sync ./build s3://whatdidyoueat
+        run: aws s3 sync ./build s3://whatdidyoueat-2
       - name: AWS Cloudfront Invalidate Action
         uses: awact/cloudfront-action@0.1.2
         env:

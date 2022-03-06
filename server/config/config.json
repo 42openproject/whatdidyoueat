@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "Wopark1!",
+    "password": "Born2code!@!@",
     "database": "wheat",
-    "host": "3.34.94.140",
+    "host": "localhost",
     "dialect": "mysql",
     "timezone": "+00:00"
   },

@@ -1,6 +1,7 @@
 const e = require("express");
 const models = require("../models");
 const multer = require("../services/multer");
+const utils = require("../services/utils");
 const { Op } = require("sequelize");
 
 function getNickname(req, res) {
@@ -28,55 +29,68 @@ function getNickname(req, res) {
 }
 
 function setNickname(req, res) {
-  models.users
-    .update(
-      {
-        nickname: req.body.nickname,
-      },
-      { where: { jwt: req.body.googleId } }
-    )
-    .then(() => {
-      res.send({
-        success: true,
-        message: "Success",
-      });
-    })
-    .catch((err) => {
-      console.error(err);
+  if (utils.isNicknameValid(req.body.nickname) == null) {
+    res.status(400).send({
+      success: false,
+      message: "Fail",
     });
+  } else {
+    models.users
+      .update(
+        {
+          nickname: req.body.nickname,
+        },
+        { where: { jwt: req.body.googleId } }
+      )
+      .then(() => {
+        res.status(200).send({
+          success: true,
+          message: "Success",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 function checkNickname(req, res) {
-  models.users
-    .findOne({
-      where: { nickname: req.params.id },
-    })
-    .then((user) => {
-      if (user == null) {
-        res.send({
-          success: true,
-          data: {
-            duplicate: false,
-          },
-          message: "You can change it",
-        });
-      } else {
-        res.send({
-          success: true,
-          data: {
-            duplicate: true,
-          },
-          message: "Already exist",
-        });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.send({
-        success: false,
-        message: "Failed",
-      });
+  if (utils.isNicknameValid(req.params.id) == null) {
+    res.send({
+      success: false,
+      data: {
+        duplicate: true,
+      },
+      message: "Wrong input",
     });
+  } else {
+    models.users
+      .findOne({
+        where: { nickname: req.params.id },
+      })
+      .then((user) => {
+        if (user == null) {
+          res.send({
+            success: true,
+            data: {
+              duplicate: false,
+            },
+            message: "You can change it",
+          });
+        } else {
+          res.send({
+            success: true,
+            data: {
+              duplicate: true,
+            },
+            message: "Already exist",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 function getProfileImg(req, res) {

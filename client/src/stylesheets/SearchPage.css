@@ -132,6 +132,7 @@
 
 .post-box__content__tags {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .post-box__tag-item {
@@ -140,6 +141,8 @@
   margin: 0.2rem;
   font-size: 0.7rem;
   border-radius: 0.65rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .post-box__empty-post {
