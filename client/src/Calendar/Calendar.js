@@ -12,7 +12,6 @@ function Calendar({
   onChangeActiveMonth = '',
 }) {
   const today = new Date();
-  // const today = new Date(`2022-1-1`);
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth() + 1);
   const [date, setDate] = useState(today.getDate());
@@ -40,7 +39,6 @@ function Calendar({
     const prevMonthDate = new Date(y, m - 1, 0);
     const nextMonthDate = new Date(y, m, 1);
     const someArr = [];
-    console.log(endDay);
 
     if (startDay > 0) {
       const py = prevMonthDate.getFullYear();
@@ -72,7 +70,6 @@ function Calendar({
     const todayD = today.getDate();
     let M = today.getMonth() + 1;
     let Y = today.getFullYear();
-    // console.log(todayD);
     someArr.push(`${Y}-${resizeNumber(M)}-${resizeNumber(todayD)}`);
     const prevDay = today.getDay();
     let prevD = todayD - 1;
@@ -92,7 +89,6 @@ function Calendar({
     }
     let nextD = todayD + 1;
     const lastDate = new Date(Y, M, 0);
-    // console.log(lastDate);
     for (let i = 0; i < 6 - prevDay; i += 1) {
       if (lastDate.getDate() < nextD) {
         console.log('in');
