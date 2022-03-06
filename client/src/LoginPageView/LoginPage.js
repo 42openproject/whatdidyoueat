@@ -74,7 +74,23 @@ function Home({ history }) {
     return <Loading />;
   }
   if (isLogin === true) {
-    return <MainPage />;
+    // 로그인 상태인지 확인하는 요청 추가해야함
+    return (
+      <>
+        <button
+          onClick={() => setIsLogin(!isLogin)}
+          style={{
+            position: 'absolute',
+            top: '20px',
+            cursor: 'pointer',
+            border: '1px solid red',
+          }}
+        >
+          로그인 페이지로
+        </button>
+        <MainPage />
+      </>
+    );
   }
   return (
     <>
