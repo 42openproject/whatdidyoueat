@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const utils = require("../services/utils");
 const axios = require("axios");
 const { post } = require("../routes/login");
+const jwt = require("jsonwebtoken");
 
 const getKakaoToken = async (req, res) => {
   try {
@@ -39,6 +40,13 @@ const getKakaoToken = async (req, res) => {
 
     const user = await findOrCreate(userData.email, "kakao", data.access_token);
 
+    const newAccessToken = jwt.sign(
+      { date: new Date() },
+      process.env.JWT_SECRET,
+      { expiresIn: "1m", issuer: "wheat" }
+    );
+
+	  console.log(newAccessToken);
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
