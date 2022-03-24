@@ -1,9 +1,9 @@
 {
-  "name": "server",
-  "version": "0.0.0",
+  "name": "whatdidyoueat-backend",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --watch ./ ./bin/www",
+    "start": "nodemon src/bin/www",
     "test": "jest"
   },
   "dependencies": {
@@ -16,20 +16,24 @@
     "express": "~4.16.1",
     "formidable": "^3.2.1",
     "fs": "0.0.1-security",
-    "jest": "^27.4.5",
+    "global": "^4.4.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
     "multer-s3": "^2.10.0",
     "mysql2": "^2.3.2",
     "node-mocks-http": "^1.11.0",
+    "nodemon": "^2.0.15",
     "openapi-types": "^10.0.0",
     "path": "^0.12.7",
     "sequelize": "^6.7.0",
-    "supertest": "^6.1.6",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "eslint": "^8.11.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.0",
+    "supertest": "^6.2.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.2.0"
   }
