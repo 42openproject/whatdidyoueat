@@ -5,7 +5,7 @@ import GoogleLogin from 'react-google-login';
 import { GOOGLE_CLIENT_ID } from '../config';
 import '../stylesheets/LoginPage.css';
 import '../stylesheets/reset.css';
-import LogoImg from '../asset/logo.svg';
+import LogoImg from '../asset/main-logo.png';
 // import KakaoLogo from '../asset/kakao_logo.png';
 
 // const onOauthSuccess = ({ history, googleId, email }) => {

@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 function UserFollow() {
@@ -6,12 +6,13 @@ function UserFollow() {
   const [follower, setFollower] = useState(0);
 
   useEffect(async () => {
+    setFollower(0);
+    setFollowing(0);
     // 본 api 추가
-
     // test api
-    const { data } = await axios.get(`http://localhost:8000/follows/dhyeon`);
-    setFollowing(data.following);
-    setFollower(data.follower);
+    // const { data } = await axios.get(`http://localhost:8000/follows/dhyeon`);
+    // setFollowing(data.following);
+    // setFollower(data.follower);
   }, []);
 
   return (

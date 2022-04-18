@@ -12,11 +12,11 @@ function MainPage() {
   const [userNickname, setUserNickname] = useState('');
   const [clickedDay, setClickedDay] = useState(new Date());
   const googleId = localStorage.getItem('googleId');
-  const [testFlag, setTestFlag] = useState(
-    localStorage.getItem('testFlag') === null
-      ? false
-      : JSON.parse(localStorage.getItem('testFlag')),
-  );
+  // const [testFlag, setTestFlag] = useState(
+  //   localStorage.getItem('testFlag') === null
+  //     ? false
+  //     : JSON.parse(localStorage.getItem('testFlag')),
+  // );
   const date = `${clickedDay.getFullYear()}-${
     clickedDay.getMonth() + 1 < 10
       ? `0${clickedDay.getMonth() + 1}`
@@ -49,7 +49,7 @@ function MainPage() {
           <MainCalendar
             clickedDay={clickedDay}
             setClickedDay={setClickedDay}
-            testFlag={testFlag}
+            // testFlag={testFlag}
             userNickname={userNickname}
           />
         </section>
@@ -62,7 +62,7 @@ function MainPage() {
                 googleId={googleId}
                 clickedDay={clickedDay}
                 date={date}
-                testFlag={testFlag}
+                // testFlag={testFlag}
               />
             </div>
             <div className="post-header__author">🥕{userNickname}</div>
@@ -70,7 +70,7 @@ function MainPage() {
           <hr size="1" className="posts-header-hr" />
           <MainPost
             clickedDay={clickedDay}
-            testFlag={testFlag}
+            // testFlag={testFlag}
             userNickname={userNickname}
           />
         </section>
@@ -78,7 +78,7 @@ function MainPage() {
       <NaviBar />
 
       {/* flag 설정! */}
-      <button
+      {/* <button
         style={{
           position: 'absolute',
           width: '150px',
@@ -95,7 +95,7 @@ function MainPage() {
         }}
       >
         {testFlag === false ? 'test api 사용하기' : '본 api 사용하기'}
-      </button>
+      </button> */}
     </>
   );
 }

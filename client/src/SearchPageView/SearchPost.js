@@ -11,7 +11,7 @@ function SearchPost() {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/explore`,
       );
-      console.log(data);
+      // console.log(data);
       setPosts(data.data.posts);
       // test api
       // const { data: testData } = await axios.get(`http://localhost:8000/allposts`);

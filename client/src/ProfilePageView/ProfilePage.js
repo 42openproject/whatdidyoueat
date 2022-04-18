@@ -11,11 +11,11 @@ import '../stylesheets/ProfilePage.css';
 function ProfilePage() {
   const [userNickname, setUserNickname] = useState('');
   const googleId = localStorage.getItem('googleId');
-  const [testFlag, setTestFlag] = useState(
-    localStorage.getItem('testFlag') === null
-      ? false
-      : JSON.parse(localStorage.getItem('testFlag')),
-  );
+  // const [testFlag, setTestFlag] = useState(
+  //   localStorage.getItem('testFlag') === null
+  //     ? false
+  //     : JSON.parse(localStorage.getItem('testFlag')),
+  // );
 
   useEffect(async () => {
     // user nickname 요청
@@ -43,13 +43,13 @@ function ProfilePage() {
         <UserTags
           userNickname={userNickname}
           googleId={googleId}
-          testFlag={testFlag}
+          // testFlag={testFlag}
         />
         <UserAcheivement />
       </div>
       <NaviBar />
       {/* flag 설정! */}
-      <button
+      {/* <button
         style={{
           position: 'absolute',
           width: '150px',
@@ -66,7 +66,7 @@ function ProfilePage() {
         }}
       >
         {testFlag === false ? 'test api 사용하기' : '본 api 사용하기'}
-      </button>
+      </button> */}
     </>
   );
 }

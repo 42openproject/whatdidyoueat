@@ -14,10 +14,12 @@ function SetNicknamePage({ history }) {
 
   async function onSaveNick() {
     const nickInput = nickRef.current.value;
-    // console.log(nickInput);
-    if (nickInput === '' || nickInput.length < 2)
-      alert('2자 이상 입력해주세요');
-    else {
+    const reg = /^[A-Za-z0-9+]*$/;
+    if (!reg.test(nickInput) || nickInput === '' || nickInput.length <= 2) {
+      // alert('영문 + 숫자만 가능합니다');
+      errMsgRef.current.innerText =
+        '3자 이상 15자 이하 영문 + 숫자만 가능합니다';
+    } else {
       try {
         // nick check
         const { data } = await axios.get(
@@ -77,6 +79,9 @@ function SetNicknamePage({ history }) {
             value={nickname}
             onChange={onChangeNickname}
             ref={nickRef}
+            onKeyPress={e => {
+              if (e.key === 'Enter') onSaveNick();
+            }}
           ></input>
           <span className="container__box__err-msg" ref={errMsgRef}></span>
           <button className="container__box__btn" onClick={onSaveNick}>

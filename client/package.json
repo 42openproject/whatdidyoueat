@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.23.0",
+    "babel-jest": "^27.5.1",
     "dayjs": "^1.10.7",
     "json-server": "^0.17.0",
     "react": "^17.0.2",
@@ -16,7 +17,7 @@
     "react-icons": "^4.3.1",
     "react-kakao-login": "^2.1.0",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },
@@ -28,7 +29,7 @@
     "server": "json-server --watch ./db.json --port 8000",
     "dev": "concurrently \"npm run server\" \"npm run start\"",
     "deploy": "aws s3 sync ./build s3://whatdidyoueat-2 --profile=dhyeon",
-    "invalidate": "aws cloudfront create-invalidation --profile=dhyeon --distribution-id E3HJOC7ZOIK7FH --paths /*",
+    "invalidate": "aws cloudfront create-invalidation --profile=dhyeon --distribution-id E3HJOC7ZOIK7FH --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico",
     "all": "npm-run-all -s build deploy invalidate"
   },
   "eslintConfig": {
@@ -58,6 +59,5 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "prettier": "2.4.1"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }

@@ -28,7 +28,7 @@ body {
 .container__logo {
   width: 80%;
   max-width: 350px;
-  height: 55vh;
+  height: 400px;
   text-align: center;
   margin-top: 10vh;
   padding: 30px;
@@ -53,6 +53,7 @@ body {
 
 .container__login {
   height: 150px;
+  max-width: 600px;
 }
 
 .container__login .btn {
@@ -64,7 +65,7 @@ body {
 
 .btn__google,
 .btn__kakao {
-  width: 80% !important;
+  width: 90% !important;
   vertical-align: middle;
   display: inline-flex;
   justify-content: center;

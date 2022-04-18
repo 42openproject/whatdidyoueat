@@ -12,7 +12,6 @@ function CalendarDateItem({
 }) {
   const item = new Date(date);
   const d = date === '' ? '' : new Date(date).getDate();
-
   const getItemClass = dd => {
     let tmp = 'calendar-days__day-item';
     const todayY = today.getFullYear();
@@ -22,14 +21,15 @@ function CalendarDateItem({
     const M = resizeNumber(dd.getMonth() + 1);
     const D = resizeNumber(dd.getDate());
 
-    if (todayD === D && todayM === M && todayY === Y) {
+    if (todayD === D && todayM === Number(M) && todayY === Y) {
       tmp += ' calendar-days__day-item--today';
-    } else if (M !== month) {
+    } else if (Number(M) !== month) {
+      console.log(M, month);
       tmp += ' calendar-days__day-item--not-this-month';
     }
     if (
       postedDate.length &&
-      M === month &&
+      Number(M) === month &&
       postedDate.some(e => e === `${Y}-${M}-${D}`)
     )
       tmp += ' calendar-days__day-item--posted';

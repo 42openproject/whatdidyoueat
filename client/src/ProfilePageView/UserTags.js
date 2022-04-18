@@ -4,7 +4,7 @@ import axios from 'axios';
 import OnToggleTagModal from './OnToggleTagModal';
 import TagList from './TagList';
 
-function UserTags({ userNickname, googleId, testFlag }) {
+function UserTags({ userNickname, googleId, testFlag = false }) {
   const [tagArr, setTagArr] = useState([]);
   const [tagModal, setTagModal] = useState(false);
   const [tagFlag, setTagFlag] = useState(new Date());
@@ -14,9 +14,9 @@ function UserTags({ userNickname, googleId, testFlag }) {
     try {
       // test api
       if (testFlag) {
-        await axios.patch(`http://localhost:8000/tags/dhyeon`, {
-          tagArr: newTags,
-        });
+        // await axios.patch(`http://localhost:8000/tags/dhyeon`, {
+        //   tagArr: newTags,
+        // });
       } else if (userNickname) {
         // 본 api
         const { data } = await axios.post(
