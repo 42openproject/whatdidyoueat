@@ -50,7 +50,7 @@ jobs:
         uses: awact/cloudfront-action@0.1.2
         env:
           DISTRIBUTION_ID: ${{ secrets.DISTRIBUTION_ID }}
-          SOURCE_PATH: "/ /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
+          SOURCE_PATH: "/*"
           AWS_REGION: "ap-northeast-2"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
