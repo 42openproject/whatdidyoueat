@@ -1,3 +1,5 @@
+import React from 'react';
+
 function CalendarDateItem({
   resizeNumber,
   date,
@@ -21,15 +23,14 @@ function CalendarDateItem({
     const M = resizeNumber(dd.getMonth() + 1);
     const D = resizeNumber(dd.getDate());
 
-    if (todayD === D && todayM === Number(M) && todayY === Y) {
+    if (+todayD === +D && +todayM === +M && todayY === Y) {
       tmp += ' calendar-days__day-item--today';
-    } else if (Number(M) !== month) {
-      console.log(M, month);
+    } else if (+M !== +month) {
       tmp += ' calendar-days__day-item--not-this-month';
     }
     if (
       postedDate.length &&
-      Number(M) === month &&
+      +M === +month &&
       postedDate.some(e => e === `${Y}-${M}-${D}`)
     )
       tmp += ' calendar-days__day-item--posted';
@@ -51,7 +52,6 @@ function CalendarDateItem({
       setClickedDate(e.target.ariaLabel);
       if (onClickDate) onClickDate(new Date(e.target.ariaLabel));
     }
-    // return console.log(e.target.ariaLabel);
   };
 
   return (
@@ -69,4 +69,4 @@ function CalendarDateItem({
   );
 }
 
-export default CalendarDateItem;
+export default React.memo(CalendarDateItem);
